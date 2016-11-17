@@ -1,5 +1,3 @@
-import javax.swing.JFrame;
-import javax.swing.JFileChooser;
 import java.io.File;
 import javax.swing.*;
 
@@ -17,6 +15,15 @@ public class IHM
 
 		JMenu file=new JMenu("Fichier");
 		menu.add(file);
+
+		JButton btnOuvrir=new JButton("Ouvrir");
+		file.add(btnOuvrir);
+
+		JButton btnEnregistrer=new JButton("Enregistrer");
+		file.add(btnEnregistrer);
+
+		JButton btnQuitter=new JButton("Quitter");
+		file.add(btnQuitter);
 
 		window.setVisible(true);
 
