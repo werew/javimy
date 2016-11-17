@@ -12,6 +12,9 @@ public class Main {
             image = ImageIO.read(input);
             Filter f = new Sobel(image); 
             f.apply();
+            image = f.getImg();
+            File output = new File("out.jpg");
+            ImageIO.write(image,"jpg",output); 
         } catch (IOException e){
         };
 
