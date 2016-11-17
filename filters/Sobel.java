@@ -15,10 +15,23 @@ public class Sobel extends Filter {
         image = img;
     }
 
+    int max;
+
     public void apply(){
         System.out.println("Apply Sobel");
         int w = image.getWidth();
         int h = image.getHeight();
+
+        // Set max
+        max = 0;
+        for (int i=1; i<w-1; i++){
+            for (int j=1; j<h-1; j++){
+                int val = get_val(i,j);
+                if (val>max) max = val;
+            }
+        }
+        System.out.println("max "+max);
+        // Apply filter 
         for (int i=1; i<w-1; i++){
             for (int j=1; j<h-1; j++){
                 convolution(i,j);
@@ -29,6 +42,30 @@ public class Sobel extends Filter {
     
     public BufferedImage getImg(){
         return image;
+    }
+
+    private int get_val(int x, int y){
+        int px_x = 0;
+        int px_y = 0;
+
+        for (int i=0; i<3; i++){
+            for (int j=0; j<3; j++){
+                Color c = new Color(image.getRGB(i+x-1,j+y-1));
+                int red = (int)(c.getRed() * 0.2);
+                int green = (int)(c.getGreen() * 0.2);
+                int blue = (int)(c.getBlue() * 0.2);
+                int rgb = red+green+blue;
+               // System.out.println("---> "+mx[j][i]);
+               // System.out.println("rgb "+rgb);
+                px_x += mx[j][i] * rgb;
+                px_y += my[j][i] * rgb;
+                //System.out.println("px "+px_x+" "+px_y);
+            }
+        }
+
+    
+        int val = (int) Math.ceil(Math.sqrt((px_x*px_x) + (px_y*px_y)));
+        return val;
     }
 
     private void convolution(int x, int y){
@@ -52,8 +89,9 @@ public class Sobel extends Filter {
 
     
         int val = (int) Math.ceil(Math.sqrt((px_x*px_x) + (px_y*px_y)));
-        if (val > 255) val = 255;
-        //System.out.println("final "+val);
+        System.out.println("prev "+val);
+        val = (int) Math.floor(255 * val/max);
+        System.out.println("final "+val);
         Color nc = new Color(val,val,val);
         image.setRGB(x,y,nc.getRGB());
     }
