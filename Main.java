@@ -12,8 +12,15 @@ public class Main {
             image = ImageIO.read(input);
             Filter f = new Sobel(image); 
             image = f.getImg();
-            File output = new File("out.jpg");
+            File output = new File("out_sobel.jpg");
             ImageIO.write(image,"jpg",output); 
+
+            Filter g = new Prewitt(image); 
+	    image = g.getImg();
+            File output_p = new File("out_prewitt.jpg");
+            ImageIO.write(image,"jpg",output_p); 
+
+
         } catch (IOException e){
         };
 
