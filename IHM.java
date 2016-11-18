@@ -28,9 +28,12 @@ class window extends JFrame implements ActionListener
 
 		JFileChooser fichier=new JFileChooser(new File("."));	//TODO filtre
 
+		ImageIcon icone=new ImageIcon("icone.jpg");
+
 	public window()
 	{
-		this.setTitle("Filtre");
+		this.setTitle("Javimy");
+		this.setIconImage(icone.getImage());
 		this.setSize(500,500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
