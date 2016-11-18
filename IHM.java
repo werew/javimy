@@ -138,6 +138,10 @@ class window extends JFrame implements ActionListener
 		{
 			newFile = new Sobel(image);
 		}
+		if(e.getSource()==btnPrewitt)
+		{
+			newFile = new Prewitt(image);
+		}
 		
 	}
 	
