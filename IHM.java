@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import filters.*;
 
+
 class window extends JFrame implements ActionListener
 {
 		JMenuBar menu=new JMenuBar();
@@ -23,6 +24,9 @@ class window extends JFrame implements ActionListener
 		JMenuItem btnQuitter=new JMenuItem("Quitter");
 		JMenuItem btnSobel=new JMenuItem("Sobel");
 		JMenuItem btnPrewitt=new JMenuItem("Prewitt");
+
+		ImageIcon imageAfficher;
+		JLabel labelImageAfficher;
 
 		File fichier_image;	//TODO en attribut si jamais on veux ecraser le fichier courant
 		Filter newFile;
@@ -68,6 +72,7 @@ class window extends JFrame implements ActionListener
 	
 	}
 
+
 	private void ouvrir()
 	{
 		int boite=fichier.showOpenDialog(null);
@@ -79,10 +84,15 @@ class window extends JFrame implements ActionListener
 			image=ImageIO.read(fichier_image);
 			} catch (IOException e) {
 				e.printStackTrace();
-			}/*
-			Graphics g=image.createGraphics();
-			g.drawImage(image,0,0,null);
-			this.validate();*/ //TODO
+			}
+
+			//this.printImage(image);	//TODO marche presque, si on ouvre une image alors qu'il y en a deja une ouverte = bug
+			imageAfficher=new ImageIcon(image);
+			labelImageAfficher=new JLabel();
+			labelImageAfficher.setIcon(imageAfficher);
+			this.getContentPane().add(labelImageAfficher,BorderLayout.CENTER);
+			this.revalidate();	
+
 		}
 		else
 		{
@@ -137,31 +147,30 @@ class window extends JFrame implements ActionListener
 		if(e.getSource()==btnSobel)
 		{
 			newFile = new Sobel(image);
+			this.printImage(newFile.getImg());
+
 		}
 		if(e.getSource()==btnPrewitt)
 		{
 			newFile = new Prewitt(image);
+			this.printImage(newFile.getImg());
 		}
 		
+	}
+
+	private void printImage(BufferedImage i)
+	{
+			this.getContentPane().remove(labelImageAfficher);
+			imageAfficher=new ImageIcon(i);
+			labelImageAfficher=new JLabel();
+			labelImageAfficher.setIcon(imageAfficher);
+			this.getContentPane().add(labelImageAfficher,BorderLayout.CENTER);
+			this.revalidate();	
 	}
 	
 }
 
 
-/*class image_afficher extends JPanel
-{
-	public void paintComponent(Graphics g)
-	{
-			File fichier_image=new File("img.jpg");
-			try{
-			Image image=ImageIO.read(fichier_image);
-		g.drawImage(image,0,0,null);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	}
-}
-*/
 
 public class IHM
 {
