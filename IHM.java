@@ -18,6 +18,7 @@ class window extends JFrame implements ActionListener
 
 		JButton btnOuvrir=new JButton("Ouvrir");
 		JButton btnEnregistrer=new JButton("Enregistrer");
+		JButton btnEnregistrerSous=new JButton("Enregistrer sous");
 		JButton btnQuitter=new JButton("Quitter");
 		JButton btnSobel=new JButton("Sobel");
 		JButton btnPrewitt=new JButton("Prewitt");
@@ -41,6 +42,9 @@ class window extends JFrame implements ActionListener
 
 		file.add(btnEnregistrer);
 		btnEnregistrer.addActionListener(this);
+
+		file.add(btnEnregistrerSous);
+		btnEnregistrerSous.addActionListener(this);
 
 		file.add(btnQuitter);
 		btnQuitter.addActionListener(this);
@@ -90,6 +94,11 @@ class window extends JFrame implements ActionListener
 		{
 			this.dispose();
 		}
+		if(e.getSource()==btnEnregistrer)
+		{
+			//TODO
+		}
+		
 	}
 	
 }
