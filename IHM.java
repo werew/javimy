@@ -100,6 +100,17 @@ class window extends JFrame implements ActionListener
 		}
 	}
 
+	private void enregistrer()
+	{
+			File output=new File(""+fichier.getSelectedFile());
+			try {
+			ImageIO.write(image,"jpg",output);	//XXX changer image
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+	}
+
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource()==btnOuvrir)
@@ -112,7 +123,7 @@ class window extends JFrame implements ActionListener
 		}
 		if(e.getSource()==btnEnregistrer)
 		{
-			//TODO
+			this.enregistrer();
 		}
 		if(e.getSource()==btnEnregistrerSous)
 		{
