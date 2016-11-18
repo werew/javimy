@@ -26,6 +26,8 @@ class window extends JFrame implements ActionListener
 		File fichier_image;	//TODO en attribut si jamais on veux ecraser le fichier courant
 		BufferedImage image;
 
+		JFileChooser fichier=new JFileChooser(new File("."));	//TODO filtre
+
 	public window()
 	{
 		this.setTitle("Filtre");
@@ -63,17 +65,16 @@ class window extends JFrame implements ActionListener
 
 	private void ouvrir()
 	{
-		JFileChooser fichier=new JFileChooser(new File("."));
 		int boite=fichier.showOpenDialog(null);
 		if(boite==JFileChooser.APPROVE_OPTION)
 		{
-			System.out.println("Bravo, tu as choisi: "+fichier.getSelectedFile());	//XXX
-		/*	fichier_image=new File(""+fichier.getSelectedFile());
+			System.out.println("Bravo, tu as ouvert: "+fichier.getSelectedFile());	//XXX
+			fichier_image=new File(""+fichier.getSelectedFile());
 			try{
 			image=ImageIO.read(fichier_image);
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			}/*
 			Graphics g=image.createGraphics();
 			g.drawImage(image,0,0,null);
 			this.validate();*/ //TODO
@@ -81,6 +82,21 @@ class window extends JFrame implements ActionListener
 		else
 		{
 			System.out.println("Perdu");	//XXX
+		}
+	}
+
+	private void enregistrerSous()
+	{
+		int boite=fichier.showSaveDialog(null);
+		if(boite==JFileChooser.APPROVE_OPTION)
+		{
+			System.out.println("Bravo, tu as enregistrer: "+fichier.getSelectedFile());	//XXX
+			File output=new File(""+fichier.getSelectedFile());
+			try {
+			ImageIO.write(image,"jpg",output);	//XXX changer image
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -97,6 +113,10 @@ class window extends JFrame implements ActionListener
 		if(e.getSource()==btnEnregistrer)
 		{
 			//TODO
+		}
+		if(e.getSource()==btnEnregistrerSous)
+		{
+			this.enregistrerSous();
 		}
 		
 	}
