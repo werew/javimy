@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
+import filters.*;
 
 class window extends JFrame implements ActionListener
 {
@@ -24,6 +25,7 @@ class window extends JFrame implements ActionListener
 		JButton btnPrewitt=new JButton("Prewitt");
 
 		File fichier_image;	//TODO en attribut si jamais on veux ecraser le fichier courant
+		Filter newFile;
 		BufferedImage image;
 
 		JFileChooser fichier=new JFileChooser(new File("."));	//TODO filtre
@@ -96,7 +98,7 @@ class window extends JFrame implements ActionListener
 			System.out.println("Bravo, tu as enregistrer: "+fichier.getSelectedFile());	//XXX
 			File output=new File(""+fichier.getSelectedFile());
 			try {
-			ImageIO.write(image,"jpg",output);	//XXX changer image
+			ImageIO.write(newFile.getImg(),"jpg",output);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -107,7 +109,7 @@ class window extends JFrame implements ActionListener
 	{
 			File output=new File(""+fichier.getSelectedFile());
 			try {
-			ImageIO.write(image,"jpg",output);	//XXX changer image
+			ImageIO.write(newFile.getImg(),"jpg",output);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -131,6 +133,10 @@ class window extends JFrame implements ActionListener
 		if(e.getSource()==btnEnregistrerSous)
 		{
 			this.enregistrerSous();
+		}
+		if(e.getSource()==btnSobel)
+		{
+			newFile = new Sobel(image);
 		}
 		
 	}
