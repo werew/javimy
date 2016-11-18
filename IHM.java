@@ -17,12 +17,12 @@ class window extends JFrame implements ActionListener
 		JMenu file=new JMenu("Fichier");
 		JMenu filtre=new JMenu("Filtre");
 
-		JButton btnOuvrir=new JButton("Ouvrir");
-		JButton btnEnregistrer=new JButton("Enregistrer");
-		JButton btnEnregistrerSous=new JButton("Enregistrer sous");
-		JButton btnQuitter=new JButton("Quitter");
-		JButton btnSobel=new JButton("Sobel");
-		JButton btnPrewitt=new JButton("Prewitt");
+		JMenuItem btnOuvrir=new JMenuItem("Ouvrir");
+		JMenuItem btnEnregistrer=new JMenuItem("Enregistrer");
+		JMenuItem btnEnregistrerSous=new JMenuItem("Enregistrer sous");
+		JMenuItem btnQuitter=new JMenuItem("Quitter");
+		JMenuItem btnSobel=new JMenuItem("Sobel");
+		JMenuItem btnPrewitt=new JMenuItem("Prewitt");
 
 		File fichier_image;	//TODO en attribut si jamais on veux ecraser le fichier courant
 		Filter newFile;
