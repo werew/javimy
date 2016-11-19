@@ -31,11 +31,11 @@ class window extends JFrame implements ActionListener
 		ImageIcon imageAfficher;
 		JLabel labelImageAfficher;
 
-		File fichier_image;	//TODO en attribut si jamais on veux ecraser le fichier courant
-		Filter newFile;
-		BufferedImage image;
+		File fichierImage;	//TODO en attribut si jamais on veux ecraser le fichier courant
+		Filter newImage;
+		BufferedImage imageOriginal;
 
-		JFileChooser fichier=new JFileChooser(new File("."));	//TODO filtre
+		JFileChooser choix=new JFileChooser(new File("."));	//TODO filtre
 
 		ImageIcon icone=new ImageIcon("icone.jpg");
 
@@ -89,13 +89,13 @@ class window extends JFrame implements ActionListener
 
 	private void ouvrir()
 	{
-		int boite=fichier.showOpenDialog(null);
+		int boite=choix.showOpenDialog(null);
 		if(boite==JFileChooser.APPROVE_OPTION)
 		{
-			System.out.println("Bravo, tu as ouvert: "+fichier.getSelectedFile());	//XXX
-			fichier_image=new File(""+fichier.getSelectedFile());
+			System.out.println("Bravo, tu as ouvert: "+choix.getSelectedFile());	//XXX
+			fichierImage=new File(""+choix.getSelectedFile());
 			try{
-			image=ImageIO.read(fichier_image);
+			imageOriginal=ImageIO.read(fichierImage);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -103,7 +103,7 @@ class window extends JFrame implements ActionListener
 			//this.printImage(image);	//TODO marche presque, si on ouvre une image alors qu'il y en a deja une ouverte = bug
 			//TODO factoriser code dans méthode
 			this.getContentPane().removeAll();
-			imageAfficher=new ImageIcon(image);
+			imageAfficher=new ImageIcon(imageOriginal);
 			labelImageAfficher=new JLabel("",SwingConstants.CENTER);
 			labelImageAfficher.setIcon(imageAfficher);
 			this.getContentPane().add(labelImageAfficher,BorderLayout.CENTER);
@@ -118,13 +118,13 @@ class window extends JFrame implements ActionListener
 
 	private void enregistrerSous()
 	{
-		int boite=fichier.showSaveDialog(null);
+		int boite=choix.showSaveDialog(null);
 		if(boite==JFileChooser.APPROVE_OPTION)
 		{
-			System.out.println("Bravo, tu as enregistrer: "+fichier.getSelectedFile());	//XXX
-			File output=new File(""+fichier.getSelectedFile());
+			System.out.println("Bravo, tu as enregistrer: "+choix.getSelectedFile());	//XXX
+			File output=new File(""+choix.getSelectedFile());
 			try {
-			ImageIO.write(newFile.getImg(),"jpg",output);
+			ImageIO.write(newImage.getImg(),"jpg",output);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -133,9 +133,9 @@ class window extends JFrame implements ActionListener
 
 	private void enregistrer()
 	{
-			File output=new File(""+fichier.getSelectedFile());
+			File output=new File(""+choix.getSelectedFile());
 			try {
-			ImageIO.write(newFile.getImg(),"jpg",output);
+			ImageIO.write(newImage.getImg(),"jpg",output);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -167,23 +167,23 @@ class window extends JFrame implements ActionListener
 		}*/
 		if(e.getSource()==btnSobel)
 		{
-			newFile = new Sobel(image);
-			this.printImage(newFile.getImg());
+			newImage = new Sobel(imageOriginal);
+			this.printImage(newImage.getImg());
 
 		}
 		if(e.getSource()==btnPrewitt)
 		{
-			newFile = new Prewitt(image);
-			this.printImage(newFile.getImg());
+			newImage = new Prewitt(imageOriginal);
+			this.printImage(newImage.getImg());
 		}
 		if(e.getSource()==btnKirsche)
 		{
-			newFile = new Kirsche(image);
-			this.printImage(newFile.getImg());
+			newImage = new Kirsche(imageOriginal);
+			this.printImage(newImage.getImg());
 		}
 		if(e.getSource()==btnEffacer)
 		{
-			this.printImage(image);
+			this.printImage(imageOriginal);
 		}
 		
 	}
