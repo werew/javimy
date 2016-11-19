@@ -25,6 +25,7 @@ class window extends JFrame implements ActionListener
 		JMenuItem btnQuitter=new JMenuItem("Quitter");
 		JMenuItem btnSobel=new JMenuItem("Sobel");
 		JMenuItem btnPrewitt=new JMenuItem("Prewitt");
+		JMenuItem btnKirsche=new JMenuItem("Kirsche");
 		JMenuItem btnEffacer=new JMenuItem("Effacer");
 
 		ImageIcon imageAfficher;
@@ -70,6 +71,9 @@ class window extends JFrame implements ActionListener
 
 		filtre.add(btnPrewitt);
 		btnPrewitt.addActionListener(this);
+
+		filtre.add(btnKirsche);
+		btnKirsche.addActionListener(this);
 
 		filtre.add(btnEffacer);
 		btnEffacer.addActionListener(this);
@@ -170,6 +174,11 @@ class window extends JFrame implements ActionListener
 		if(e.getSource()==btnPrewitt)
 		{
 			newFile = new Prewitt(image);
+			this.printImage(newFile.getImg());
+		}
+		if(e.getSource()==btnKirsche)
+		{
+			newFile = new Kirsche(image);
 			this.printImage(newFile.getImg());
 		}
 		if(e.getSource()==btnEffacer)
