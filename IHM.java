@@ -21,9 +21,11 @@ class window extends JFrame implements ActionListener
 		JMenuItem btnOuvrir=new JMenuItem("Ouvrir");
 		JMenuItem btnEnregistrer=new JMenuItem("Enregistrer");
 		JMenuItem btnEnregistrerSous=new JMenuItem("Enregistrer sous");
+		//JMenuItem btnFermer=new JMenuItem("Fermer");
 		JMenuItem btnQuitter=new JMenuItem("Quitter");
 		JMenuItem btnSobel=new JMenuItem("Sobel");
 		JMenuItem btnPrewitt=new JMenuItem("Prewitt");
+		JMenuItem btnEffacer=new JMenuItem("Effacer");
 
 		ImageIcon imageAfficher;
 		JLabel labelImageAfficher;
@@ -57,6 +59,9 @@ class window extends JFrame implements ActionListener
 		file.add(btnEnregistrerSous);
 		btnEnregistrerSous.addActionListener(this);
 
+		/*file.add(btnFermer);
+		btnFermer.addActionListener(this);
+*/
 		file.add(btnQuitter);
 		btnQuitter.addActionListener(this);
 
@@ -65,6 +70,11 @@ class window extends JFrame implements ActionListener
 
 		filtre.add(btnPrewitt);
 		btnPrewitt.addActionListener(this);
+
+		filtre.add(btnEffacer);
+		btnEffacer.addActionListener(this);
+
+		
 
 
 		this.setVisible(true);
@@ -93,7 +103,7 @@ class window extends JFrame implements ActionListener
 			labelImageAfficher=new JLabel("",SwingConstants.CENTER);
 			labelImageAfficher.setIcon(imageAfficher);
 			this.getContentPane().add(labelImageAfficher,BorderLayout.CENTER);
-			this.revalidate();	
+			this.revalidate();
 
 		}
 		else
@@ -146,6 +156,11 @@ class window extends JFrame implements ActionListener
 		{
 			this.enregistrerSous();
 		}
+	/*	if(e.getSource()==btnFermer)
+		{
+			this.getContentPane().removeAll();
+			this.revalidate();
+		}*/
 		if(e.getSource()==btnSobel)
 		{
 			newFile = new Sobel(image);
@@ -156,6 +171,10 @@ class window extends JFrame implements ActionListener
 		{
 			newFile = new Prewitt(image);
 			this.printImage(newFile.getImg());
+		}
+		if(e.getSource()==btnEffacer)
+		{
+			this.printImage(image);
 		}
 		
 	}
