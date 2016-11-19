@@ -87,8 +87,10 @@ class window extends JFrame implements ActionListener
 			}
 
 			//this.printImage(image);	//TODO marche presque, si on ouvre une image alors qu'il y en a deja une ouverte = bug
+			//TODO factoriser code dans méthode
+			this.getContentPane().removeAll();
 			imageAfficher=new ImageIcon(image);
-			labelImageAfficher=new JLabel();
+			labelImageAfficher=new JLabel("",SwingConstants.CENTER);
 			labelImageAfficher.setIcon(imageAfficher);
 			this.getContentPane().add(labelImageAfficher,BorderLayout.CENTER);
 			this.revalidate();	
@@ -162,7 +164,7 @@ class window extends JFrame implements ActionListener
 	{
 			this.getContentPane().remove(labelImageAfficher);
 			imageAfficher=new ImageIcon(i);
-			labelImageAfficher=new JLabel();
+			labelImageAfficher=new JLabel("",SwingConstants.CENTER);	//TODO Inutile?
 			labelImageAfficher.setIcon(imageAfficher);
 			this.getContentPane().add(labelImageAfficher,BorderLayout.CENTER);
 			this.revalidate();	
