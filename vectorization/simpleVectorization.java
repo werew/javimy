@@ -27,9 +27,23 @@ public class simpleVectorization
 
 				if(rgb>seuil)
 				{
-					
+					vectRec(i,j);
 				}
 			}
+		}
+	}
+
+	private void vectRec(int i,int j)
+	{
+		Color c=new Color(imageFiltrer.getRGB(i,j));
+		int red = (int)(c.getRed() * 0.3);
+		int green = (int)(c.getGreen() * 0.3);
+		int blue = (int)(c.getBlue() * 0.3);
+		int rgb = red+green+blue;
+
+		if(rgb<seuil)
+		{
+			return;
 		}
 	}
 }
