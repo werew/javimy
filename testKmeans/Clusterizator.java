@@ -15,7 +15,16 @@ public class Clusterizator {
         src = img;
         labels = new int[w][h];
         generateKmeans(K);
-        createLabels();
+        while (createLabels() == false){
+            System.out.println("go");
+            mv2centroids();
+        }
+
+        for (int i=0; i<w; i++){
+            for (int j=0; j<h; j++){
+                image.setRGB(i,j,kmeans[labels[i][j]].getRGB());
+            }
+        }
     }
 
     void generateKmeans(int K){
@@ -29,37 +38,61 @@ public class Clusterizator {
         
     }
 
-    void createLabels(){
+    void mv2centroids(){
+        int w = src.getWidth();
+        int h = src.getHeight();
+
+        for (int k=0; k < kmeans.length ; k++){
+            int r = 0; int g = 0; int b = 0;
+            int cnt = 1;
+            for (int i=0; i<w; i++){
+                for (int j=0; j<h; j++){
+                    if (labels[i][j] == k){
+                        cnt++;
+                        Color px = new Color(src.getRGB(i,j));
+                        r += px.getRed();
+                        g += px.getGreen();
+                        b += px.getBlue();
+                    }
+                }
+            }
+            r = r/cnt; g = g/cnt; b = b/cnt;
+            kmeans[k] = new Color(r,g,b);
+        }
+    }
+
+    boolean createLabels(){
+        boolean converged = true;
         int w = src.getWidth();
         int h = src.getHeight();
 
         for (int i=0; i<w; i++){
             for (int j=0; j<h; j++){
-                int distance = 255*255; // Max distance
-                //System.out.println("Distance "+distance);
+
                 Color c = new Color(src.getRGB(i,j));
+                double distance = RGBdistance(kmeans[labels[i][j]],c);
+
                 for (int k=0; k < kmeans.length; k++){
-                    int newdist = RGBdistance(kmeans[k],c);
-               //     System.out.println("Compare "+newdist+" "+distance);
+                    double newdist = RGBdistance(kmeans[k],c);
                     if (newdist < distance){
                         distance = newdist;
-                        // Set label TODO for now set the color directly
-                        image.setRGB(i,j,kmeans[k].getRGB());
-              //          System.out.println("Setting "+k);
+                        // Set label 
+                        labels[i][j] = k;
+                        converged = false;
                     }
                 }
             }
         }
+        return converged;
     }
 
-    int RGBdistance(Color c1, Color c2){
+    double RGBdistance(Color c1, Color c2){
         int r1 = c1.getRed();   int r2 = c2.getRed(); 
         int g1 = c1.getGreen(); int g2 = c2.getGreen(); 
         int b1 = c1.getBlue();  int b2 = c2.getBlue(); 
-        int r = (int) Math.sqrt((r1-r2)*(r1-r2) + 
-                                (g1-g2)*(g1-g2) + 
-                                (b1-b2)*(b1-b2));
-       // System.out.println(r1+" "+g1+" "+b1+" "+r2+" "+g2+" "+b2);
+        double r = Math.sqrt((r1-r2)*(r1-r2) + 
+                             (g1-g2)*(g1-g2) + 
+                             (b1-b2)*(b1-b2));
         return r;
     }
     
