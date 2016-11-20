@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import filters.*;
+import vectorization.*;
 
 
 class window extends JFrame implements ActionListener
@@ -17,6 +18,7 @@ class window extends JFrame implements ActionListener
 
 		JMenu file=new JMenu("Fichier");
 		JMenu filtre=new JMenu("Filtre");
+		JMenu vectorisation=new JMenu("Vectorisation");
 
 		JMenuItem btnOuvrir=new JMenuItem("Ouvrir");
 		JMenuItem btnEnregistrer=new JMenuItem("Enregistrer");
@@ -27,6 +29,7 @@ class window extends JFrame implements ActionListener
 		JMenuItem btnPrewitt=new JMenuItem("Prewitt");
 		JMenuItem btnKirsche=new JMenuItem("Kirsche");
 		JMenuItem btnEffacer=new JMenuItem("Effacer");
+		JMenuItem btnVectorisationSimple=new JMenuItem("Vectorisation simple");
 
 		ImageIcon imageAfficher;
 		JLabel labelImageAfficher;
@@ -50,6 +53,7 @@ class window extends JFrame implements ActionListener
 
 		menu.add(file);
 		menu.add(filtre);
+		menu.add(vectorisation);
 
 		file.add(btnOuvrir);
 		btnOuvrir.addActionListener(this);
@@ -78,7 +82,8 @@ class window extends JFrame implements ActionListener
 		filtre.add(btnEffacer);
 		btnEffacer.addActionListener(this);
 
-		
+		vectorisation.add(btnVectorisationSimple);
+		btnVectorisationSimple.addActionListener(this);
 
 
 		this.setVisible(true);
@@ -184,6 +189,11 @@ class window extends JFrame implements ActionListener
 		if(e.getSource()==btnEffacer)
 		{
 			this.printImage(imageOriginal);
+		}
+		if(e.getSource()==btnVectorisationSimple)
+		{
+			simpleVectorization imageVect= new simpleVectorization(imageOriginal);	//TODO changer type avec héritage
+			this.printImage(imageVect.getImg());
 		}
 		
 	}
