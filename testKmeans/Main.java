@@ -9,7 +9,7 @@ public class Main {
         try {
             File input = new File("img.jpg");
             image = ImageIO.read(input);
-            Clusterizator f = new Clusterizator(image, 4); 
+            Clusterizator f = new Clusterizator(image, 5); 
             image = f.getImg();
             File output = new File("out.jpg");
             ImageIO.write(image,"jpg",output); 

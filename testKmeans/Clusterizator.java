@@ -16,18 +16,15 @@ public class Clusterizator {
         labels = new int[w][h];
         generateKmeans(K);
         createLabels();
-        
     }
 
-    /**
-     * Devide the 255 range in K sections
-     */
     void generateKmeans(int K){
         kmeans = new Color[K];
         for (int i=0;i < K; i++){
-            int c = (255/K * (i+1));
-            kmeans[i] = new Color(c,c,c);
-           System.out.println("Km "+c);
+            int x = (int) (Math.random()*src.getWidth());
+            int y = (int) (Math.random()*src.getHeight());
+            kmeans[i] = new Color(src.getRGB(x,y));
+            System.out.println(kmeans[i]+" "+x+" "+y);
         }
         
     }
@@ -38,16 +35,17 @@ public class Clusterizator {
 
         for (int i=0; i<w; i++){
             for (int j=0; j<h; j++){
-                int distance = 255; // Max distance
+                int distance = 255*255; // Max distance
                 //System.out.println("Distance "+distance);
                 Color c = new Color(src.getRGB(i,j));
                 for (int k=0; k < kmeans.length; k++){
                     int newdist = RGBdistance(kmeans[k],c);
+               //     System.out.println("Compare "+newdist+" "+distance);
                     if (newdist < distance){
                         distance = newdist;
                         // Set label TODO for now set the color directly
                         image.setRGB(i,j,kmeans[k].getRGB());
-                        //System.out.println("Setting "+k);
+              //          System.out.println("Setting "+k);
                     }
                 }
             }
@@ -58,7 +56,10 @@ public class Clusterizator {
         int r1 = c1.getRed();   int r2 = c2.getRed(); 
         int g1 = c1.getGreen(); int g2 = c2.getGreen(); 
         int b1 = c1.getBlue();  int b2 = c2.getBlue(); 
-        int r = Math.abs(r1+b1+g1-(r2+g2+b2));
+        int r = (int) Math.sqrt((r1-r2)*(r1-r2) + 
+                                (g1-g2)*(g1-g2) + 
+                                (b1-b2)*(b1-b2));
+       // System.out.println(r1+" "+g1+" "+b1+" "+r2+" "+g2+" "+b2);
         return r;
     }
     
