@@ -76,11 +76,12 @@ public class Kirsche extends Filter {
 				int rgb = red+green+blue;
 				px_x += g[k][j][i] * rgb;
 
-				if(px_x > max_g)
-				{
-					max_g=px_x;
-				}
+				
 			}
+		}
+		if(px_x > max_g)
+		{
+			max_g=px_x;
 		}
 	}
 
