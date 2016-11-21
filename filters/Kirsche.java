@@ -79,6 +79,7 @@ public class Kirsche extends Filter {
 				
 			}
 		}
+		px_x=Math.abs(px_x);
 		if(px_x > max_g)
 		{
 			max_g=px_x;
