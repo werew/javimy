@@ -49,7 +49,7 @@ public class Tracer {
                 if (new_rgb != prev_rgb && labels[i][j] == 0) { 
                     // Add a new path 
                     System.out.println("---> Start path");
-                    get_path(new Point(i,j));
+                    paths.add(get_path(new Point(i,j)));
                     System.out.println("---> End path");
                 }
                 prev_rgb = new_rgb;
@@ -57,7 +57,7 @@ public class Tracer {
         }
     }
 
-    void get_path(Point start){
+    Path get_path(Point start){
         // Color and label of the path
         int rgb = src.getRGB(start.x, start.y);
         int l = paths.size()+1;     
@@ -105,7 +105,8 @@ public class Tracer {
 
                     System.out.println("I moved to: "+current);
         } while (current.x != start.x || current.y != start.y /*&& END CONDITION */);
-        
+
+        return path;
 
     }
 
