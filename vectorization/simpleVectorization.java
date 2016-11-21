@@ -34,7 +34,7 @@ public class simpleVectorization
 
 					if(imageVect.getRGB(j,i)==imageFiltrer.getImg().getRGB(j,i))
 					{
-						return;
+						continue;
 					}
 
 					int x,y;
@@ -49,13 +49,13 @@ public class simpleVectorization
 							{
 								if(i+x<0 || j+y<0 || j+y>=imageFiltrer.getImg().getWidth() || i+x>=imageFiltrer.getImg().getHeight())
 								{
-									return;
+									continue;
 								}
 
 								//verifier que le pixel n'est pas deja reporter sur l'image vectorise
 								if(imageVect.getRGB(j+y,i+x)==imageFiltrer.getImg().getRGB(j+y,i+x))
 								{
-									return;
+									continue;
 								}
 
 								c=new Color(imageFiltrer.getImg().getRGB(j,i));
@@ -67,7 +67,7 @@ public class simpleVectorization
 
 								if(rgb<seuil)
 								{
-									return;
+									continue;
 								}
 								vectRec(j,i,y,x);
 							}
@@ -76,6 +76,7 @@ public class simpleVectorization
 				}
 			}
 		}
+		System.out.println("Fini");
 	}
 
 	private void vectRec(int j,int i,int diry,int dirx)
@@ -104,7 +105,7 @@ public class simpleVectorization
 		{
 			return;
 		}
-
+		System.out.println(rgb);
 		//marquer pixel dans image vect
 		imageVect.setRGB(j,i,rgb);
 
