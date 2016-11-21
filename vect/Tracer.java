@@ -62,7 +62,11 @@ public class Tracer {
     Path get_path(Point start){
         // Color and label of the path
         int rgb = src.getRGB(start.x, start.y);
-        int l = paths.size()+1;     
+        int l = paths.size()+1;
+        
+        // Boundaries of the image
+        int w = src.getWidth(); 
+        int h = src.getHeight();
 
         // Store all the points inside an object Path
         Path path = new Path(new Color(rgb));
@@ -91,9 +95,12 @@ public class Tracer {
                 next_direction = (direction+3+i) % 4;
                 Point next = getNeighbour(current, next_direction);
 
+                // Check boundaries
+                if (next.x < 0 || next.x > w ||
+                    next.y < 0 || next.y > h  ) continue;
+
                 System.out.println("Look at "+next_direction+" is "+src.getRGB(next.x,next.y));
 
-                // XXX take care of the boundaries
                 if (src.getRGB(next.x,next.y) == rgb) {
                     System.out.println("Found it!");
                     // Found it ! Go on !
