@@ -41,8 +41,10 @@ public class Tracer {
         paths = new ArrayList<Path>();
 
         // Start tracing
-        int prev_rgb = src.getRGB(0,0);
         for (int j=0; j<h; j++){
+            // prev_rgb is always different of new_rgb 
+            // at the beginning of each new line
+            int prev_rgb = src.getRGB(0,j) + 1;
             for (int i=0; i<w; i++){
                 int new_rgb = src.getRGB(i,j);
                 System.out.println("Process "+i+" "+j+" Rgb "+prev_rgb+" "+new_rgb+" label "+labels[i][j]);
