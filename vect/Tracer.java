@@ -96,8 +96,8 @@ public class Tracer {
                 Point next = getNeighbour(current, next_direction);
 
                 // Check boundaries
-                if (next.x < 0 || next.x > w ||
-                    next.y < 0 || next.y > h  ) continue;
+                if (next.x < 0 || next.x >= w ||
+                    next.y < 0 || next.y >= h  ) continue;
 
                 System.out.println("Look at "+next_direction+" is "+src.getRGB(next.x,next.y));
 
