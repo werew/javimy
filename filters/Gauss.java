@@ -25,6 +25,7 @@ public class Gauss extends Filter
 		generationNoyau();
 
 		//TODO changer
+		/*
 		int max=0;
 		for (int i=1; i<src.getWidth()-1; i++){
           	  for (int j=1; j<src.getHeight()-1; j++){
@@ -32,16 +33,16 @@ public class Gauss extends Filter
           	      if (val>max) max = val;
           	  }
        		 }
-
+*/
 
 		int i,j;
-		int val;
+		Color val;
 		for(i=rayon;i<src.getHeight()-rayon;i++)
 		{
 			for(j=rayon;j<src.getWidth()-rayon;j++)
 			{
 				val=convolution(j,i);
-				// Truncate values
+/*				// Truncate values
                 val = (int) Math.floor((255*val)/max);
                 // Normalize
                 if (val > 255 - 100) val = 255;
@@ -50,16 +51,16 @@ public class Gauss extends Filter
                 // Set pixel
                 Color nc = new Color(val,val,val);
                 image.setRGB(j-1,i-1,nc.getRGB());
-
+*/
 			}
 		}
 
 
 	}
 
-	private int convolution(int y,int x)
+	private Color convolution(int y,int x)
 	{
-		int total=0;
+		Color total=new Color(0,0,0);
 		int i=0,j=0;
 
 		int decalage_hauteur=(dimNoyau-1)/2;
@@ -71,12 +72,11 @@ public class Gauss extends Filter
 			{
 		//		int c=src.getRGB(y-decalage_hauteur+i,x-decalage_largeur+j);
 				Color c = new Color(src.getRGB(y-decalage_hauteur+i,x-decalage_largeur+j));
-				int red = (int)(c.getRed() * 0.3);
-				int green = (int)(c.getGreen() * 0.3);
-				int blue = (int)(c.getBlue() * 0.3);
-				int rgb = red+green+blue;
+				int red = (int)(c.getRed() * noyau[i][j]);
+				int green = (int)(c.getGreen() * noyau[i][j]);
+				int blue = (int)(c.getBlue() * noyau[i][j]);
 
-				total+=noyau[i][j]*rgb;
+				total=new Color(total.getRed()+red,total.getGreen()+green,total.getBlue()+blue);
 			}
 		}
 //		System.out.println(total);
