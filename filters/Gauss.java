@@ -25,15 +25,17 @@ public class Gauss extends Filter
 		generationNoyau();
 
 		//TODO changer
-		/*
-		int max=0;
-		for (int i=1; i<src.getWidth()-1; i++){
-          	  for (int j=1; j<src.getHeight()-1; j++){
-          	      int val = convolution(i,j);
-          	      if (val>max) max = val;
-          	  }
+		
+		Color max=new Color(0,0,0);
+		for (int i=rayon; i<src.getWidth()-rayon; i++){
+          	  for (int j=rayon; j<src.getHeight()-rayon; j++){
+          	      Color val = convolution(i,j);
+          	      if (val.getRed()>max.getRed())	max=new Color(val.getRed(),max.getGreen(),max.getBlue());
+			if(val.getGreen()>max.getGreen()) max=new Color(max.getRed(),val.getGreen(),max.getBlue());
+			if(val.getBlue()>max.getBlue()) max=new Color(max.getRed(),max.getGreen(),val.getBlue());
+			}
        		 }
-*/
+
 
 		int i,j;
 		Color val;
@@ -42,16 +44,20 @@ public class Gauss extends Filter
 			for(j=rayon;j<src.getWidth()-rayon;j++)
 			{
 				val=convolution(j,i);
-/*				// Truncate values
-                val = (int) Math.floor((255*val)/max);
+				// Truncate values
+                int valRed = (int) Math.floor((255*val.getRed())/max.getRed());
+                int valGreen = (int) Math.floor((255*val.getGreen())/max.getGreen());
+                int valBlue = (int) Math.floor((255*val.getBlue())/max.getBlue());
                 // Normalize
-                if (val > 255 - 100) val = 255;
+
+
+/*                if (val > 255 - 100) val = 255;
                 else if (val < 100) val = 0;
-    
+  */  
                 // Set pixel
-                Color nc = new Color(val,val,val);
+                Color nc = new Color(valRed,valGreen,valBlue);
                 image.setRGB(j-1,i-1,nc.getRGB());
-*/
+
 			}
 		}
 
