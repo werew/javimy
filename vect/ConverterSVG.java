@@ -8,19 +8,19 @@ public class ConverterSVG {
 
     public ConverterSVG(ArrayList<Path> paths, int h, int w){
 
-        String body = "";
+        System.out.println(getHeader(h,w));
+
         for (Path path : paths){
-            body = body + convertPath(path);
+            System.out.println(convertPath(path));
         }
         
-        String svg_img = getHeader(h,w) + body + getFooter(); 
-        System.out.println(svg_img);
+        System.out.println(getFooter());
         
     }
 
     String getHeader(int h, int w){
-        return "<svg version=\"1.1\" "            +
-               "width=\""+w+"\" height=\""+h+"\"" +
+        return "<svg version=\"1.1\" "             +
+               "width=\""+w+"\" height=\""+h+"\" " +
                "xmlns=\"http://www.w3.org/2000/svg\">";
     }
 
@@ -32,7 +32,7 @@ public class ConverterSVG {
         Point po = pa.points.get(0);
         String svg_path = "M "+po.x+" "+po.y+" ";
 
-        for (int i=1; i<pa.points.size(); i += 10){
+        for (int i=1; i<pa.points.size(); i += 5){
             po = pa.points.get(i);
             svg_path = svg_path + "L "+po.x+" "+po.y+" ";
         }
