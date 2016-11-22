@@ -2,16 +2,6 @@ import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.util.ArrayList;
 
-class Path {
-    public ArrayList<Point> points;
-    public Color color;
-
-    public Path(Color c){
-        color = c;
-        points = new ArrayList<Point>();
-    }
-
-}
 
 public class Tracer {
     
@@ -47,12 +37,9 @@ public class Tracer {
             int prev_rgb = src.getRGB(0,j) + 1;
             for (int i=0; i<w; i++){
                 int new_rgb = src.getRGB(i,j);
-                System.out.println("Process "+i+" "+j+" Rgb "+prev_rgb+" "+new_rgb+" label "+labels[i][j]);
                 if (new_rgb != prev_rgb && labels[i][j] == 0) { 
                     // Add a new path 
-                    System.out.println("---> Start path");
                     paths.add(get_path(new Point(i,j)));
-                    System.out.println("---> End path");
                 }
                 prev_rgb = new_rgb;
             }
@@ -77,15 +64,12 @@ public class Tracer {
         // When starting direction is always RIGHT
         int direction = RIGHT;
         int next_direction = 0;
-        System.out.println("Color "+rgb);
 
         do {
             // Visit point
             labels[current.x][current.y] = l;
             path.points.add(current);
-            System.out.println("Adding point: "+current);
-            Color c = new Color(255,255,255);
-            image.setRGB(current.x,current.y, c.getRGB());
+            image.setRGB(current.x,current.y, rgb);
 
             // Look to 4 directions (clockwise order)
             for (int i=0; i<4; i++){
@@ -99,10 +83,8 @@ public class Tracer {
                 if (next.x < 0 || next.x >= w ||
                     next.y < 0 || next.y >= h  ) continue;
 
-                System.out.println("Look at "+next_direction+" is "+src.getRGB(next.x,next.y));
 
                 if (src.getRGB(next.x,next.y) == rgb) {
-                    System.out.println("Found it!");
                     // Found it ! Go on !
                     current = next;
                     break;
@@ -112,7 +94,6 @@ public class Tracer {
             // Update direction
             direction = next_direction;
 
-                    System.out.println("I moved to: "+current);
         } while (current.x != start.x || current.y != start.y /*&& END CONDITION */);
 
         return path;
