@@ -10,9 +10,11 @@ public class Main {
             File input = new File("test.jpg");
             image = ImageIO.read(input);
             Tracer f = new Tracer(image); 
-            image = f.getImg();
+            ConverterSVG c = new ConverterSVG(f.paths,image.getHeight(),image.getWidth()); 
+           /* image = f.getImg();
             File output = new File("out.jpg");
             ImageIO.write(image,"jpg",output); 
+            */
         } catch (IOException e){
         };
 
