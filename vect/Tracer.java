@@ -1,6 +1,7 @@
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public class Tracer {
@@ -12,6 +13,7 @@ public class Tracer {
     int[][] labels;      // Segment label of each pixel
 
 
+    static final int VISITED = -1;
     /**
      *  Direction (ATTENTION: directions must be
      *  clockwise enumerated)
@@ -39,11 +41,53 @@ public class Tracer {
                 int new_rgb = src.getRGB(i,j);
                 if (new_rgb != prev_rgb && labels[i][j] == 0) { 
                     // Add a new path 
-                    paths.add(get_path(new Point(i,j)));
+                    Path p = get_path(new Point(i,j));
+                    paths.add(p);
+                    fill_figure(p);
                 }
                 prev_rgb = new_rgb;
             }
         }
+    }
+
+    void fill_figure(Path path){
+
+        // Color and label of the path
+        Point start = path.points.get(0);
+        int rgb = src.getRGB(start.x, start.y);
+        
+        // Boundaries of the image
+        int w = src.getWidth(); 
+        int h = src.getHeight();
+
+        LinkedList<Point> fifo = new LinkedList<Point>();
+        fifo.add(start);
+        
+        Point p;
+        while ((p = fifo.pollFirst()) != null){
+            // If visited skip it
+            if (labels[p.x][p.y] == VISITED) continue;
+
+            // Visit
+            labels[p.x][p.y] = VISITED;
+
+            // Look to 4 directions
+            for (int direction=0; direction<4; direction++){
+
+                Point next = getNeighbour(p, direction);
+
+                // Check boundaries
+                if (next.x < 0 || next.x >= w ||
+                    next.y < 0 || next.y >= h  ) continue;
+
+                // Is part of the figure ?
+                if (src.getRGB(next.x,next.y) == rgb &&
+                    labels[next.x][next.y] != VISITED) {
+                    fifo.add(next);
+                }
+            }
+        }
+
     }
 
     Path get_path(Point start){
