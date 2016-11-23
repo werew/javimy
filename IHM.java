@@ -1,3 +1,4 @@
+package window;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import filters.*;
 import vectorization.*;
-
+import option.*;
 
 class window extends JFrame implements ActionListener
 {
@@ -155,6 +156,8 @@ class window extends JFrame implements ActionListener
 
 	}
 
+	optionGauss opt;
+
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource()==btnOuvrir)
@@ -201,8 +204,20 @@ class window extends JFrame implements ActionListener
 		}
 		if(e.getSource()==btnGauss)
 		{
-			newImage = new Gauss(imageOriginal,1,0.8);	//XXX argument variable
+			opt=new optionGauss(imageOriginal,this);
+			//newImage = new Gauss(imageOriginal,1,0.8);	//XXX argument variable
+			//newImage=opt.getImg();
+
+		if(e.getSource()==opt.submit)
+		{
+			double sig= Double.parseDouble(opt.sigma.getText());
+			int r=Integer.parseInt(opt.rayon.getText());
+			image=new Gauss(src,r,sig);
+
 			this.printImage(newImage.getImg());
+		}
+
+
 		}
 		if(e.getSource()==btnEffacer)
 		{
