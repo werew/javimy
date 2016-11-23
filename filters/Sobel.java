@@ -10,7 +10,7 @@ public class Sobel extends Filter {
     private int max = 1;
     private int thr = 0;
 
-    private int[][] mx = {{1,0,-1},{2,0,-2},{1,0,-1}};
+    private int[][] mx = {{-1,0,1},{-2,0,2},{-1,0,1}};
     private int[][] my = {{-1,-2,-1},{0,0,0},{1,2,1}};
     BufferedImage src;
 
