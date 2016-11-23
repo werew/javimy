@@ -29,6 +29,7 @@ class window extends JFrame implements ActionListener
 		JMenuItem btnPrewitt=new JMenuItem("Prewitt");
 		JMenuItem btnKirsche=new JMenuItem("Kirsche");
 		JMenuItem btnRoberts=new JMenuItem("Roberts");
+		JMenuItem btnGauss=new JMenuItem("Gauss");
 		JMenuItem btnEffacer=new JMenuItem("Effacer");
 		JMenuItem btnVectorisationSimple=new JMenuItem("Vectorisation simple");
 
@@ -82,6 +83,9 @@ class window extends JFrame implements ActionListener
 
 		filtre.add(btnRoberts);
 		btnRoberts.addActionListener(this);
+
+		filtre.add(btnGauss);
+		btnGauss.addActionListener(this);
 
 		filtre.add(btnEffacer);
 		btnEffacer.addActionListener(this);
@@ -193,6 +197,11 @@ class window extends JFrame implements ActionListener
 		if(e.getSource()==btnRoberts)
 		{
 			newImage = new Roberts(imageOriginal);
+			this.printImage(newImage.getImg());
+		}
+		if(e.getSource()==btnGauss)
+		{
+			newImage = new Gauss(imageOriginal,1,0.8);	//XXX argument variable
 			this.printImage(newImage.getImg());
 		}
 		if(e.getSource()==btnEffacer)
