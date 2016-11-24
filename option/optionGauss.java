@@ -20,7 +20,6 @@ public	JFormattedTextField seuil=new JFormattedTextField();
 public	JFormattedTextField sigma=new JFormattedTextField();
 public	JFormattedTextField rayon=new JFormattedTextField();
 public	JButton submit=new JButton("Valider");
-public	JPanel panel=new JPanel();
 	
 	Filter image;
 	BufferedImage src;
@@ -36,7 +35,10 @@ public	JPanel panel=new JPanel();
 		this.setIconImage(icone.getImage());
 		this.setSize(500,500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null)
 
+		JPanel panel=new JPanel();
+		panel.setBackground(Color.ORANGE);
 		panel.add(seuil);
 		panel.add(sigma);
 		panel.add(rayon);
@@ -44,6 +46,7 @@ public	JPanel panel=new JPanel();
 		submit.addActionListener(w);
 		panel.add(submit);
 
+		this.setContentPane(panel);
 		this.setVisible(true);
 	}
 

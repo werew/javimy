@@ -13,7 +13,7 @@ import filters.*;
 import vectorization.*;
 import option.*;
 
-class window extends JFrame implements ActionListener
+public class window extends JFrame implements ActionListener
 {
 		JMenuBar menu=new JMenuBar();
 
@@ -212,7 +212,7 @@ class window extends JFrame implements ActionListener
 		{
 			double sig= Double.parseDouble(opt.sigma.getText());
 			int r=Integer.parseInt(opt.rayon.getText());
-			image=new Gauss(src,r,sig);
+			newImage=new Gauss(imageOriginal,r,sig);
 
 			this.printImage(newImage.getImg());
 		}
@@ -241,14 +241,4 @@ class window extends JFrame implements ActionListener
 			this.revalidate();	
 	}
 	
-}
-
-
-
-public class IHM
-{
-	public static void main(String[] args)
-	{
-		window fenetre=new window();
-	}
 }
