@@ -16,9 +16,9 @@ import window.*;
 
 public class optionGauss extends JFrame implements ActionListener
 {
-public	JFormattedTextField seuil=new JFormattedTextField();
-public	JFormattedTextField sigma=new JFormattedTextField();
-public	JFormattedTextField rayon=new JFormattedTextField();
+public	JTextField seuil=new JFormattedTextField();
+public	JTextField sigma=new JFormattedTextField();
+public	JTextField rayon=new JFormattedTextField();
 public	JButton submit=new JButton("Valider");
 	
 	Filter image;
@@ -34,8 +34,12 @@ public	JButton submit=new JButton("Valider");
 		this.setTitle("Javimy");
 		this.setIconImage(icone.getImage());
 		this.setSize(500,500);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null)
+		this.setLocationRelativeTo(null);
+
+
+		seuil.setPreferredSize(new Dimension(100,50));
+		sigma.setPreferredSize(new Dimension(100,50));
+		rayon.setPreferredSize(new Dimension(100,50));
 
 		JPanel panel=new JPanel();
 		panel.setBackground(Color.ORANGE);
@@ -50,18 +54,13 @@ public	JButton submit=new JButton("Valider");
 		this.setVisible(true);
 	}
 
-	public void actionPerformed(ActionEvent e)
-	{
-		if(e.getSource()==submit)
-		{
-			double sig= Double.parseDouble(sigma.getText());
-			int r=Integer.parseInt(rayon.getText());
-			image=new Gauss(src,r,sig);
-		}
-	}
 
 	public Filter getImg()
 	{
 		return image;
+	}
+
+	public void actionPerformed(ActionEvent e)
+	{
 	}
 }

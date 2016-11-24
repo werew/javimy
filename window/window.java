@@ -156,7 +156,7 @@ public class window extends JFrame implements ActionListener
 
 	}
 
-	optionGauss opt;
+	optionGauss opt;	//TODO instancier et affichage avec methode print
 
 	public void actionPerformed(ActionEvent e)
 	{
@@ -207,18 +207,19 @@ public class window extends JFrame implements ActionListener
 			opt=new optionGauss(imageOriginal,this);
 			//newImage = new Gauss(imageOriginal,1,0.8);	//XXX argument variable
 			//newImage=opt.getImg();
-
+		}
 		if(e.getSource()==opt.submit)
 		{
+			System.out.println("submit");
 			double sig= Double.parseDouble(opt.sigma.getText());
 			int r=Integer.parseInt(opt.rayon.getText());
 			newImage=new Gauss(imageOriginal,r,sig);
 
 			this.printImage(newImage.getImg());
+			opt.dispose();
 		}
 
 
-		}
 		if(e.getSource()==btnEffacer)
 		{
 			this.printImage(imageOriginal);
