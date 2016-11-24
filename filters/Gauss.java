@@ -110,7 +110,7 @@ public class Gauss extends Filter
 			for(j=0;j<2*rayon+1;j++)
 			{
 				noyau[j][i]/=diviseur;
-				System.out.println(noyau[j][i]);
+				//System.out.println(noyau[j][i]);
 			}
 		}
 	}
