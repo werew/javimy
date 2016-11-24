@@ -190,9 +190,12 @@ public class Tracer {
         angles[3] = new Point(p.x-1,p.y-1);    
         return angles;
     }
+    private bd_paths(
 
     private void collect_paths(){
 
+
+        // Paths from junction points
         for (Point p : jn_points){
             for (Point edge : get_edges(p)){
 
@@ -201,11 +204,49 @@ public class Tracer {
                 }
             }
         }
-     
-    
 
+        // Paths from the borders
+        int label = paths.size() + 1;
+        for (int i = 0; i < wl; i++){
+            if (labels[i][0] == LAB_VS){
+                Point p = new Point(i,0);
+                Path pa = take_path(p, label++);
+                paths.add(pa);    
+            }
 
+            if (labels[i][hl-1] == LAB_VS){
+                Point p = new Point(i,hl-1);
+                Path pa = take_path(p, label++);
+                paths.add(pa);    
+            }
+        }
 
+        for (int i = 0; i < hl; i++){
+            if (labels[0][i] == LAB_VS){
+                Point p = new Point(i,0);
+                Path pa = take_path(p, label++);
+                paths.add(pa);    
+            }
+
+            if (labels[wl-1][i] == LAB_VS){
+                Point p = new Point(wl-1,i);
+                Path pa = take_path(p, label++);
+                paths.add(pa);    
+            }
+        }
+
+        // Closed paths
+        for (int i = 0; i < wl; i++){
+            for (int j = 0; j < hl; j++){
+
+                if (labels[i][j] == LAB_VS){
+                    Point p = new Point(i,j);
+                    Path pa = take_path(p, label++);
+                    paths.add(pa);    
+                }
+            }
+        }
+        
     }
 
 }
