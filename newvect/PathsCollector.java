@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class PathsCollector {
     
-    ArrayList<Path> paths; 
+    public ArrayList<Path> paths; 
     ArrayList<Point> jn_points;
 
     BufferedImage src;   // Image source
@@ -38,15 +38,34 @@ public class PathsCollector {
 
     }
 
+    public ArrayList<Path> getNearPaths(Point p){
+        p.move(p.x*2-1,p.y*2-1);
+        ArrayList<Path> pa = new ArrayList<Path>();
+        for ( Point e : get_edges(p)){
+            if (labels[e.x][e.y] > 0) {
+                pa.add(paths.get(labels[e.x][e.y]-1));
+            }
+        }
+
+        for ( Point a : get_angles(p)){
+            if (labels[a.x][a.y] > 0) {
+                pa.add(paths.get(labels[a.x][a.y]-1));
+            }
+        }
+        return pa;
+    }
+
     public BufferedImage getImg(){
         BufferedImage img = new BufferedImage(wl,hl,src.getType());
         int r,g,b; 
         for (Path pa : paths){
+            System.out.println("----- Path -----");
             r = 50 + (int)(Math.random() * ((255 - 50) + 1));
             g = 50 + (int)(Math.random() * ((255 - 50) + 1));
             b = 50 + (int)(Math.random() * ((255 - 50) + 1));
             Color c = new Color(r,g,b);
             for (Point p : pa.points) {
+                System.out.println(p.x+"    "+p.y);
                 img.setRGB(p.x,p.y,c.getRGB());
             }
         }
@@ -237,7 +256,7 @@ public class PathsCollector {
      * @return The whished path
      */
     private Path take_path(Point start, int label){
-        Path pa = new Path();
+        Path pa = new Path(label);
         Point current = start;
 
         while (current != null && labels[current.x][current.y] != LAB_JN){
