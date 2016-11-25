@@ -19,5 +19,14 @@ class Path {
     public getLast(){
         return points.get(points.size()-1);
     }
+    
+    public String toSVG(){
+        String result = "";
+        for (p : points){
+            result += "L "+p.x+" "+p.y+" "; 
+        }
+
+        return result;
+    }
 
 }
