@@ -9,11 +9,13 @@ public class Main {
         try {
             File input = new File("test.jpg");
             image = ImageIO.read(input);
-            PathsCollector pc = new PathsCollector(image); 
-            //ConverterSVG c = new ConverterSVG(f.paths,image.getHeight(),image.getWidth()); 
+            ConverterSVG c = new ConverterSVG(image); 
+            c.printSVG();
+            /*
             image = pc.getImg();
             File output = new File("out.bmp");
             ImageIO.write(image,"bmp",output); 
+            */
 
         } catch (IOException e){
             e.printStackTrace();
