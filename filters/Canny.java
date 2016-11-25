@@ -35,30 +35,30 @@ public class Canny extends Filter {
 	carte=new gradient[image.getWidth()][image.getHeight()];
 
 
-	//TODO appliquer gauss
+	src=new Gauss(src,1,0.8).getImg();
 
         // Set max
         for (int i=1; i<w-1; i++){
             for (int j=1; j<h-1; j++){
-                int val = convolution(i,j);
-                if (val>max) max = val;
+                gradient val = convolution(j,i);
+                if (val.Norme>max) max = val.Norme;
             }
         }
 
         // Apply filter 
         for (int i=1; i<w-1; i++){
             for (int j=1; j<h-1; j++){
-                gradient val = convolution(i,j);
+                gradient val = convolution(j,i);
 
 		//TODO
                 // Truncate values
-                val = (int) Math.floor((255*val)/max);
+                val.Norme = (int) Math.floor((255*val.Norme)/max);
                 // Normalize
-                if (val > 255 - thr_max) val = 255;
-                else if (val < thr_min) val = 0;
+                if (val.Norme > 255 - thr_max) val.Norme = 255;
+                else if (val.Norme < thr_min) val.Norme = 0;
     
                 // Set pixel
-                Color nc = new Color(val,val,val);
+                Color nc = new Color(val.Norme,val.Norme,val.Norme);
                 image.setRGB(i-1,j-1,nc.getRGB());
             }
         }
@@ -67,30 +67,30 @@ public class Canny extends Filter {
 	{
 		for(int j=0;j<w-2;j++)
 		{
-			//TODO
-			int dx,dy;
-			if(carte[j][i].getAngle()==0)
+			//TODO arrondir angle
+			int dx=0,dy=0;
+			if(carte[j][i].Angle>=0 && carte[j][i].Angle<45)
 			{
-				dx=;
-				dy=;
+				dx=1;
+				dy=0;
 			}
-			if(carte[j][i].getAngle()==0)
+			if(carte[j][i].Angle>=45 && carte[j][i].Angle<90)
 			{
-				dx=;
-				dy=;
+				dx=1;
+				dy=1;
 			}
-			if(carte[j][i].getAngle()==0)
+			if(carte[j][i].Angle>=90 && carte[j][i].Angle<135)
 			{
-				dx=;
-				dy=;
+				dx=0;
+				dy=1;
 			}
-			if(carte[j][i].getAngle()==0)
+			if(carte[j][i].Angle>=135 && carte[j][i].Angle<180)
 			{
-				dx=;
-				dy=;
+				dx=-1;
+				dy=1;
 			}
 
-			if(carte[j+dx][i+dy]>carte[j][i].getNorme() || carte[j-dx][i-dy]>carte[j][i])
+			if(carte[j+dx][i+dy].Norme>carte[j][i].Norme || carte[j-dx][i-dy].Norme>carte[j][i].Norme)
 			{
 				//XXX Mise a 0?
 				carte[j][i].etat=false;
@@ -102,15 +102,15 @@ public class Canny extends Filter {
 	{
 		for(int j=0;j<w-2;j++)
 		{
-			if(carte[j][i]<thr_min)
+			if(carte[j][i].Norme<thr_min)
 			{
 				//XXX rejeté?
-				carte[j][i]=false;
+				carte[j][i].etat=false;
 			}
-			else if(carte[j][i]>thr_max)
+			else if(carte[j][i].Norme>thr_max)
 			{
 				//XXX accepter
-				carte[j][i]=true;
+				carte[j][i].etat=true;
 			}
 			else
 			{
@@ -144,6 +144,7 @@ public class Canny extends Filter {
 
         for (int i=0; i<3; i++){
             for (int j=0; j<3; j++){
+		System.out.println("i "+i+" j "+j+" w "+src.getWidth()+" h "+src.getHeight());
                 Color c = new Color(src.getRGB(i+x-1,j+y-1));
                 int red = (int)(c.getRed() * 0.3);
                 int green = (int)(c.getGreen() * 0.3);
