@@ -12,10 +12,11 @@ public class Main {
             PathsCollector pc = new PathsCollector(image); 
             //ConverterSVG c = new ConverterSVG(f.paths,image.getHeight(),image.getWidth()); 
             image = pc.getImg();
-            File output = new File("out.jpg");
-            ImageIO.write(image,"jpg",output); 
+            File output = new File("out.bmp");
+            ImageIO.write(image,"bmp",output); 
 
         } catch (IOException e){
+            e.printStackTrace();
         };
 
     }

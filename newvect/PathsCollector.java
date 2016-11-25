@@ -34,25 +34,23 @@ public class PathsCollector {
         jn_points = new ArrayList<Point>();
 
         trace();
-        //collect_paths();
+        collect_paths();
 
     }
 
     public BufferedImage getImg(){
         BufferedImage img = new BufferedImage(wl,hl,src.getType());
-        /*
         int r,g,b; 
         for (Path pa : paths){
-            r = 200 + (int)(Math.random() * ((255 - 200) + 1));
-            g = 200 + (int)(Math.random() * ((255 - 200) + 1));
-            b = 200 + (int)(Math.random() * ((255 - 200) + 1));
-            Color c = new Color(255,255,255);
+            r = 50 + (int)(Math.random() * ((255 - 50) + 1));
+            g = 50 + (int)(Math.random() * ((255 - 50) + 1));
+            b = 50 + (int)(Math.random() * ((255 - 50) + 1));
+            Color c = new Color(r,g,b);
             for (Point p : pa.points) {
                 img.setRGB(p.x,p.y,c.getRGB());
             }
         }
-        */
-
+/*
             Color c = new Color(255,255,255);
         for (int i=0; i<wl;i++){
             for (int j=0;j<hl;j++){
@@ -61,6 +59,7 @@ public class PathsCollector {
                 }
             }
         }
+*/
         return img;
     }
         
