@@ -6,16 +6,28 @@ import java.util.ArrayList;
 
 public class ConverterSVG {
 
-    public ConverterSVG(ArrayList<Path> paths, int h, int w){
+    int h,w;
+    ArrayList<Figure> figures;
+
+    public ConverterSVG(BufferedImage img){
+        src = img;
+        this.w = img.getHeight()*2-1; 
+        this.h = img.getWidth()*2-1; 
+
+        FigureBuilder fb = new FigureBuilder(img);
+        figures = fb.getFigures();
+        
+    }
+
+    public void printSVG(){
 
         System.out.println(getHeader(h,w));
 
-        for (Path path : paths){
-            System.out.println(convertPath(path));
+        for (Figure f : figures){
+            System.out.println(f.toSVG());
         }
         
         System.out.println(getFooter());
-        
     }
 
     String getHeader(int h, int w){
@@ -28,17 +40,4 @@ public class ConverterSVG {
         return "</svg>";
     }
 
-    String convertPath(Path pa){
-        Point po = pa.points.get(0);
-        String svg_path = "M "+po.x+" "+po.y+" ";
-
-        for (int i=1; i<pa.points.size(); i += 5){
-            po = pa.points.get(i);
-            svg_path = svg_path + "L "+po.x+" "+po.y+" ";
-        }
-
-        return "<path d=\""+svg_path+"\" fill=\"rgb("      +
-               pa.color.getRed() +","+pa.color.getGreen()+","+
-               pa.color.getBlue()+")\"/>";
-    }
 }
