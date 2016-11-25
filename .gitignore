@@ -14,3 +14,8 @@ hs_err_pid*
 
 # vim swp files
 *.swp
+
+# some image types
+*.jpg
+*.bpm
+*.svg
