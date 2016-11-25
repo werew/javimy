@@ -144,7 +144,7 @@ public class FigureBuilder {
 
         } while (current.x != start.x || current.y != start.y /*&& END CONDITION */);
 
-        return figure;
+        return f;
     }
 
 
