@@ -6,12 +6,12 @@ import java.util.LinkedList;
 
 class Figure {
     private boolean sorted = true;
-    public final int color;
+    public final Color color;
 
     public LinkedList<Path> borders;
 
     public Figure(int rgb){
-        color = rgb;
+        color = new Color(rgb);
         borders = new LinkedList<Path>();
     }
 
@@ -57,6 +57,22 @@ class Figure {
         }
 
     }
+
+    boolean isClosed(){
+        sortedBorders();
+        Path first = borders.getFirst();
+        Point a1 = first.getFirst();
+        Point b1 = first.getLast();
+
+        Path last = borders.getLast();
+        Point a2 = last.getFirst();
+        Point b2 = last.getLast();
+        
+        return (a1.equals(a2) || a1.equals(b2) ||
+                b1.equals(a2) || b1.equals(b2)  );
+
+    }
+
 
     public String toSVG(){
         String svg_path = "";
