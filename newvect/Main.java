@@ -9,8 +9,8 @@ public class Main {
         try {
             File input = new File("test.jpg");
             image = ImageIO.read(input);
-            Tracer f = new Tracer(image); 
-            ConverterSVG c = new ConverterSVG(f.paths,image.getHeight(),image.getWidth()); 
+            PathsCollector pc = new PathsCollector(image); 
+            //ConverterSVG c = new ConverterSVG(f.paths,image.getHeight(),image.getWidth()); 
            /* image = f.getImg();
             File output = new File("out.jpg");
             ImageIO.write(image,"jpg",output); 

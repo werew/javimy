@@ -21,7 +21,7 @@ public class PathsCollector {
     static final int LAB_NOT_FOLLOW = -3;
     
 
-    public Tracer (BufferedImage img){
+    public PathsCollector (BufferedImage img){
         // Init object
         w = img.getWidth();
         h = img.getHeight();
@@ -50,14 +50,14 @@ public class PathsCollector {
         // Fill edges
         for (int i = 0; i < wl; i++){
             for (int j = 0; j < hl; i++){
-                if (i&0x1 && j^0x1){
+                if ((i&0x1) == 0x1 && (j^0x1) == 0x1){
                     // i odd j even
                     c0 = src.getRGB((i+1)/2,j/2);
                     c1 = src.getRGB((i-1)/2,j/2);
                     if (c0 != c1){
                         labels[i][j] = LAB_VS;
                     }
-                } else if (i^0x1 && j&0x1){
+                } else if ((i^0x1) == 0x1 && (j&0x1) == 0x1){
                     // i even j odd
                     c0 = src.getRGB(i/2,(j+1)/2);
                     c1 = src.getRGB(i/2,(j-1)/2);
@@ -76,7 +76,7 @@ public class PathsCollector {
 
                 if (sum_v + sum_h < LAB_VS*2){
                     labels[i][j] = LAB_JN;
-                    jn_points.add(new Point(i,j); 
+                    jn_points.add(new Point(i,j));
                 } else if (sum_v == LAB_VS*2 || 
                            sum_h == LAB_VS*2 ){
                     labels[i][j] = LAB_VS;
@@ -216,14 +216,14 @@ public class PathsCollector {
         while (current != null && labels[current.x][current.y] != LAB_JN){
 
             // Add and mark as visited
-            pa.add(current);
-            labels[current.x][current.y] == label;
+            pa.points.add(current);
+            labels[current.x][current.y] = label;
 
             // Priority to 4-connected links
             // and junction points
-            Point next = find_next(current, get_edges(current));
+            Point next = find_next(get_edges(current));
             if (next == null){
-                next = find_next(current, get_angles(current));
+                next = find_next(get_angles(current));
             }
 
             current = next;
@@ -231,7 +231,7 @@ public class PathsCollector {
 
         if (current != null) {
             // Path ends with a junction point
-            pa.add(current);
+            pa.points.add(current);
         } else {
             // Test for closed paths
             Point last = pa.points.get(pa.points.size()-1);

@@ -3,15 +3,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 class Path {
+    boolean circular = false;
     public ArrayList<Point> points;
-    Point start;
-    Point end;
 
-
-    public Path(Point start){
+    public Path(){
         points = new ArrayList<Point>();
-        this.start = start;
-        points.add(start);
     }
 
 }
