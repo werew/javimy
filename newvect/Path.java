@@ -3,11 +3,21 @@ import java.awt.*;
 import java.util.ArrayList;
 
 class Path {
+    public final int id;
     boolean circular = false;
     public ArrayList<Point> points;
 
-    public Path(){
+    public Path(int id){
+        this.id = id;
         points = new ArrayList<Point>();
+    }
+
+    public getFirst(){
+        return points.get(0);
+    }
+
+    public getLast(){
+        return points.get(points.size()-1);
     }
 
 }
