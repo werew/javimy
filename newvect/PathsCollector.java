@@ -34,9 +34,36 @@ public class PathsCollector {
         jn_points = new ArrayList<Point>();
 
         trace();
-        collect_paths();
+        //collect_paths();
 
     }
+
+    public BufferedImage getImg(){
+        BufferedImage img = new BufferedImage(wl,hl,src.getType());
+        /*
+        int r,g,b; 
+        for (Path pa : paths){
+            r = 200 + (int)(Math.random() * ((255 - 200) + 1));
+            g = 200 + (int)(Math.random() * ((255 - 200) + 1));
+            b = 200 + (int)(Math.random() * ((255 - 200) + 1));
+            Color c = new Color(255,255,255);
+            for (Point p : pa.points) {
+                img.setRGB(p.x,p.y,c.getRGB());
+            }
+        }
+        */
+
+            Color c = new Color(255,255,255);
+        for (int i=0; i<wl;i++){
+            for (int j=0;j<hl;j++){
+                if (labels[i][j] != 0){
+                    img.setRGB(i,j,c.getRGB());
+                }
+            }
+        }
+        return img;
+    }
+        
 
 
     /**
@@ -46,18 +73,18 @@ public class PathsCollector {
      */
     private void trace(){
         int c0, c1;
-
         // Fill edges
-        for (int i = 0; i < wl; i++){
-            for (int j = 0; j < hl; i++){
-                if ((i&0x1) == 0x1 && (j^0x1) == 0x1){
+        for (int i = 0; i < wl-1; i++){
+            for (int j = 0; j < (hl-1); j++){
+                
+                if ((i%2) == 1 && (j%2) == 0){
                     // i odd j even
                     c0 = src.getRGB((i+1)/2,j/2);
                     c1 = src.getRGB((i-1)/2,j/2);
                     if (c0 != c1){
                         labels[i][j] = LAB_VS;
                     }
-                } else if ((i^0x1) == 0x1 && (j&0x1) == 0x1){
+                } else if ((i%2) == 0 && (j%2) == 1){
                     // i even j odd
                     c0 = src.getRGB(i/2,(j+1)/2);
                     c1 = src.getRGB(i/2,(j-1)/2);
@@ -68,9 +95,9 @@ public class PathsCollector {
             }
         }
 
-        // Fill gaps junction points
-        for (int i = 1; i < wl-2; i++){
-            for (int j = 1; j < hl-2; i++){
+        // Fill gaps and junction points
+        for (int i = 1; i < wl-2; i += 2){
+            for (int j = 1; j < hl-2; j += 2){
                 int sum_v = labels[i+1][j] + labels[i-1][j];
                 int sum_h = labels[i][j+1] + labels[i][j-1];
 
@@ -83,6 +110,7 @@ public class PathsCollector {
                 }
             }
         }
+
     }
 
 
