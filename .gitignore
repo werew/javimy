@@ -17,5 +17,6 @@ hs_err_pid*
 
 # some image types
 *.jpg
-*.bpm
+*.bmp
 *.svg
+*.png
