@@ -12,7 +12,7 @@ class Figure {
 
     public Path(int rgb){
         color = rgb;
-        borders = new ArrayList<Path>();
+        borders = new LinkedList<Path>();
     }
 
     public void addBorder(Path p){
@@ -58,8 +58,16 @@ class Figure {
 
     }
 
-    public String toSvg(){
-        return "";
+    public String toSVG(){
+        String svg_path = "";
+
+        for (b : borders){
+            svg_path += b.toSVG();
+        }
+
+        return "<path d=\""+svg_path+"\" fill=\"rgb("   +
+               color.getRed() +","+color.getGreen()+"," +
+               color.getBlue()+")\"/>";
     }
 
 }
