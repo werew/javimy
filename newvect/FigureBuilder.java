@@ -6,10 +6,11 @@ import java.util.LinkedList;
 
 public class FigureBuilder {
     
-    ArrayList<Figure> figures; 
+    private ArrayList<Figure> figures; 
 
     PathsCollector pc;
     BufferedImage src;   // Image source
+    int w,h;
     int[][] labels;      // Segment label of each pixel
 
 
@@ -23,10 +24,10 @@ public class FigureBuilder {
     static final int DOWN  = 2;
     static final int LEFT  = 3;
 
-    public Tracer (BufferedImage img){
+    public FigureBuilder (BufferedImage img){
         // Init object
-        int w = img.getWidth();
-        int h = img.getHeight();
+        w = img.getWidth();
+        h = img.getHeight();
         src = img;
         labels = new int[w][h];
         figures = new ArrayList<Figure>();
@@ -39,13 +40,17 @@ public class FigureBuilder {
             // prev_rgb is always different of new_rgb 
             // at the beginning of each new line
             int prev_rgb = src.getRGB(0,j) + 1;
+
             for (int i=0; i<w; i++){
                 int new_rgb = src.getRGB(i,j);
+
+                // If a new color has been detected and the
+                // figure has not been yet taken (label == 0)
                 if (new_rgb != prev_rgb && labels[i][j] == 0) { 
-                    // Add a new figure
                     Point p = new Point(i,j);
-                    Figure f = get_figure(p);
-                    figures.add(f);
+                    // Add a new figure
+                    figures.add(collect_figure(p));
+                    // Fill the figure to avoid re-detections
                     fill_figure(p);
                 }
                 prev_rgb = new_rgb;
@@ -58,10 +63,6 @@ public class FigureBuilder {
         // Color of the figure
         int rgb = src.getRGB(start.x, start.y);
         
-        // Boundaries of the image
-        int w = src.getWidth(); 
-        int h = src.getHeight();
-
         LinkedList<Point> fifo = new LinkedList<Point>();
         fifo.add(start);
         
@@ -92,17 +93,17 @@ public class FigureBuilder {
     }
 
 
-    Figure get_figure(Point start){
+    /**
+     * Get a figure scanning the borders starting
+     * from the point 'start'
+     */
+    Figure collect_figure(Point start){
 
         // Color and label of the figure
         int rgb = src.getRGB(start.x, start.y);
         int l = figures.size()+1;
         
         Figure f = new Figure(rgb);
-
-        // Boundaries of the image
-        int w = src.getWidth(); 
-        int h = src.getHeight();
 
         // Current point 
         Point current = start;
@@ -145,6 +146,22 @@ public class FigureBuilder {
 
         return figure;
     }
+
+
+    // Assure they are auto-contained from left to right
+    ArrayList<Figure> getFigures(){
+        ArrayList<Figure> figs = new ArrayList<Figure>();
+
+        for (f : figures){
+            if (f.isClosed() == false) figs.add(f);
+        }
+
+        for (f : figures){
+            if (f.isClosed()) figs.add(f);
+        }
+        return figs;
+    }
+
 
     Point getNeighbour(Point p, int direction){
         switch (direction){
