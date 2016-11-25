@@ -152,11 +152,11 @@ public class FigureBuilder {
     ArrayList<Figure> getFigures(){
         ArrayList<Figure> figs = new ArrayList<Figure>();
 
-        for (f : figures){
+        for (Figure f : figures){
             if (f.isClosed() == false) figs.add(f);
         }
 
-        for (f : figures){
+        for (Figure f : figures){
             if (f.isClosed()) figs.add(f);
         }
         return figs;

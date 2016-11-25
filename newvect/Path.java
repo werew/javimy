@@ -12,17 +12,17 @@ class Path {
         points = new ArrayList<Point>();
     }
 
-    public getFirst(){
+    public Point getFirst(){
         return points.get(0);
     }
 
-    public getLast(){
+    public Point getLast(){
         return points.get(points.size()-1);
     }
     
     public String toSVG(){
         String result = "";
-        for (p : points){
+        for (Point p : points){
             result += "L "+p.x+" "+p.y+" "; 
         }
 

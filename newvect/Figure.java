@@ -10,13 +10,13 @@ class Figure {
 
     public LinkedList<Path> borders;
 
-    public Path(int rgb){
+    public Figure(int rgb){
         color = rgb;
         borders = new LinkedList<Path>();
     }
 
     public void addBorder(Path p){
-        for ( b : borders){
+        for (Path b : borders){
             if (p.id == b.id) return;
         }
         borders.add(p);
@@ -24,12 +24,12 @@ class Figure {
     }
 
     public void addBorders(Path[] paths){
-        for (p : paths) {
+        for (Path p : paths) {
             addBorder(p);            
         }
     } 
 
-    private sortBorders(){
+    private void sortBorders(){
 
         if (sorted == true) return;
 
@@ -45,7 +45,7 @@ class Figure {
             
             for (Path p : borders ){
                 Point a = p.getFirst();
-                Point b = p.getLast()l
+                Point b = p.getLast();
                 if (start.equals(b)){
                    sortedBorders.addFirst(p);
                     start = a;
@@ -61,7 +61,7 @@ class Figure {
     public String toSVG(){
         String svg_path = "";
 
-        for (b : borders){
+        for (Path b : borders){
             svg_path += b.toSVG();
         }
 
