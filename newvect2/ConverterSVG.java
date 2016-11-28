@@ -10,8 +10,8 @@ public class ConverterSVG {
     ArrayList<Figure> figures;
 
     public ConverterSVG(BufferedImage img){
-        this.w = img.getHeight()*2-1; 
-        this.h = img.getWidth()*2-1; 
+        this.w = img.getWidth()*2-2; 
+        this.h = img.getHeight()*2-2; 
 
         FigureBuilder fb = new FigureBuilder(img);
         figures = fb.getFigures();
