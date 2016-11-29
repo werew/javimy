@@ -7,16 +7,15 @@ public class Main {
 
         BufferedImage image;
         try {
-            File input = new File("test.bmp");
+            File input = new File("test.jpg");
             image = ImageIO.read(input);
            ConverterSVG c = new ConverterSVG(image); 
-          c.printSVG();
-/*
-            PathsCollector pc = new PathsCollector(image);
-            image = pc.getImg();
-            File output = new File("out.bmp");
-            ImageIO.write(image,"bmp",output); 
-*/
+        c.printSVG();
+//            PathsCollector pc = new PathsCollector(image);
+ //           image = pc.getImg();
+  //          File output = new File("out.bmp");
+   //         ImageIO.write(image,"bmp",output); 
+
 
         } catch (IOException e){
             e.printStackTrace();
