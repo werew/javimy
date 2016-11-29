@@ -47,35 +47,41 @@ class Figure {
         // Check the last border against the first one
         if ( i >= borders.size() - 1){
             if (matchb(i-1, i) && matchb(i, 0)) {
-               // System.out.println("\nlAST: Sort "+i+" worked");
+                //System.out.println("\tlAST: Sort "+i+" worked");
                 return true;
             } 
 
             borders.get(i).reverse();
-            //System.out.println("\nlAST: Sort "+i+" reverse");
+            //System.out.println("\tlAST: Sort "+i+" reverse");
             if ((matchb(i-1,i) && matchb(i,0))) { 
-                //System.out.println("\nlAST: Sort "+i+" worked");
+                //System.out.println("\tlAST: Sort "+i+" worked");
                 return true;
             }
-                //System.out.println("\nlAST: Sort "+i+" BAD");
+                //System.out.println("\tlAST: Sort "+i+" BAD");
                 return false;
         }
 
         // Try the current orientation
         if (matchb(i-1,i) && _sortBorders(i+1)){
-            //System.out.println("\nSort "+i+" worked");
+            //System.out.println("\tSort "+i+" worked");
             return true;
         }
        
+        // Don't need to reverse if the current
+        // border is a circular path
+        if ( borders.get(i).getFirst()
+                .equals(borders.get(i).getLast())
+           ) return false;
+               
         // Current orietation doesn't work
         // try to reverse the border
         borders.get(i).reverse();
-        //System.out.println("\nSort "+i+" reverse");
+        //System.out.println("\tSort "+i+" reverse");
         if (matchb(i-1,i) && _sortBorders(i+1)) {
-            //System.out.println("\nSort "+i+" worked");
+            //System.out.println("\tSort "+i+" worked");
             return true;
         } else {
-            //System.out.println("\nSort "+i+" BAD");
+            //System.out.println("\tSort "+i+" BAD");
             return false;
         }
     }
