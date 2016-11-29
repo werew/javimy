@@ -18,7 +18,6 @@ class Figure {
         for (Path b : borders){
             if (p.id == b.id) return;
         }
-        System.out.println("add path "+p.id+" : "+p.getFirst()+" "+p.getLast());
         borders.add(p);
     }
 
@@ -30,7 +29,7 @@ class Figure {
 
 
     void sortBorders(){
-        System.out.println("-------- Start sort -------"+borders.size());
+        //System.out.println("-------- Start sort -------"+borders.size());
 
         if (borders.size() <= 1) return;
 
@@ -44,39 +43,39 @@ class Figure {
     // shouldn't be used on it's own
     boolean _sortBorders(int i){
 
-        System.out.println("---- Sort "+i);
+        //System.out.println("---- Sort "+i);
         // Check the last border against the first one
         if ( i >= borders.size() - 1){
             if (matchb(i-1, i) && matchb(i, 0)) {
-                System.out.println("\nLAST: Sort "+i+" worked");
+               // System.out.println("\nlAST: Sort "+i+" worked");
                 return true;
             } 
 
             borders.get(i).reverse();
-            System.out.println("\nLAST: Sort "+i+" reverse");
+            //System.out.println("\nlAST: Sort "+i+" reverse");
             if ((matchb(i-1,i) && matchb(i,0))) { 
-                System.out.println("\nLAST: Sort "+i+" worked");
+                //System.out.println("\nlAST: Sort "+i+" worked");
                 return true;
             }
-                System.out.println("\nLAST: Sort "+i+" BAD");
+                //System.out.println("\nlAST: Sort "+i+" BAD");
                 return false;
         }
 
         // Try the current orientation
         if (matchb(i-1,i) && _sortBorders(i+1)){
-            System.out.println("\nSort "+i+" worked");
+            //System.out.println("\nSort "+i+" worked");
             return true;
         }
        
         // Current orietation doesn't work
         // try to reverse the border
         borders.get(i).reverse();
-        System.out.println("\nSort "+i+" reverse");
+        //System.out.println("\nSort "+i+" reverse");
         if (matchb(i-1,i) && _sortBorders(i+1)) {
-            System.out.println("\nSort "+i+" worked");
+            //System.out.println("\nSort "+i+" worked");
             return true;
         } else {
-            System.out.println("\nSort "+i+" BAD");
+            //System.out.println("\nSort "+i+" BAD");
             return false;
         }
     }
@@ -85,7 +84,7 @@ class Figure {
         Point a = borders.get(i).getLast();
         Point b = borders.get(j).getFirst();
 
-        System.out.println("\t\tmatchb "+i+" "+j+" "+a+" "+b);
+        //System.out.println("\t\tmatchb "+i+" "+j+" "+a+" "+b);
         if (a.equals(b)) return true;
 
         if (a.x == b.x || a.y == b.y ){
@@ -99,7 +98,7 @@ class Figure {
             if (dist_ab <= dist_ac) return true;
         }
 
-        System.out.println("\t\tfail matchb");
+        //System.out.println("\t\tfail matchb");
         return false;
     }
         

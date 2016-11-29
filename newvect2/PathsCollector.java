@@ -36,28 +36,6 @@ public class PathsCollector {
         trace();
         collect_paths();
     
-        for (Path a : paths){
-            System.out.println("--- Path "+paths.indexOf(a)+" ---");
-            for (Point p : a.points){
-                System.out.println(p.x+" "+p.y);
-            }
-        }
-
-    }
-
-    public Path getPath(Point origin, Point delta){
-
-        Point p = new Point(origin.x*2+delta.x,origin.y*2+delta.y);
-
-        if (pointOutOfBounds(p) == true) return null;
-
-        if (pointOutOfBounds(p) == false &&
-            labels[p.x][p.y] > 0) {
-            System.out.println("---with label --> "+labels[p.x][p.y]);
-            return paths.get(labels[p.x][p.y]-1);
-        }
-
-        return null;
     }
 
     public boolean checkDirection(Point origin, Point delta){
@@ -106,7 +84,9 @@ public class PathsCollector {
     }
 
     public BufferedImage getImg(){
-        BufferedImage img = new BufferedImage(wl,hl,src.getType());
+        int imgtype = src.getType();
+        if (imgtype == 0 ) imgtype = 5;
+        BufferedImage img = new BufferedImage(wl,hl,imgtype);
         int r,g,b; 
         for (Path pa : paths){
             System.out.println("----- Path -----");
@@ -260,8 +240,6 @@ public class PathsCollector {
         // Label of the current path
         int label = paths.size() + 1;
 
-        System.out.println("GET JN "+label+" :"+jn+" from "+next);
-
         // Visit next
         labels[next.x][next.y] = label;
         
@@ -307,11 +285,8 @@ public class PathsCollector {
             
         Point current = start;
 
-        System.out.println("TAKE PATH "+label+" :"+start);
-
         while (current != null && labels[current.x][current.y] != LAB_JN){
 
-        System.out.println("visit "+current+" : "+labels[current.x][current.y]);
             // Add and mark as visited
             pa.points.add(current);
             labels[current.x][current.y] = label;
@@ -329,7 +304,6 @@ public class PathsCollector {
         if (current != null) {
             // Path ends with a junction point
             pa.points.add(current);
-            System.out.println("End with JN "+current+" "+labels[current.x][current.y]);
         } 
 
         // Test for closed paths

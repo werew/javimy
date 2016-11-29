@@ -26,7 +26,6 @@ public class FigureBuilder {
         // Init object
         w = img.getWidth();
         h = img.getHeight();
-        System.out.println(w+" "+h);
         src = img;
         labels = new int[w][h];
         figures = new ArrayList<Figure>();
@@ -110,14 +109,11 @@ public class FigureBuilder {
         // Backtrack direction
         int bk = 0; // Left
 
-        System.out.println("----> Figure "+l);
 
 
         do {
             // Visit point
             labels[current.x][current.y] = l;
-
-        System.out.println("---pick--> "+ current);
 
             // If current == angle, add a path
             Path pa = null;
@@ -130,7 +126,6 @@ public class FigureBuilder {
             }
 
             if (pa != null) {
-                    System.out.println("---ADD ANGLE--> "+ current);
                     pa.points.add(new Point(current.x*2,current.y*2));
                     f.addBorder(pa);
             }
@@ -141,10 +136,8 @@ public class FigureBuilder {
 
             for (int i = 0; i < 8 && found == false; i++){
                
-                bk = (bk + 1) % 8;
                 Point next = nb[bk];
                 Point delta = new Point(next.x-current.x,next.y-current.y);
-                //System.out.println("considering "+ next);
 
                 // Check boundaries and color
                 // and if its separate by a path
@@ -155,6 +148,8 @@ public class FigureBuilder {
                 
                     Path p = pc.getBorder(current, delta);
                     if (p != null) f.addBorder(p);
+                    
+                    bk = (bk + 1) % 8;
                     
                     continue;
                 }
@@ -180,7 +175,7 @@ public class FigureBuilder {
                  }
             }
 
-        } while (current.equals(start) == false /*&& bk == 0 */);
+        } while (current.equals(start) == false /*&& bk != 0 */);
 
 
         return f;
@@ -208,15 +203,13 @@ public class FigureBuilder {
         ArrayList<Figure> figs = new ArrayList<Figure>();
 
         for (Figure f : figures){
-            System.out.println("Check fig "+figures.indexOf(f));
             if (f.isClosed() == false) figs.add(f);
         }
 
         for (Figure f : figures){
-            System.out.println("Check fig "+figures.indexOf(f));
             if (f.isClosed()) figs.add(f);
         }
-        System.out.println("DONE");
+
         return figs;
     }
 
