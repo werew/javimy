@@ -19,11 +19,11 @@ public class window extends JFrame implements ActionListener
 
 		JMenu file=new JMenu("Fichier");
 		JMenu filtre=new JMenu("Filtre");
-		JMenu vectorisation=new JMenu("Vectorisation");
 
 		JMenuItem btnOuvrir=new JMenuItem("Ouvrir");
 		JMenuItem btnEnregistrer=new JMenuItem("Enregistrer");
 		JMenuItem btnEnregistrerSous=new JMenuItem("Enregistrer sous");
+		JMenuItem btnVectorisation=new JMenuItem("Exporter comme SVG");
 		//JMenuItem btnFermer=new JMenuItem("Fermer");
 		JMenuItem btnQuitter=new JMenuItem("Quitter");
 		JMenuItem btnSobel=new JMenuItem("Sobel");
@@ -33,7 +33,6 @@ public class window extends JFrame implements ActionListener
 		JMenuItem btnGauss=new JMenuItem("Gauss");
 		JMenuItem btnCanny=new JMenuItem("Canny");
 		JMenuItem btnEffacer=new JMenuItem("Effacer");
-		JMenuItem btnVectorisationSimple=new JMenuItem("Vectorisation simple");
 
 		ImageIcon imageAfficher;
 		JLabel labelImageAfficher;
@@ -57,7 +56,6 @@ public class window extends JFrame implements ActionListener
 
 		menu.add(file);
 		menu.add(filtre);
-		menu.add(vectorisation);
 
 		file.add(btnOuvrir);
 		btnOuvrir.addActionListener(this);
@@ -67,6 +65,9 @@ public class window extends JFrame implements ActionListener
 
 		file.add(btnEnregistrerSous);
 		btnEnregistrerSous.addActionListener(this);
+
+		file.add(btnVectorisation);
+		btnVectorisation.addActionListener(this);
 
 		/*file.add(btnFermer);
 		btnFermer.addActionListener(this);
@@ -95,10 +96,7 @@ public class window extends JFrame implements ActionListener
 		filtre.add(btnEffacer);
 		btnEffacer.addActionListener(this);
 
-		vectorisation.add(btnVectorisationSimple);
-		btnVectorisationSimple.addActionListener(this);
-
-
+		
 		this.setVisible(true);
 
 	
@@ -180,6 +178,12 @@ public class window extends JFrame implements ActionListener
 		{
 			this.enregistrerSous();
 		}
+
+		if(e.getSource()==btnVectorisation)
+		{
+			//TODO
+		}
+
 	/*	if(e.getSource()==btnFermer)
 		{
 			this.getContentPane().removeAll();
@@ -233,11 +237,6 @@ public class window extends JFrame implements ActionListener
 		if(e.getSource()==btnEffacer)
 		{
 			this.printImage(imageOriginal);
-		}
-		if(e.getSource()==btnVectorisationSimple)
-		{
-			simpleVectorization imageVect= new simpleVectorization(imageOriginal);	//TODO changer type avec héritage
-			this.printImage(imageVect.getImg());
 		}
 		
 	}
