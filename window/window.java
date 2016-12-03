@@ -30,7 +30,7 @@ public class window extends JFrame implements ActionListener
 		JMenuItem btnPrewitt=new JMenuItem("Prewitt");
 		JMenuItem btnKirsche=new JMenuItem("Kirsche");
 		JMenuItem btnRoberts=new JMenuItem("Roberts");
-		JMenuItem btnGauss=new JMenuItem("Gauss");
+		ItemAction btnGauss=new ItemAction(new optionGauss(),"Gauss");
 		JMenuItem btnCanny=new JMenuItem("Canny");
 		JMenuItem btnEffacer=new JMenuItem("Effacer");
 
@@ -89,6 +89,7 @@ public class window extends JFrame implements ActionListener
 
 		filtre.add(btnGauss);
 		btnGauss.addActionListener(this);
+		btnGauss.opt.submit.addActionListener(this);
 
 		filtre.add(btnCanny);
 		btnCanny.addActionListener(this);
@@ -158,7 +159,6 @@ public class window extends JFrame implements ActionListener
 
 	}
 
-	optionGauss opt;	//TODO instancier et affichage avec methode print
 
 	public void actionPerformed(ActionEvent e)
 	{
@@ -166,20 +166,20 @@ public class window extends JFrame implements ActionListener
 		{
 			this.ouvrir();
 		}
-		if(e.getSource()==btnQuitter)
+		else if(e.getSource()==btnQuitter)
 		{
 			this.dispose();
 		}
-		if(e.getSource()==btnEnregistrer)
+		else if(e.getSource()==btnEnregistrer)
 		{
 			this.enregistrer();
 		}
-		if(e.getSource()==btnEnregistrerSous)
+		else if(e.getSource()==btnEnregistrerSous)
 		{
 			this.enregistrerSous();
 		}
 
-		if(e.getSource()==btnVectorisation)
+		else if(e.getSource()==btnVectorisation)
 		{
 			//TODO
 		}
@@ -188,7 +188,7 @@ public class window extends JFrame implements ActionListener
 		{
 			this.getContentPane().removeAll();
 			this.revalidate();
-		}*/
+		}
 		if(e.getSource()==btnSobel)
 		{
 			newImage = new Sobel(imageOriginal);
@@ -210,29 +210,27 @@ public class window extends JFrame implements ActionListener
 			newImage = new Roberts(imageOriginal);
 			this.printImage(newImage.getImg());
 		}
-		if(e.getSource()==btnGauss)
+*/		else if(e.getSource() instanceof ItemAction)
 		{
-			opt=new optionGauss(imageOriginal,this);
-			//newImage = new Gauss(imageOriginal,1,0.8);	//XXX argument variable
-			//newImage=opt.getImg();
+			ItemAction item=(ItemAction)e.getSource();
+			item.affiche();
 		}
-/*		if(e.getSource()==opt.submit)
+		else if(e.getSource() instanceof JButton)
 		{
+			
+			Option item =(Option)e.getSource();
 			System.out.println("submit");
-			double sig= Double.parseDouble(opt.sigma.getText());
-			int r=Integer.parseInt(opt.rayon.getText());
-			newImage=new Gauss(imageOriginal,r,sig);
-
+			item.execute(imageOriginal);
+			newImage=item.getImg();
 			this.printImage(newImage.getImg());
-			opt.dispose();
-		}*/
+		}
 
-		if(e.getSource()==btnCanny)
+/*		if(e.getSource()==btnCanny)
 		{
 			newImage=new Canny(imageOriginal);
 			this.printImage(newImage.getImg());
 		}
-
+*/
 
 		if(e.getSource()==btnEffacer)
 		{
