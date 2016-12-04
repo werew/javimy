@@ -1,6 +1,8 @@
 package filters;
 import java.awt.image.BufferedImage;
 import java.awt.*;
+import java.util.*;
+import java.awt.Point;
 
 // Here is a cool post about this filter:
 // https://blog.saush.com/2011/04/20/edge-detection-
@@ -98,6 +100,8 @@ public class Canny extends Filter {
 		}
 	}
 
+	List<Point> incertain=new List<Point>();
+
 	for(int i=0;i<h-2;i++)
 	{
 		for(int j=0;j<w-2;j++)
@@ -114,10 +118,37 @@ public class Canny extends Filter {
 			}
 			else
 			{
-				//TODO que faire?
+				incertain.add(new Point(j,i));
 			}
 
 
+		}
+	}
+	//TODO prend les point au bord: attention
+	for(Point p : incertain)
+	{
+		int x=p.getX();
+		int y=p.getY();
+
+		carte[x][y].etat=false;
+
+		int i,j;
+		for(i=-1;i<=1;i++)
+		{
+			for(j=-1;j<=1;j++)
+			{
+				if(i!=0 || j!=0)
+				{
+					carte[x][y].etat=carte[x][y].etat || carte[x+j][y+i].etat;
+				}
+			}
+		}
+	}
+
+	for(int i=0;i<h-2;i++)
+	{
+		for(int j=0;j<w-2;j++)
+		{
 			if(carte[j][i].etat)
 			{
 				Color nc=new Color(255,255,255);
@@ -130,8 +161,6 @@ public class Canny extends Filter {
 			}
 		}
 	}
-
-	
     }
 
     public BufferedImage getImg(){
@@ -144,7 +173,7 @@ public class Canny extends Filter {
 
         for (int i=0; i<3; i++){
             for (int j=0; j<3; j++){
-		System.out.println("i "+i+" j "+j+" w "+src.getWidth()+" h "+src.getHeight());
+//		System.out.println("i "+i+" j "+j+" w "+src.getWidth()+" h "+src.getHeight());
                 Color c = new Color(src.getRGB(i+x-1,j+y-1));
                 int red = (int)(c.getRed() * 0.3);
                 int green = (int)(c.getGreen() * 0.3);
