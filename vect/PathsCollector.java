@@ -35,6 +35,7 @@ public class PathsCollector {
 
         trace();
         collect_paths();
+        for (Path p : paths) p.reduce(4.);
     
     }
 
