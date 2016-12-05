@@ -15,18 +15,13 @@ public class ItemAction extends JMenuItem
 		this.opt=opt;
 	}
 
-	public void affiche()
+	public void affiche(BufferedImage src)
 	{
-		opt.affiche();
-	}
-
-	public void execute(BufferedImage src)
-	{
-		this.opt.execute(src);
+		opt.affiche(src);
 	}
 
 	public Filter getImg()
 	{
-		return opt.image;
+		return opt.getImg();
 	}
 }

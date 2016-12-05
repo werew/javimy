@@ -213,14 +213,7 @@ public class window extends JFrame implements ActionListener
 */		else if(e.getSource() instanceof ItemAction)
 		{
 			ItemAction item=(ItemAction)e.getSource();
-			item.affiche();
-		}
-		else if(e.getSource() instanceof JButton)
-		{
-			
-			Option item =(Option)e.getSource();
-			System.out.println("submit");
-			item.execute(imageOriginal);
+			item.affiche(imageOriginal);
 			newImage=item.getImg();
 			this.printImage(newImage.getImg());
 		}

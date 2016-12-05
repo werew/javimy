@@ -42,6 +42,8 @@ public	JTextField rayon=new JFormattedTextField();
 
 	public void execute(BufferedImage src)
 	{
-		image=new Gauss(src,2,2);
+		int r= Integer.parseInt(rayon.getText());
+		double s= Double.parseDouble(sigma.getText());
+		image=new Gauss(src,r,s);
 	}
 }
