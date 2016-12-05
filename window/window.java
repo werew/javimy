@@ -159,7 +159,7 @@ public class window extends JFrame implements ActionListener
 
 	}
 
-	private void vectorization()
+/*	private void vectorization()
 	{
 		int boite=choix.showSaveDialog(null);
 		if(boite==JFileChooser.APPROVE_OPTION)
@@ -171,7 +171,7 @@ public class window extends JFrame implements ActionListener
 		opt.affiche(imageOriginal);
 		//TODO
 	}
-
+*/
 
 	public void actionPerformed(ActionEvent e)
 	{

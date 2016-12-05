@@ -14,20 +14,23 @@ import vectorization.*;
 import javax.swing.JFormattedTextField;
 import window.*;
 
-public class optionVectorization extends Option
+public class optionVectorization extends JDialog
 {
 public	JTextField champNbCouleur=new JFormattedTextField();
+public	JTextField champPrecision=new JFormattedTextField();	//DOUBLE
 	
-
+//TODO ajouter specificite JDIALOG
 
 	public optionVectorization()
 	{
 		super();
 
 		champNbCouleur.setPreferredSize(new Dimension(100,50));
+		champPrecision.setPreferredSize(new Dimension(100,50));
 
 		JPanel panel=new JPanel();
 		panel.add(champNbCouleur);
+		panel.add(champPrecision);
 
 		panel.add(submit);
 
@@ -37,14 +40,18 @@ public	JTextField champNbCouleur=new JFormattedTextField();
 	public void execute(BufferedImage src)
 	{
 		int nbCouleur=Integer.parseInt(champNbCouleur.getText());
+		int precision=Double.parseDouble((champPrecision.getText());
+	//Segmentation
         try {
-            Clusterizator f = new Clusterizator(src, 2); 
+            Clusterizator f = new Clusterizator(src, nbCouleur); 
             image = f.getImg();
-            File output = new File("out.jpg");
-
 
         } catch (IOException e){
         };
+
+	//Vect
+	ConverterSVG svg=new ConverterSVG(image/*,precision*/);
+	svg.export
 
 
 	}
