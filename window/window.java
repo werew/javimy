@@ -159,6 +159,19 @@ public class window extends JFrame implements ActionListener
 
 	}
 
+	private void vectorization()
+	{
+		int boite=choix.showSaveDialog(null);
+		if(boite==JFileChooser.APPROVE_OPTION)
+		{
+			System.out.println("Bravo, tu as enregistrer: "+choix.getSelectedFile());	//XXX
+			File output=new File(""+choix.getSelectedFile());
+		}
+		Option opt=new Option();
+		opt.affiche(imageOriginal);
+		//TODO
+	}
+
 
 	public void actionPerformed(ActionEvent e)
 	{
