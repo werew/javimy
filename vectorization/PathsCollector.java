@@ -23,7 +23,7 @@ public class PathsCollector {
     static final int LAB_NOT_FOLLOW = -3;
     
 
-    public PathsCollector (BufferedImage img){
+    public PathsCollector (BufferedImage img, float precision){
         // Init object
         w = img.getWidth();
         h = img.getHeight();
@@ -37,7 +37,12 @@ public class PathsCollector {
 
         trace();
         collect_paths();
-        for (Path p : paths) p.reduce(4.);
+
+        if (precision > 100) precision = 100;
+
+        if (precision > 0) {
+            for (Path p : paths) p.reduce(100-precision);
+        }
     
     }
 

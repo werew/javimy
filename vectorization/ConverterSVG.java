@@ -12,11 +12,11 @@ public class ConverterSVG {
     int h,w;
     ArrayList<Figure> figures;
 
-    public ConverterSVG(BufferedImage img){
+    public ConverterSVG(BufferedImage img, float precision){
         this.w = img.getWidth()*2-2; 
         this.h = img.getHeight()*2-2; 
 
-        FigureBuilder fb = new FigureBuilder(img);
+        FigureBuilder fb = new FigureBuilder(img, precision);
         figures = fb.getFigures();
         
     }
