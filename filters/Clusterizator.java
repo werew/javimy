@@ -1,11 +1,10 @@
-package Filters;
+package filters;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 
-public class Clusterizator {
+public class Clusterizator extends Filter {
     
     Color[] kmeans;      // k-means
-    BufferedImage image; // Segmented image
     BufferedImage src;   // Image source
     int[][] labels;      // Segment label of each pixel
 
@@ -16,8 +15,8 @@ public class Clusterizator {
         src = img;
         labels = new int[w][h];
         generateKmeans(K);
+
         while (createLabels() == false){
-            System.out.println("go");
             mv2centroids();
         }
 
@@ -34,7 +33,6 @@ public class Clusterizator {
             int x = (int) (Math.random()*src.getWidth());
             int y = (int) (Math.random()*src.getHeight());
             kmeans[i] = new Color(src.getRGB(x,y));
-            System.out.println(kmeans[i]+" "+x+" "+y);
         }
         
     }

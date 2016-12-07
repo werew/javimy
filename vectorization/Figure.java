@@ -1,3 +1,5 @@
+package vectorization;
+
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.util.ArrayList;
@@ -29,8 +31,6 @@ class Figure {
 
 
     void sortBorders(){
-        //System.out.println("-------- Start sort -------"+borders.size());
-
         if (borders.size() <= 1) return;
 
         if (_sortBorders(1)) return;
@@ -43,29 +43,16 @@ class Figure {
     // shouldn't be used on it's own
     boolean _sortBorders(int i){
 
-        //System.out.println("---- Sort "+i);
         // Check the last border against the first one
         if ( i >= borders.size() - 1){
-            if (matchb(i-1, i) && matchb(i, 0)) {
-                //System.out.println("\tlAST: Sort "+i+" worked");
-                return true;
-            } 
+            if (matchb(i-1, i) && matchb(i, 0)) return true;
 
             borders.get(i).reverse();
-            //System.out.println("\tlAST: Sort "+i+" reverse");
-            if ((matchb(i-1,i) && matchb(i,0))) { 
-                //System.out.println("\tlAST: Sort "+i+" worked");
-                return true;
-            }
-                //System.out.println("\tlAST: Sort "+i+" BAD");
-                return false;
+            return (matchb(i-1,i) && matchb(i,0));
         }
 
         // Try the current orientation
-        if (matchb(i-1,i) && _sortBorders(i+1)){
-            //System.out.println("\tSort "+i+" worked");
-            return true;
-        }
+        if (matchb(i-1,i) && _sortBorders(i+1)) return true;
        
         // Don't need to reverse if the current
         // border is a circular path
@@ -76,21 +63,13 @@ class Figure {
         // Current orietation doesn't work
         // try to reverse the border
         borders.get(i).reverse();
-        //System.out.println("\tSort "+i+" reverse");
-        if (matchb(i-1,i) && _sortBorders(i+1)) {
-            //System.out.println("\tSort "+i+" worked");
-            return true;
-        } else {
-            //System.out.println("\tSort "+i+" BAD");
-            return false;
-        }
+        return (matchb(i-1,i) && _sortBorders(i+1));
     }
 
     boolean matchb(int i, int j){
         Point a = borders.get(i).getLast();
         Point b = borders.get(j).getFirst();
 
-        //System.out.println("\t\tmatchb "+i+" "+j+" "+a+" "+b);
         if (a.equals(b)) return true;
 
         if (a.x == b.x || a.y == b.y ){
@@ -104,7 +83,6 @@ class Figure {
             if (dist_ab <= dist_ac) return true;
         }
 
-        //System.out.println("\t\tfail matchb");
         return false;
     }
         

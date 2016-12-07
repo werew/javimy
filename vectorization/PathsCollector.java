@@ -1,3 +1,5 @@
+package vectorization;
+
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.util.ArrayList;
@@ -60,29 +62,6 @@ public class PathsCollector {
         return paths.get(labels[p.x][p.y]-1);
     }
 
-    public ArrayList<Path> getNearPaths(Point origin){
-        Point p = new Point(origin.x*2,origin.y*2);
-
-        System.out.println("---Get near paths --> "+p);
-
-        ArrayList<Path> pa = new ArrayList<Path>();
-        for ( Point e : get_edges(p)){
-            if (pointOutOfBounds(e) == false &&
-                labels[e.x][e.y] > 0) {
-                System.out.println("---found label --> "+labels[e.x][e.y]);
-                pa.add(paths.get(labels[e.x][e.y]-1));
-            }
-        }
-
-        for ( Point a : get_angles(p)){
-            if (pointOutOfBounds(a) == false &&
-                labels[a.x][a.y] > 0) {
-                 System.out.println("---found label --> "+labels[a.x][a.y]);
-                pa.add(paths.get(labels[a.x][a.y]-1));
-            }
-        }
-        return pa;
-    }
 
     public BufferedImage getImg(){
         int imgtype = src.getType();
@@ -90,26 +69,14 @@ public class PathsCollector {
         BufferedImage img = new BufferedImage(wl,hl,imgtype);
         int r,g,b; 
         for (Path pa : paths){
-            System.out.println("----- Path -----");
             r = 50 + (int)(Math.random() * ((255 - 50) + 1));
             g = 50 + (int)(Math.random() * ((255 - 50) + 1));
             b = 50 + (int)(Math.random() * ((255 - 50) + 1));
             Color c = new Color(r,g,b);
             for (Point p : pa.points) {
-                System.out.println(p.x+"    "+p.y);
                 img.setRGB(p.x,p.y,c.getRGB());
             }
         }
-/*
-            Color c = new Color(255,255,255);
-        for (int i=0; i<wl;i++){
-            for (int j=0; j<hl;j++){
-                if (labels[i][j] != 0){
-                    img.setRGB(i,j,c.getRGB());
-                }
-             }
-        }
-*/
         return img;
     }
         
@@ -347,15 +314,10 @@ public class PathsCollector {
     }
 
 
-
-
     boolean pointOutOfBounds(Point p){
             return (p.x < 0 || p.x >= wl || 
                     p.y < 0 || p.y >= hl );
     }
-
-
-
 
 
     /**
@@ -370,10 +332,6 @@ public class PathsCollector {
         edges[3] = new Point(p.x-1,p.y);    
         return edges;
     }
-
-
-
-
 
     /**
      * Get the 4 points at the angles of a point p
