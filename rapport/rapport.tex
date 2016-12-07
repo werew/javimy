@@ -109,7 +109,7 @@ et assigner chaque pixel de l'image a le plus proche de ces couleurs.
 \begin{figure}[h]
 \centering
 \includegraphics[width=8cm]{./pics/kmeans.eps}
-\caption{Agrégation des pixels selon la plus courte distance avec le
+\caption{Agrégation des pixels selon la plus courte distance avec les
 K-moyennes (ici K = 5)}
 \label{fig:routcidr}
 \end{figure}
@@ -120,6 +120,17 @@ suite jusq'a quand les K couleurs et le partitionnement des pixels
 convergent. 
 
 \subsection{Cluster-edges}
+Cet filtre s'inscrit dans l'ensemble des filtres de detections des
+bords. La particularite de ce filtre par rapport aux autres filtre de
+detection des contours est que il n'effectue pas une simple detection
+des bords mais, plus precisement, il determine les limites entre
+differents zones de couleurs. 
+Les limites entre deux zones de couleurs sont represente par des
+chemin colore. A chaque bord correspond un chemin d'un couleur
+different.
+
+
+
 \newpage
 
 \section{Vectorisation} 
