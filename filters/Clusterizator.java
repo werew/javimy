@@ -2,10 +2,9 @@ package filters;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 
-public class Clusterizator {
+public class Clusterizator extends Filter {
     
     Color[] kmeans;      // k-means
-    BufferedImage image; // Segmented image
     BufferedImage src;   // Image source
     int[][] labels;      // Segment label of each pixel
 
