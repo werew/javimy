@@ -2,6 +2,10 @@ package vectorization;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.io.IOException;
+
+
 
 
 
@@ -19,15 +23,20 @@ public class ConverterSVG {
         
     }
 
-    public void printSVG(){
+    public void export(String filename) throws IOException {
 
-        System.out.println(getHeader(h,w));
+        PrintWriter writer = new PrintWriter(filename);
+
+        writer.println(getHeader(h,w));
 
         for (Figure f : figures){
-            System.out.println(f.toSVG());
+            writer.println(f.toSVG());
+            writer.flush();
         }
         
-        System.out.println(getFooter());
+        writer.println(getFooter());
+        writer.close();
+        
     }
 
     String getHeader(int h, int w){
