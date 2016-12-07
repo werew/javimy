@@ -19,4 +19,13 @@ hs_err_pid*
 *.jpg
 *.bmp
 *.svg
-*.png
+
+# Tex proj
+*.aux
+*.log
+*.toc
+*.dvi
+*.ps
+*.pdf
+*.bbl
+*.blg
