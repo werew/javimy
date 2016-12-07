@@ -23,7 +23,7 @@ public class FigureBuilder {
     static final int DOWN  = 2;
     static final int LEFT  = 3;
 
-    public FigureBuilder (BufferedImage img){
+    public FigureBuilder (BufferedImage img, float precision){
         // Init object
         w = img.getWidth();
         h = img.getHeight();
@@ -32,7 +32,7 @@ public class FigureBuilder {
         figures = new ArrayList<Figure>();
 
         // Run paths collector
-        pc = new PathsCollector(img);
+        pc = new PathsCollector(img, precision);
 
         // Start tracing
         for (int j=0; j<h; j++){
