@@ -37,19 +37,20 @@ public class Canny extends Filter {
         image = new BufferedImage(w-2,h-2,src.getType());
 	carte = new gradient[image.getWidth()][image.getHeight()];
 
-
+	System.out.println("w "+w+" h "+h);
 
         // Set max
-        for (int i=1; i<w-1; i++){
-            for (int j=1; j<h-1; j++){
+        for (int i=1; i<h-1; i++){
+            for (int j=1; j<w-1; j++){
                 gradient val = convolution(j,i);
+//		System.out.println("===========> i "+i+" j "+j);
                 if (val.Norme>max) max = val.Norme;
             }
         }
 
         // Apply filter 
-        for (int i=1; i<w-1; i++){
-            for (int j=1; j<h-1; j++){
+        for (int i=1; i<h-1; i++){
+            for (int j=1; j<w-1; j++){
                 gradient val = convolution(j,i);
 
 		//TODO
@@ -66,9 +67,9 @@ public class Canny extends Filter {
             }
         }
 
-	for(int i=0;i<h-2;i++)
+	for(int i=1;i<h-3;i++)
 	{
-		for(int j=0;j<w-2;j++)
+		for(int j=1;j<w-3;j++)
 		{
 			//TODO arrondir angle
 			int dx=0,dy=0;
@@ -143,7 +144,10 @@ public class Canny extends Filter {
 			{
 				if(i!=0 || j!=0)
 				{
-					carte[x][y].etat=carte[x][y].etat || carte[x+j][y+i].etat;
+					if(x+j>=0 && y+i>=0 && x+j<w-2 && y+i<h-2)
+					{
+						carte[x][y].etat=carte[x][y].etat || carte[x+j][y+i].etat;
+					}
 				}
 			}
 		}
@@ -177,14 +181,20 @@ public class Canny extends Filter {
 
         for (int i=-1; i<=1; i++){
             for (int j=-1; j<=1; j++){
+
+		Color c=null;
+		try{
+                c = new Color(src.getRGB(j+x,i+y));
+		} catch(Exception e){
+			
 		System.out.println("i "+i+" j "+j+" w "+src.getWidth()+" h "+src.getHeight());
-                Color c = new Color(src.getRGB(i+x,j+y));
+		};
                 int red = (int)(c.getRed() * 0.3);
                 int green = (int)(c.getGreen() * 0.3);
                 int blue = (int)(c.getBlue() * 0.3);
                 int rgb = red+green+blue;
-                px_x += mx[j][i] * rgb;
-                px_y += my[j][i] * rgb;
+                px_x += mx[j+1][i+1] * rgb;
+                px_y += my[j+1][i+1] * rgb;
             }
         }
 
