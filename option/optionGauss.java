@@ -19,6 +19,9 @@ public class optionGauss extends Option
 public	JTextField seuil=new JFormattedTextField();
 public	JTextField sigma=new JFormattedTextField();
 public	JTextField rayon=new JFormattedTextField();
+public JLabel TxtSeuil = new JLabel("Seuil");
+public JLabel TxtSigma = new JLabel("Sigma");
+public JLabel TxtRayon = new JLabel("Rayon");
 	
 
 
@@ -26,13 +29,16 @@ public	JTextField rayon=new JFormattedTextField();
 	{
 		super();
 
-		seuil.setPreferredSize(new Dimension(100,50));
-		sigma.setPreferredSize(new Dimension(100,50));
-		rayon.setPreferredSize(new Dimension(100,50));
+		seuil.setPreferredSize(new Dimension(70,20));
+		sigma.setPreferredSize(new Dimension(70,20));
+		rayon.setPreferredSize(new Dimension(70,20));
 
 		JPanel panel=new JPanel();
+		panel.add(TxtSeuil);
 		panel.add(seuil);
+		panel.add(TxtSigma);
 		panel.add(sigma);
+		panel.add(TxtRayon);
 		panel.add(rayon);
 
 		panel.add(submit);
