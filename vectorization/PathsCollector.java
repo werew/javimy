@@ -92,26 +92,14 @@ public class PathsCollector {
         BufferedImage img = new BufferedImage(wl,hl,imgtype);
         int r,g,b; 
         for (Path pa : paths){
-            System.out.println("----- Path -----");
             r = 50 + (int)(Math.random() * ((255 - 50) + 1));
             g = 50 + (int)(Math.random() * ((255 - 50) + 1));
             b = 50 + (int)(Math.random() * ((255 - 50) + 1));
             Color c = new Color(r,g,b);
             for (Point p : pa.points) {
-                System.out.println(p.x+"    "+p.y);
                 img.setRGB(p.x,p.y,c.getRGB());
             }
         }
-/*
-            Color c = new Color(255,255,255);
-        for (int i=0; i<wl;i++){
-            for (int j=0; j<hl;j++){
-                if (labels[i][j] != 0){
-                    img.setRGB(i,j,c.getRGB());
-                }
-             }
-        }
-*/
         return img;
     }
         
