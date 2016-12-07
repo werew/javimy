@@ -8,10 +8,10 @@ import java.awt.event.ActionListener;
 
 public abstract class Option extends JDialog implements ActionListener
 {
-	private imageicon icone=new imageicon("icone.jpg");
+	private ImageIcon icone=new ImageIcon("icone.jpg");
 	public	JButton submit=new JButton("valider");
-	public filter image;
-	public bufferedimage src;
+	public Filter image;
+	public BufferedImage src;
 
 	public Option()
 	{
@@ -25,7 +25,7 @@ public abstract class Option extends JDialog implements ActionListener
 
 		this.setTitle("Javimy");
 		this.setIconImage(icone.getImage());
-		this.setSize(500,500);
+		this.setSize(400,100);
 		this.setLocationRelativeTo(null);
 		this.setModal(true);
 
