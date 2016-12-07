@@ -8,10 +8,10 @@ import java.awt.event.ActionListener;
 
 public abstract class Option extends JDialog implements ActionListener
 {
-	private ImageIcon icone=new ImageIcon("icone.jpg");
-	public	JButton submit=new JButton("Valider");
-	public Filter image;
-	public BufferedImage src;
+	private imageicon icone=new imageicon("icone.jpg");
+	public	JButton submit=new JButton("valider");
+	public filter image;
+	public bufferedimage src;
 
 	public Option()
 	{
