@@ -1,7 +1,8 @@
 package filters;
+
 import java.awt.image.BufferedImage;
-import java.awt.*;
-import java.util.*;
+import java.awt.Color;
+import java.util.ArrayList;
 import java.awt.Point;
 
 // Here is a cool post about this filter:
@@ -100,7 +101,10 @@ public class Canny extends Filter {
 		}
 	}
 
-	List<Point> incertain=new List<Point>();
+
+
+
+	ArrayList<Point> incertain=new ArrayList<Point>();
 
 	for(int i=0;i<h-2;i++)
 	{
@@ -127,8 +131,8 @@ public class Canny extends Filter {
 	//TODO prend les point au bord: attention
 	for(Point p : incertain)
 	{
-		int x=p.getX();
-		int y=p.getY();
+		int x=p.x;
+		int y=p.y;
 
 		carte[x][y].etat=false;
 
