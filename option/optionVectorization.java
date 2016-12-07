@@ -15,20 +15,20 @@ import vectorization.*;
 import javax.swing.JFormattedTextField;
 import vectorization.*;
 import javax.swing.ImageIcon;
+import window.popup;
 
 public class optionVectorization extends JDialog implements ActionListener
 {
-public	JTextField champNbCouleur=new JFormattedTextField();	//TODO filtrer si il y a de caractere
-public	JTextField champPrecision=new JFormattedTextField();	//DOUBLE
+	public	JTextField champNbCouleur=new JFormattedTextField();	//TODO filtrer si il y a de caractere
+	public	JTextField champPrecision=new JFormattedTextField();	//DOUBLE
 	
-private ImageIcon icone=new ImageIcon("icone.jpg");
-private JButton browse = new JButton ("Browse");
-public	JButton submit=new JButton("valider");
-public Filter image;
-public BufferedImage src;
-private JFileChooser choix = new JFileChooser(".");
+	private ImageIcon icone=new ImageIcon("icone.jpg");
+	private	 JButton browse = new JButton ("Browse");
+	public	JButton submit=new JButton("valider");
+	public Filter image;
+	public BufferedImage src;
+	private JFileChooser choix = null; 
 
-//TODO ajouter specificite JDIALOG
 
 	public optionVectorization(BufferedImage src)
 	{
@@ -59,14 +59,6 @@ private JFileChooser choix = new JFileChooser(".");
 		this.setVisible(true);
 	}
 
-	private void enregistrerSous()
-	{
-		int boite=choix.showSaveDialog(null);
-		if(boite==JFileChooser.APPROVE_OPTION)
-		{
-			System.out.println("Bravo, tu as enregistrer: "+choix.getSelectedFile().toString());	//XXX
-		}
-	}
 
 	public void execute(BufferedImage src)
 	{
@@ -80,23 +72,31 @@ private JFileChooser choix = new JFileChooser(".");
 
 		svg.export(choix.getSelectedFile().toString());
         } catch (IOException e){
-        };
+        }
 
 	}
+
 
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource()==browse)
 		{
-			System.out.println("browse");
-			enregistrerSous();
+			choix=new JFileChooser(".");
+			choix.showSaveDialog(null);
 		}
 		else if (e.getSource()==submit)
 		{
-		//	new popup("Veuillez patienter");	TODO
-			execute(src);
-		//	new popup("Fichier enregistrer");	TODO
-			this.dispose();
+			if(choix==null)
+			{
+				new popup("Pas de chemin de sauvegarde");
+			}
+			else
+			{
+				new popup("Veuillez patienter");	
+				execute(src);
+				new popup("Fichier enregistrer");
+				this.dispose();
+			}
 		}
 	}
 
