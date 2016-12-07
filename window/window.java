@@ -31,6 +31,7 @@ public class window extends JFrame implements ActionListener
 		JMenuItem btnKirsche=new JMenuItem("Kirsche");
 		JMenuItem btnRoberts=new JMenuItem("Roberts");
 		ItemAction btnGauss=new ItemAction(new optionGauss(),"Gauss");
+		//JMenuItem btnCanny=new JMenuItem("Canny");
 		JMenuItem btnCanny=new JMenuItem("Canny");
 		JMenuItem btnEffacer=new JMenuItem("Effacer");
 
@@ -256,12 +257,13 @@ public class window extends JFrame implements ActionListener
 			}
 		}
 
-/*		if(e.getSource()==btnCanny)
+		if(e.getSource()==btnCanny)
 		{
+			System.out.println("Canny");
 			newImage=new Canny(imageOriginal);
 			this.printImage(newImage.getImg());
 		}
-*/
+
 
 		if(e.getSource()==btnEffacer)
 		{
