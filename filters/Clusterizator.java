@@ -95,6 +95,6 @@ public class Clusterizator extends Filter {
         return r;
     }
     
-    BufferedImage getImg(){ return image;}
+    public BufferedImage getImg(){ return image;}
 
 }
