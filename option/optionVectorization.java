@@ -17,12 +17,12 @@ import window.*;
 import vectorization.*;
 import javax.swing.ImageIcon;
 
-public class optionVectorization extends JDialog
+public class optionVectorization extends JDialog implements ActionListener
 {
-public	JTextField champNbCouleur=new JFormattedTextField();
+public	JTextField champNbCouleur=new JFormattedTextField();	//TODO filtrer si il y a de caractere
 public	JTextField champPrecision=new JFormattedTextField();	//DOUBLE
 	
-private ImageIcon icone=new imageicon("icone.jpg");
+private ImageIcon icone=new ImageIcon("icone.jpg");
 private JButton browse = new JButton ("Browse");
 public	JButton submit=new JButton("valider");
 public Filter image;
@@ -31,7 +31,7 @@ private JFileChooser choix = new JFileChooser(".");
 
 //TODO ajouter specificite JDIALOG
 
-	public optionVectorization()
+	public optionVectorization(BufferedImage src)
 	{
 		this.src=src;
 
@@ -40,7 +40,6 @@ private JFileChooser choix = new JFileChooser(".");
 		this.setSize(500,500);
 		this.setLocationRelativeTo(null);
 		this.setModal(true);
-
 
 
 		champNbCouleur.setPreferredSize(new Dimension(100,50));
@@ -52,6 +51,9 @@ private JFileChooser choix = new JFileChooser(".");
 
 		panel.add(submit);
 		panel.add(browse);
+
+		browse.addActionListener(this);
+		submit.addActionListener(this);
 
 		this.setContentPane(panel);
 
@@ -72,17 +74,31 @@ private JFileChooser choix = new JFileChooser(".");
 		int nbCouleur=Integer.parseInt(champNbCouleur.getText());
 		double precision=Double.parseDouble((champPrecision.getText()));
 	//Segmentation
-        try {
-            Clusterizator f = new Clusterizator(src, nbCouleur); 
-            image = f.getImg();
+		Clusterizator f = new Clusterizator(src, nbCouleur); 
 
+		ConverterSVG svg=new ConverterSVG(f.getImg()/*,precision*/);
+        try {
+
+		svg.export(choix.getSelectedFile().toString());
         } catch (IOException e){
         };
 
-	//Vect
-	ConverterSVG svg=new ConverterSVG(image/*,precision*/);
-//	svg.export;
-
-
 	}
+
+	public void actionPerformed(ActionEvent e)
+	{
+		if(e.getSource()==browse)
+		{
+			System.out.println("browse");
+			enregistrerSous();
+		}
+		else if (e.getSource()==submit)
+		{
+		//	new popup("Veuillez patienter");	TODO
+			execute(src);
+		//	new popup("Fichier enregistrer");	TODO
+			this.dispose();
+		}
+	}
+
 }
