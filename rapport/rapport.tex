@@ -85,7 +85,10 @@ du programme:
 \end{center}
 
 \newpage 
+
 \section{Filtres}
+\label{sec:filtres}
+
 \subsection{Sobel, Prewitt, Roberts, etc...}
 Description du principe de fonctionnement avec quelque image/example
 
@@ -129,51 +132,70 @@ Les limites entre deux zones de couleurs sont represente par des
 chemin colore. A chaque bord correspond un chemin d'un couleur
 different.
 
+Le premiere etape de l'algoritme consiste a segmenter l'image en
+different zones de couleurs.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=3.5cm]{./pics/cluster-edges1.eps}
+\caption{Segmentation, chaque nombre represente un couleur different}
+\label{fig:routcidr}
+\end{figure}
+
+Une fois termine la segmentation on procede a la generation de
+sub-pixels entre chaque pixel de l'image originaire. Chaque sub pixel
+est rempli en raison du couleur des pixel autour de lui.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=3.5cm]{./pics/cluster-edges2.eps}
+\caption{Les bords sont les subpixel ayant comme voisins des pixel de
+couleur different}
+\label{fig:routcidr}
+\end{figure}
 
 \newpage
 
 \section{Vectorisation} 
-La vectorisation permet d'exporter une image sous la forme d'un
-fichier {\it .svg}. Pour 
+Le programme permet d'exporter une image sous la forme d'un fichier
+{\it .svg}. La conversion d'une image dans le format SVG ({\it
+Scalable Vector Graphics}) suive un processus assenz complex que vaut
+la peine d'etre presente.
 
+Si la plupart des formats representant une image en utilisant un 
+mappage plus ou moin complex des pixels, un format d'image vectorielle
+permet de representer une image comme etant un ensemble de formes
+egendre par des vecteurs. Vectoriser une image constiste a traduire
+l'ensembles des pixels d'une image en vecteurs (formes geometriques,
+chemins, courbes, etc ...).
 
+L'algorithme utilise dans le candre de ce projet pour vectoriser une
+image peut etre resume dans les etapes suivantes:   
+
+\smallbreak
 \begin{itemize}
-\item Un utilisateur ne peut pas visionner une vidéo qui n'a pas été diffusé,
-par contre il peut le sélectionner (le mettre dans les favoris) par exemple
-pour un visionnage futur. Trigger {\it ValidView}.
+\item Segmentation de l'image
+\item Detection des contours et collecte des chemins 
+\item Compression des chemins
+\item Construction des figures
+\item Conversion au format SVG
+\end{itemize}   
+\bigbreak
 
-\item Un utilisateur ne peut pas visionner une vidéo qui a dépassé la date de
-validité (même s'il n'a pas encore été archivée). Trigger {\it ValidView}.
+La segmentation et la detection des contours d'une image sont effectue
+en utilisant les techiques presentes dans la section
+\ref{sec:filtres} de ce rapport.
 
-\item Si la date de disponibilité n'est pas passée, une vidéo ne peut pas être supprimée. 
-      Trigger {\it WaitExpiration }.
 
-\item Comme spécifie le sujet: {\it "Après une diffusion, une vidéo sera
-accessible sur le site en replay pendant au moins 7 jours"}. 
-\footnote{NB: la deuxième contrainte demande dans le sujet ({\it"Si une diffusion d’une émission est
-ajoutée, les dates de disponibilités seront mises à jour.  La nouvelle date de
-fin de disponibilité sera la date de la dernière diffusion plus 4 jours."})
-n'implique pas que cette contrainte soit satisfaite (p.ex. il ne couvre pas les
-opérations d'UPDATE sur la table {\it Video}).} 
-Trigger {\it BadExpiration}.
-
-\item La date (année) de première diffusion d'une vidéo ne doit pas être
-supérieure la date de la première diffusion dans la table {\it Diffusion}.
-Triggers {\it FirstDiffusionCheck} et {\it VideoWasDiffused}.
-
-\item  Au moment de sa création, le champ Time d'un visionnage ne peut pas être
-supérieure à la date actuelle (SYSDATE): on interdit les visionnages "dans le
-futur".
-\footnote{C'est le cas typique d'une contrainte qui pourrait être remplacé par
-l'intervention de l'application web (côté serveur) dans le choix de la date du
-visionnage.}
-Trigger {\it ValidView}.
+\subsection{Compression des chemins}
+%TODO Algorithme de Douglas-Peucker %
+\subsection{Construction des figures}
+%TODO voisinage de moore %
 
 
 
-\end{itemize}
 
-%End content
+
+
 
 \end{document}
