@@ -13,7 +13,6 @@ import java.awt.image.BufferedImage;
 import filters.*;
 import vectorization.*;
 import javax.swing.JFormattedTextField;
-import window.*;
 import vectorization.*;
 import javax.swing.ImageIcon;
 
@@ -72,11 +71,11 @@ private JFileChooser choix = new JFileChooser(".");
 	public void execute(BufferedImage src)
 	{
 		int nbCouleur=Integer.parseInt(champNbCouleur.getText());
-		double precision=Double.parseDouble((champPrecision.getText()));
+		float precision=Float.parseFloat((champPrecision.getText()));
 	//Segmentation
 		Clusterizator f = new Clusterizator(src, nbCouleur); 
 
-		ConverterSVG svg=new ConverterSVG(f.getImg()/*,precision*/);
+		ConverterSVG svg=new ConverterSVG(f.getImg() ,precision); 
         try {
 
 		svg.export(choix.getSelectedFile().toString());
