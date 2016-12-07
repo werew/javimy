@@ -1,0 +1,139 @@
+\documentclass[twoside,openright,a4paper,11pt,french]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{emptypage}
+\usepackage{amsmath}
+
+% Utilisation d'url
+\usepackage{url}
+\urlstyle{sf}
+
+% Utilisation d'images, stockées dans le répertoire ./pics/
+\usepackage{graphicx}
+\graphicspath{pics/}
+
+% Définition des marges
+\usepackage{geometry}
+\geometry{
+  left=25mm,
+  right=25mm,
+  top=25mm,
+  bottom=25mm,
+  foot=15mm
+}
+
+\begin{document}
+
+\pagestyle{plain}
+\setlength{\parindent}{0pt}
+% La page de garde
+\include{page-garde}
+
+
+% La table des matières
+\parskip=0pt
+\tableofcontents
+
+
+\vspace{5cm}
+
+%Start content
+
+\section{Fichiers rendus et usage}
+\subsection{Contenu du rapport}
+L'objectif de ce rapport est d'abord celui d'illustrer la structure du
+programme. Pour accelerer/simplifier l'utilisation du travail rendu, la partie
+initiale de ce rapport décrit le contenu des fichiers et leur usage.
+
+\subsection{Contenu de l'archive}
+Après avoir ouvert l'archive {\it constans\_coniglio\_luigi.tar.gz} vous
+trouverez les fichiers et repertoires suivants:
+\smallbreak
+\begin{itemize}
+\item Ce rapport
+\item Les fichier {\bf javimy.java} est le point d'entre du programme
+\item Le repertoire {\bf gui} contiens tous les fichiers to du programme relatifs
+      a l'interface graphique
+\item Le repertoire {\bf filters} contient un package incluant tous les filtres 
+      implemente dans la candre de ce projet
+\item Le repertoire {\bf vectorization} contients la partie du programme dedie a
+      la vectorisation d'une image
+\end{itemize}
+
+\bigbreak
+
+\subsection{Usage}
+Compilez le programme par le biais de la commande 
+\colorbox{gray}{\lstinline[basicstyle=\ttfamily\color{black}]| javac javimy.java |}
+Une fois termine la création des fichiers {\it .class} vous etes pret a utiliser 
+ce magnifigue logiciel: 
+\colorbox{gray}{\lstinline[basicstyle=\ttfamily\color{black}]| java javimy |},
+
+\vspace{1cm}
+A l'execution il vous serait presente une interface graphique que vous permettra
+de facon assez intuitive d'acceder aux different functions du programme.
+
+\begin{center}
+% TODO image GUI %
+\end{center}
+
+\newpage 
+\section{Filtres}
+\subsection{Sobel, Prewitt, Roberts, etc...}
+Description du principe de fonctionnement avec quelque image/example
+
+\subsection{Canny}
+
+\subsection{Gauss}
+Description du principe de fonctionnement avec quelque image/example
+
+\subsection{Segmentation}
+
+\subsection{Cluster-edges}
+\newpage
+
+\section{Vectorisation} 
+La vectorisation permet d'exporter une image sous la forme d'un fichier {\it .svg}.
+Pour 
+
+
+\begin{itemize}
+\item Un utilisateur ne peut pas visionner une vidéo qui n'a pas été diffusé,
+par contre il peut le sélectionner (le mettre dans les favoris) par exemple
+pour un visionnage futur. Trigger {\it ValidView}.
+
+\item Un utilisateur ne peut pas visionner une vidéo qui a dépassé la date de
+validité (même s'il n'a pas encore été archivée). Trigger {\it ValidView}.
+
+\item Si la date de disponibilité n'est pas passée, une vidéo ne peut pas être supprimée. 
+      Trigger {\it WaitExpiration }.
+
+\item Comme spécifie le sujet: {\it "Après une diffusion, une vidéo sera
+accessible sur le site en replay pendant au moins 7 jours"}. 
+\footnote{NB: la deuxième contrainte demande dans le sujet ({\it"Si une diffusion d’une émission est
+ajoutée, les dates de disponibilités seront mises à jour.  La nouvelle date de
+fin de disponibilité sera la date de la dernière diffusion plus 4 jours."})
+n'implique pas que cette contrainte soit satisfaite (p.ex. il ne couvre pas les
+opérations d'UPDATE sur la table {\it Video}).} 
+Trigger {\it BadExpiration}.
+
+\item La date (année) de première diffusion d'une vidéo ne doit pas être
+supérieure la date de la première diffusion dans la table {\it Diffusion}.
+Triggers {\it FirstDiffusionCheck} et {\it VideoWasDiffused}.
+
+\item  Au moment de sa création, le champ Time d'un visionnage ne peut pas être
+supérieure à la date actuelle (SYSDATE): on interdit les visionnages "dans le
+futur".
+\footnote{C'est le cas typique d'une contrainte qui pourrait être remplacé par
+l'intervention de l'application web (côté serveur) dans le choix de la date du
+visionnage.}
+Trigger {\it ValidView}.
+
+
+
+\end{itemize}
+
+%End content
+
+\end{document}
