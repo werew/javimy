@@ -11,25 +11,29 @@ import java.awt.Point;
 public class Canny extends Filter {
 
     private int max = 1;
-    private int thr = 0;
+private int thr=0;
 
     private int[][] mx = {{-1,0,1},{-2,0,2},{-1,0,1}};
     private int[][] my = {{-1,-2,-1},{0,0,0},{1,2,1}};
     private gradient carte[][];
-    private int thr_min;
-    private int thr_max;
+    private int thr_min_conv;
+    private int thr_max_conv;
+    private int thr_min_hyst;
+    private int thr_max_hyst;
 
     BufferedImage src;
 
     public Canny(BufferedImage img){
-        this(img,0,0);
+        this(img,25,25,5,5);
     }
 
     // XXX if threshold < 0 ?? exception ??
-    public Canny(BufferedImage img, int threshold_min,int threshold_max ){
+    public Canny(BufferedImage img, int thr_min_conv,int thr_max_conv, int thr_min_hyst,int thr_max_hyst ){
 	src=new Gauss(img,1,0.8).getImg();	//TODO parametre libre
-	thr_min = threshold_min;
-	thr_min = threshold_max;
+	this.thr_min_conv = thr_min_conv;
+	this.thr_max_conv = thr_max_conv;
+	this.thr_min_hyst = thr_min_hyst;
+	this.thr_max_hyst = thr_max_hyst;
 	
 
         int w = src.getWidth();
@@ -38,6 +42,9 @@ public class Canny extends Filter {
 	carte = new gradient[image.getWidth()][image.getHeight()];
 
 	System.out.println("w "+w+" h "+h);
+
+
+	//Convolution
 
         // Set max
         for (int i=1; i<h-1; i++){
@@ -57,8 +64,8 @@ public class Canny extends Filter {
                 // Truncate values
                 val.Norme = (int) Math.floor((255*val.Norme)/max);
                 // Normalize
-                if (val.Norme > 255 - thr_max) val.Norme = 255;
-                else if (val.Norme < thr_min) val.Norme = 0;
+                if (val.Norme > 255 - thr_max_conv) val.Norme = 255;
+                else if (val.Norme < thr_min_conv) val.Norme = 0;
     
                 // Set pixel
                 //Color nc = new Color(val.Norme,val.Norme,val.Norme);
@@ -66,6 +73,9 @@ public class Canny extends Filter {
 		carte[j-1][i-1]=val;
             }
         }
+
+
+	//Suppression des non maximum
 
 	for(int i=1;i<h-3;i++)
 	{
@@ -103,7 +113,7 @@ public class Canny extends Filter {
 	}
 
 
-
+	//Seuillage
 
 	ArrayList<Point> incertain=new ArrayList<Point>();
 
@@ -111,12 +121,14 @@ public class Canny extends Filter {
 	{
 		for(int j=0;j<w-2;j++)
 		{
-			if(carte[j][i].Norme<thr_min)
+			if(carte[j][i].etat)
+			{
+			if(carte[j][i].Norme<thr_min_hyst)
 			{
 				//XXX rejeté?
 				carte[j][i].etat=false;
 			}
-			else if(carte[j][i].Norme>thr_max)
+			else if(carte[j][i].Norme>thr_max_hyst)
 			{
 				//XXX accepter
 				carte[j][i].etat=true;
@@ -125,7 +137,7 @@ public class Canny extends Filter {
 			{
 				incertain.add(new Point(j,i));
 			}
-
+			}
 
 		}
 	}
