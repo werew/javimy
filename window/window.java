@@ -38,12 +38,15 @@ public class window extends JFrame implements ActionListener
 		JLabel labelImageAfficher;
 
 		File fichierImage;	//TODO en attribut si jamais on veux ecraser le fichier courant
-		Filter newImage;
+		Filter newImage=null;
 		BufferedImage imageOriginal=null;
 
-		JFileChooser choix=new JFileChooser(new File("."));	//TODO filtre
+		JFileChooser choix=new JFileChooser(new File("."));	//TODO filtre	Variable local au méthode
 
 		ImageIcon icone=new ImageIcon("icone.jpg");
+
+
+		String pathOriginal;
 
 	public window()
 	{
@@ -119,6 +122,7 @@ public class window extends JFrame implements ActionListener
 
 			//this.printImage(image);	//TODO marche presque, si on ouvre une image alors qu'il y en a deja une ouverte = bug
 			//TODO factoriser code dans méthode
+			this.pathOriginal=choix.getSelectedFile().toString();
 			this.getContentPane().removeAll();
 			imageAfficher=new ImageIcon(imageOriginal);
 			labelImageAfficher=new JLabel("",SwingConstants.CENTER);
@@ -138,6 +142,12 @@ public class window extends JFrame implements ActionListener
 		if(imageOriginal==null)
 		{
 			new popup("Pas d'image ouverte");
+			return;
+		}
+		if(newImage==null)
+		{
+			new popup("Image non modifier");
+			return;
 		}
 		int boite=choix.showSaveDialog(null);
 		if(boite==JFileChooser.APPROVE_OPTION)
@@ -157,39 +167,23 @@ public class window extends JFrame implements ActionListener
 		if(imageOriginal==null)
 		{
 			new popup("Pas d'image ouverte");
+			return;
 		}
-		else
+		if(newImage==null)
 		{
-			File output=new File(""+choix.getSelectedFile());
+			new popup("Image non modifier");
+			return;
+		}
+
+			File output=new File(pathOriginal);
 			try {
 			ImageIO.write(newImage.getImg(),"jpg",output);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
 
 	}
 
-/*	private void vectorization()
-	{
-		if(imageOriginal==null)
-		{
-			new popup("Pas d'image ouverte");
-		}
-		else
-		{
-			int boite=choix.showSaveDialog(null);
-			if(boite==JFileChooser.APPROVE_OPTION)
-			{
-				System.out.println("Bravo, tu as enregistrer: "+choix.getSelectedFile());	//XXX
-				File output=new File(""+choix.getSelectedFile());
-			}
-			Option opt=new Option();
-			opt.affiche(imageOriginal);
-			//TODO
-		}
-	}
-*/
 
 	public void actionPerformed(ActionEvent e)
 	{
@@ -209,10 +203,16 @@ public class window extends JFrame implements ActionListener
 		{
 			this.enregistrerSous();
 		}
-
 		else if(e.getSource()==btnVectorisation)
 		{
-			//TODO
+			if(imageOriginal==null)
+			{
+				new popup("Pas d'image ouverte");
+			}
+			else
+			{
+				new optionVectorization(imageOriginal);
+			}
 		}
 
 	/*	if(e.getSource()==btnFermer)
