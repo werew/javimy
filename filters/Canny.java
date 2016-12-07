@@ -27,18 +27,17 @@ public class Canny extends Filter {
 
     // XXX if threshold < 0 ?? exception ??
     public Canny(BufferedImage img, int threshold_min,int threshold_max ){
-        src = img;
+	src=new Gauss(img,1,0.8).getImg();	//TODO parametre libre
 	thr_min = threshold_min;
 	thr_min = threshold_max;
 	
 
-        int w = img.getWidth();
-        int h = img.getHeight();
-        image = new BufferedImage(w-2,h-2,img.getType());
-	carte=new gradient[image.getWidth()][image.getHeight()];
+        int w = src.getWidth();
+        int h = src.getHeight();
+        image = new BufferedImage(w-2,h-2,src.getType());
+	carte = new gradient[image.getWidth()][image.getHeight()];
 
 
-	src=new Gauss(src,1,0.8).getImg();
 
         // Set max
         for (int i=1; i<w-1; i++){
@@ -61,8 +60,9 @@ public class Canny extends Filter {
                 else if (val.Norme < thr_min) val.Norme = 0;
     
                 // Set pixel
-                Color nc = new Color(val.Norme,val.Norme,val.Norme);
-                image.setRGB(i-1,j-1,nc.getRGB());
+                //Color nc = new Color(val.Norme,val.Norme,val.Norme);
+                //image.setRGB(i-1,j-1,nc.getRGB());
+		carte[j-1][i-1]=val;
             }
         }
 
@@ -175,10 +175,10 @@ public class Canny extends Filter {
         int px_x = 0;
         int px_y = 0;
 
-        for (int i=0; i<3; i++){
-            for (int j=0; j<3; j++){
-//		System.out.println("i "+i+" j "+j+" w "+src.getWidth()+" h "+src.getHeight());
-                Color c = new Color(src.getRGB(i+x-1,j+y-1));
+        for (int i=-1; i<=1; i++){
+            for (int j=-1; j<=1; j++){
+		System.out.println("i "+i+" j "+j+" w "+src.getWidth()+" h "+src.getHeight());
+                Color c = new Color(src.getRGB(i+x,j+y));
                 int red = (int)(c.getRed() * 0.3);
                 int green = (int)(c.getGreen() * 0.3);
                 int blue = (int)(c.getBlue() * 0.3);
