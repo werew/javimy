@@ -20,7 +20,7 @@ public class Gauss extends Filter
 		this.rayon=rayon;
 		this.sigma=sigma;
 		this.src=src;
-		this.image=new BufferedImage(src.getWidth()-rayon,src.getHeight()-rayon,src.getType());
+		this.image=new BufferedImage(src.getWidth()-2*rayon,src.getHeight()-2*rayon,src.getType());
 
 		generationNoyau();
 
