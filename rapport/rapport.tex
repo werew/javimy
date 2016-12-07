@@ -129,7 +129,27 @@ Les limites entre deux zones de couleurs sont represente par des
 chemin colore. A chaque bord correspond un chemin d'un couleur
 different.
 
+Le premiere etape de l'algoritme consiste a segmenter l'image en
+different zones de couleurs.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=3.5cm]{./pics/cluster-edges1.eps}
+\caption{Segmentation, chaque nombre represente un couleur different}
+\label{fig:routcidr}
+\end{figure}
+
+Une fois termine la segmentation on procede a la generation de
+sub-pixels entre chaque pixel de l'image originaire. Chaque sub pixel
+est rempli en raison du couleur des pixel autour de lui.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=3.5cm]{./pics/cluster-edges2.eps}
+\caption{Les bords sont les subpixel ayant comme voisins des pixel de
+couleur different}
+\label{fig:routcidr}
+\end{figure}
 
 \newpage
 
