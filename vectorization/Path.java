@@ -1,3 +1,5 @@
+package vectorization;
+
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.util.ArrayList;

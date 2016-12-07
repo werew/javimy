@@ -9,8 +9,9 @@ public class Main {
         try {
             File input = new File("test.jpg");
             image = ImageIO.read(input);
-           ConverterSVG c = new ConverterSVG(image); 
-        c.printSVG();
+            ConverterSVG c = new ConverterSVG(image); 
+            c.export("asd.svg");
+
 //            PathsCollector pc = new PathsCollector(image);
  //           image = pc.getImg();
   //          File output = new File("out.bmp");
