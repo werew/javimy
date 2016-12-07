@@ -66,13 +66,14 @@ trouverez les fichiers et repertoires suivants:
 \subsection{Usage}
 Compilez le programme par le biais de la commande 
 \colorbox{gray}{\lstinline[basicstyle=\ttfamily\color{black}]| javac javimy.java |}
-Une fois termine la création des fichiers {\it .class} vous etes pret a utiliser 
-ce magnifigue logiciel: 
+Une fois termine la création des fichiers {\it .class} vous etes pret
+a utiliser ce magnifigue logiciel: 
 \colorbox{gray}{\lstinline[basicstyle=\ttfamily\color{black}]| java javimy |},
 
 \vspace{1cm}
-A l'execution il vous serait presente une interface graphique que vous permettra
-de facon assez intuitive d'acceder aux different functions du programme.
+A l'execution il vous serait presente une interface graphique que vous
+permettra de facon assez intuitive d'acceder aux different functions
+du programme:
 
 \begin{center}
 % TODO image GUI %
@@ -89,13 +90,30 @@ Description du principe de fonctionnement avec quelque image/example
 Description du principe de fonctionnement avec quelque image/example
 
 \subsection{Segmentation}
+La segmentation a l'objectif de partitionner un image en sections
+(ensembles de pixels) sur la base de leurs propriete (couleurs,
+intensite, ...). Dans le menu des filtres vous trouverez un bouton qui
+va vous permet de realiser cette type de operation sur les couleurs
+d'une image. 
+
+L'algoritme utilise pour segmenter l'image est inspire du
+partitionnement en {\it K-moyennes} (ou {\it k-means clustering} en
+anglais). Ce type de partitionnement consiste a selectioner K couleurs
+et assigner chaque pixel de l'image a le plus proche de ces couleurs.
+
+%TODO image %
+
+Les K couleurs sont apres modifie pour minimiser les distances avec
+les pixel de l'image, les groupement par couleurs refait et ainsi de
+suite jusq'a quand les K couleurs et le partitionnement des pixels
+convergent. 
 
 \subsection{Cluster-edges}
 \newpage
 
 \section{Vectorisation} 
-La vectorisation permet d'exporter une image sous la forme d'un fichier {\it .svg}.
-Pour 
+La vectorisation permet d'exporter une image sous la forme d'un
+fichier {\it .svg}. Pour 
 
 
 \begin{itemize}
