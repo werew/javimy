@@ -15,8 +15,8 @@ public class Clusterizator {
         src = img;
         labels = new int[w][h];
         generateKmeans(K);
+
         while (createLabels() == false){
-            System.out.println("go");
             mv2centroids();
         }
 
@@ -33,7 +33,6 @@ public class Clusterizator {
             int x = (int) (Math.random()*src.getWidth());
             int y = (int) (Math.random()*src.getHeight());
             kmeans[i] = new Color(src.getRGB(x,y));
-            System.out.println(kmeans[i]+" "+x+" "+y);
         }
         
     }
