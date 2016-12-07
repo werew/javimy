@@ -39,7 +39,7 @@ public class window extends JFrame implements ActionListener
 
 		File fichierImage;	//TODO en attribut si jamais on veux ecraser le fichier courant
 		Filter newImage;
-		BufferedImage imageOriginal;
+		BufferedImage imageOriginal=null;
 
 		JFileChooser choix=new JFileChooser(new File("."));	//TODO filtre
 
@@ -135,6 +135,10 @@ public class window extends JFrame implements ActionListener
 
 	private void enregistrerSous()
 	{
+		if(imageOriginal==null)
+		{
+			new popup("Pas d'image ouverte");
+		}
 		int boite=choix.showSaveDialog(null);
 		if(boite==JFileChooser.APPROVE_OPTION)
 		{
@@ -150,26 +154,40 @@ public class window extends JFrame implements ActionListener
 
 	private void enregistrer()
 	{
+		if(imageOriginal==null)
+		{
+			new popup("Pas d'image ouverte");
+		}
+		else
+		{
 			File output=new File(""+choix.getSelectedFile());
 			try {
 			ImageIO.write(newImage.getImg(),"jpg",output);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
 
 	}
 
 /*	private void vectorization()
 	{
-		int boite=choix.showSaveDialog(null);
-		if(boite==JFileChooser.APPROVE_OPTION)
+		if(imageOriginal==null)
 		{
-			System.out.println("Bravo, tu as enregistrer: "+choix.getSelectedFile());	//XXX
-			File output=new File(""+choix.getSelectedFile());
+			new popup("Pas d'image ouverte");
 		}
-		Option opt=new Option();
-		opt.affiche(imageOriginal);
-		//TODO
+		else
+		{
+			int boite=choix.showSaveDialog(null);
+			if(boite==JFileChooser.APPROVE_OPTION)
+			{
+				System.out.println("Bravo, tu as enregistrer: "+choix.getSelectedFile());	//XXX
+				File output=new File(""+choix.getSelectedFile());
+			}
+			Option opt=new Option();
+			opt.affiche(imageOriginal);
+			//TODO
+		}
 	}
 */
 
@@ -225,10 +243,17 @@ public class window extends JFrame implements ActionListener
 		}
 */		else if(e.getSource() instanceof ItemAction)
 		{
-			ItemAction item=(ItemAction)e.getSource();
-			item.affiche(imageOriginal);
-			newImage=item.getImg();
-			this.printImage(newImage.getImg());
+			if(imageOriginal==null)
+			{
+				new popup("Pas d'image ouverte");
+			}
+			else
+			{
+				ItemAction item=(ItemAction)e.getSource();
+				item.affiche(imageOriginal);
+				newImage=item.getImg();
+				this.printImage(newImage.getImg());
+			}
 		}
 
 /*		if(e.getSource()==btnCanny)
