@@ -57,13 +57,22 @@ trouverez les fichiers et répertoires suivants:
 \begin{itemize}
 \item Ce rapport
 \item Le fichier {\bf javimy.java} qui est le point d'entrée du programme
-\item Le répertoire {\bf gui} qui contient tous les fichiers du programme relatifs
+\item Les répertoires {\bf window} et {\bf option} qui contiennent tous les fichiers du programme relatifs
       à l'interface graphique
 \item Le répertoire {\bf filters} qui contient un package incluant tous les filtres 
       implementés dans la cadre de ce projet
 \item Le répertoire {\bf vectorization} qui contient la partie du programme dédiée à
       la vectorisation d'une image
 \end{itemize}
+
+\section{Répartition des tâches}
+La majorité des algorithmes implémentés dans ce projet ont été pensés par l'ensemble du groupe.
+Cependant, la production du code à été répartit comme suit:
+\begin{itemize}
+\item {\bf Luigi CONIGLIO}: Filtre de Sobel, segmentation, filtre Cluster-Edges, vectorisation
+\item {\bf Victor CONSTANS}: Interface graphique, filtre de Prewitt, Gauss, Roberts, Kirsch, Canny
+\end{itemize}
+
 
 \bigbreak
 \subsection{Usage}
@@ -134,6 +143,8 @@ La deuxième section est celle des filtres. Elle est constitué d'une classe abs
 attributs communs aux différents filtres.
 Les différentes classe de filtre étende cette classe Filter de sorte que les filtre apparaissent sous un objet unique; un Filter.
 
+Les classes de la partie vectorisation n'ont pas de lien hiérarchique entre
+eux. Cependant les objets de cette section sont complémentaires étant qu'il y a un lien de producteur/consommateur.
 
 
 \section{Filtres}
