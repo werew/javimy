@@ -417,8 +417,22 @@ alors la dernière ne pourra jamais couvrir la première.
 
 
 \section{Valeurs optimales}
-%TODO valeurs optimales dans l'utilisation de chaque filtre%
+Tout au long du développement nous avons pu tester les algorithmes à
+plusieurs reprises et surtout avec des valeurs d'option différentes,
+influençant directement le qualité de l'image filtrer.
+Fort des tests que nous avons réalisés, nous vous mettons à disposition
+les valeurs des options qui présentent des résultats intéressant.
 
+\begin{itemize}
+\item Sobel: black thresh = 20 , white thresh = 150
+\item Prewitt: black thresh = 20 , white thresh = 150
+\item Kirsch: black thresh = 25 , white tresh = 155
+\item Roberts: black thresh = 20 , white tresh = 220
+\item Gauss: sigma = 1.2 , radius = 2
+\item Canny: thresh min = 60 , thresh max = 220 , double thresh min = 60 , double thresh max = 220
+\item Segmentation: nombre de couleur = 3
+\item Cluster-edges: nombre de couleur = 3
+\end
 
 
 \newpage
