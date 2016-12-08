@@ -11,7 +11,7 @@ public class Sobel extends Filter {
 	/*Matrice de convolution*/
     private int[][] mx = {{-1,0,1},{-2,0,2},{-1,0,1}};
     private int[][] my = {{-1,-2,-1},{0,0,0},{1,2,1}};
-    BuferedImage src;
+    BufferedImage src;
 
 
     public Sobel(BufferedImage img, int threshold_min, int threshold_max ){

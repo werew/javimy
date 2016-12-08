@@ -140,7 +140,7 @@ optionClusterEdges(),"Cluster-Edges");
 			//Initialisation du chemin du fichier source
 			this.pathOriginal=choix.getSelectedFile().toString();
 
-			printImg(imageOriginal);
+			printImage(imageOriginal);
 		}
 		else
 		{
