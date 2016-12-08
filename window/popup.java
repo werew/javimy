@@ -25,6 +25,8 @@ public class popup extends JFrame implements ActionListener
 
 		this.setContentPane(panneau);
 
+		this.toFront();
+
 		this.setVisible(true);
 	}
 
