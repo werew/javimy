@@ -21,7 +21,6 @@ public	JTextField rayon=new JFormattedTextField();
 public JLabel TxtSigma = new JLabel("Sigma");
 public JLabel TxtRayon = new JLabel("Radius");
 	
-//TODO mettre sous forme comme les autres
 
 	public optionGauss()
 	{

@@ -19,8 +19,8 @@ import window.*;
 
 public class optionVectorization extends JDialog implements ActionListener
 {
-	private	JTextField champNbCouleur=new JFormattedTextField();	//TODO filtrer si il y a de caractere
-	private	JTextField champPrecision=new JFormattedTextField();	//DOUBLE
+	private	JTextField champNbCouleur=new JFormattedTextField();	
+	private	JTextField champPrecision=new JFormattedTextField();
 	
 	private ImageIcon icone=new ImageIcon("icone.jpg");
 	private	 JButton browse = new JButton ("Browse");

@@ -12,7 +12,7 @@ public class gradient
 	{
 		this.Gx=x;
 		this.Gy=y;
-        	Norme=(int) Math.ceil(Math.sqrt((Gx*Gx) + (Gy*Gy)));	//XXX Int?
+        	Norme=(int) Math.ceil(Math.sqrt((Gx*Gx) + (Gy*Gy)));
 		Angle= (int) Math.atan2(Gy,Gx);
 
 		this.etat=true;
@@ -20,7 +20,7 @@ public class gradient
 
 	public void setNorme()
 	{
-        	Norme= (int) Math.ceil(Math.sqrt((Gx*Gx) + (Gy*Gy)));	//XXX Int?
+        	Norme= (int) Math.ceil(Math.sqrt((Gx*Gx) + (Gy*Gy)));
 	}
 
 	public void setAngle()
