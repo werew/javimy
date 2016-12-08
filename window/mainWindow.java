@@ -139,8 +139,13 @@ optionClusterEdges(),"Cluster-Edges");
 
 			//Initialisation du chemin du fichier source
 			this.pathOriginal=choix.getSelectedFile().toString();
+			this.getContentPane().removeAll();
+			imageAfficher=new ImageIcon(imageOriginal);
+			labelImageAfficher=new JLabel("",SwingConstants.CENTER);
+			labelImageAfficher.setIcon(imageAfficher);
+			this.getContentPane().add(labelImageAfficher,BorderLayout.CENTER);
+			this.revalidate();
 
-			printImage(imageOriginal);
 		}
 		else
 		{
