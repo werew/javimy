@@ -174,8 +174,8 @@ image peut etre resume dans les etapes suivantes:
 \smallbreak
 \begin{itemize}
 \item Segmentation de l'image
-\item Detection des contours et extraction des bords
-\item Compression des bords
+\item Detection des contours 
+\item Compression des contours
 \item Construction des figures
 \item Conversion au format SVG
 \end{itemize}   
@@ -186,7 +186,7 @@ en utilisant les techiques presentes dans la section
 \ref{sec:filtres} de ce rapport.
 
 
-\subsection{Compression des bords}
+\subsection{Compression des contours}
 %TODO Algorithme de Douglas-Peucker %
 Au moment de sa detection chaque bord est extrait comme etant une
 suite continue de pixels. Bien que un telle representation soit tout a
@@ -203,12 +203,12 @@ l'algoritme de Douglas-Peucker pour atteindre cet objectif
 \cite{url-dougpeuck}.
 
 L'algoritme de Douglas-Peucker est beaucoup utilise en geographie dans
-et permet d'approximer les points d'un chemin en tenant compte d'un
-certaine degre de liberte (parametrable).
+l'approximation des trajet et permet de reduir les points d'un chemin
+en tenant compte d'un certaine degre de liberte (parametrable).
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=7cm]{./pics/dp1.eps}
+\includegraphics[width=10cm]{./pics/dp1.eps}
 \caption{Le bords sont approxime avec un degree de liberte croissante}
 \label{fig:routcidr}
 \end{figure}
@@ -244,27 +244,28 @@ L'algoritme pour la construction des {\it figures} consinste a parcourir
 l'image a la recherche des zones de couleurs. 
 
 \begin{lstlisting}[frame=single]  % Start your code-block
+
 Construction figures ( image )
 
-Pixel p
-Couleur c
-Figure figures[]
-Pour i=0...image.hauteur faire
-    initialise c tel que c != image.pixel(i,0).couleur 
-    Pour j=0...image.largeur faire
-        si image.pixel(i,j).couleur != c et 
-           image.pixel(i,j).traite = faux
+    Pixel p, Couleur c, Figure figures[]
 
-            f <- image.pixel(i,j).extrait_figure()
-            figures.ajouter(f)
+    Pour i=0...image.hauteur faire
+        initialise c tel que c != image.pixel(i,0).couleur 
+        Pour j=0...image.largeur faire
+            si image.pixel(i,j).couleur != c et 
+               image.pixel(i,j).traite = faux
 
-            Pour tout pixel b dans f faire
-                image.pixel(b.y,b.x).traite <- vrai
+                f <- image.pixel(i,j).extrait_figure()
+                figures.ajouter(f)
+
+                Pour tout pixel b dans f faire
+                    image.pixel(b.y,b.x).traite <- vrai
+                fin 
             fin 
-        fin 
+        c <- image.pixel(i,j).couleur
+        fin
     fin
-fin
-renvoyer figures
+    renvoyer figures
 \end{lstlisting}
 
 
@@ -280,9 +281,12 @@ la {\it figure}.
 \end{figure}
 
 Les contours d'une {\it figure} sont examine dans le sens horaire en
-utilisant l'algoritme du voisinage de Moore \cite{url-moore}.
+utilisant l'algoritme du voisinage de Moore \cite{url-moore}. Cet
+approche permet d'obtenir une liste trie des contours de chaque {\it
+figure}.
 
 
+\subsection{Conversion au format SVG}
 
 
 \section{Valeurs optimales}
