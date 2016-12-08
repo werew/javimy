@@ -16,26 +16,25 @@ public class Roberts extends Filter {
     BufferedImage src;
 
 
-    // XXX if threshold < 0 ?? exception ??
     public Roberts(BufferedImage img, int threshold_min, int threshold_max ){
         src = img;
 	thr_min = threshold_min;
 	thr_max = threshold_max;
         int w = img.getWidth();
         int h = img.getHeight();
-        image = new BufferedImage(w-2,h-2,img.getType());	//TODO rectifier pour ROberts
+        image = new BufferedImage(w-2,h-2,img.getType());	
 
         // Set max
-        for (int i=1; i<w-1; i++){	//TODO rectifier pour ROberts
-            for (int j=1; j<h-1; j++){	//TODO rectifier pour ROberts
+        for (int i=1; i<w-1; i++){	
+            for (int j=1; j<h-1; j++){	
                 int val = convolution(i,j);
                 if (val>max) max = val;
             }
         }
 
         // Apply filter 
-        for (int i=1; i<w-1; i++){	//TODO rectifier pour ROberts
-            for (int j=1; j<h-1; j++){	//TODO rectifier pour ROberts
+        for (int i=1; i<w-1; i++){	
+            for (int j=1; j<h-1; j++){	
                 int val = convolution(i,j);
 
                 // Truncate values
@@ -46,7 +45,7 @@ public class Roberts extends Filter {
     
                 // Set pixel
                 Color nc = new Color(val,val,val);
-                image.setRGB(i-1,j-1,nc.getRGB());	//TODO rectifier pour ROberts
+                image.setRGB(i-1,j-1,nc.getRGB());	
             }
         }
     }

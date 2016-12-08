@@ -16,7 +16,6 @@ public class Sobel extends Filter {
     BufferedImage src;
 
 
-    // XXX if threshold < 0 ?? exception ??
     public Sobel(BufferedImage img, int threshold_min, int threshold_max ){
         src = img;
 	thr_min = threshold_min;

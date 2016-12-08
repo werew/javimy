@@ -13,7 +13,6 @@ public class Gauss extends Filter
 
 	public Gauss(BufferedImage src,int rayon, double sigma)
 	{
-		//TODO testet rayon et sigma
 
 		this.dimNoyau=2*rayon+1;
 		this.noyau=new double[dimNoyau][dimNoyau];
@@ -24,8 +23,6 @@ public class Gauss extends Filter
 
 		generationNoyau();
 
-		//TODO changer
-		
 		Color max=new Color(0,0,0);
 		for (int i=rayon; i<src.getWidth()-rayon; i++){
           	  for (int j=rayon; j<src.getHeight()-rayon; j++){
@@ -34,7 +31,7 @@ public class Gauss extends Filter
 			if(val.getGreen()>max.getGreen()) max=new Color(max.getRed(),val.getGreen(),max.getBlue());
 			if(val.getBlue()>max.getBlue()) max=new Color(max.getRed(),max.getGreen(),val.getBlue());
 			}
-       		 }
+        }
 
 
 		int i,j;
@@ -50,13 +47,9 @@ public class Gauss extends Filter
                 int valBlue = (int) Math.floor((255*val.getBlue())/max.getBlue());
                 // Normalize
 
-
-/*                if (val > 255 - 100) val = 255;
-                else if (val < 100) val = 0;
-  */  
                 // Set pixel
                 Color nc = new Color(valRed,valGreen,valBlue);
-                image.setRGB(j-1,i-1,nc.getRGB());
+                image.setRGB(j-rayon,i-rayon,nc.getRGB());
 
 			}
 		}
@@ -76,7 +69,6 @@ public class Gauss extends Filter
 		{
 			for(i=0;i<dimNoyau;i++)
 			{
-		//		int c=src.getRGB(y-decalage_hauteur+i,x-decalage_largeur+j);
 				Color c = new Color(src.getRGB(y-decalage_hauteur+i,x-decalage_largeur+j));
 				int red = (int)(c.getRed() * noyau[i][j]);
 				int green = (int)(c.getGreen() * noyau[i][j]);
@@ -85,8 +77,7 @@ public class Gauss extends Filter
 				total=new Color(total.getRed()+red,total.getGreen()+green,total.getBlue()+blue);
 			}
 		}
-//		System.out.println(total);
-//		this.image.setRGB(i,j,total);
+
 		return total;
 	}
 
@@ -104,13 +95,12 @@ public class Gauss extends Filter
 			}
 		}
 
-		//XXX pour ne pas eclaircir ou assombrir l'image
+		// Pour ne pas eclaircir ou assombrir l'image
 		for(i=0;i<2*rayon+1;i++)
 		{
 			for(j=0;j<2*rayon+1;j++)
 			{
 				noyau[j][i]/=diviseur;
-				//System.out.println(noyau[j][i]);
 			}
 		}
 	}

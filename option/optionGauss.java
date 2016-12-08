@@ -19,17 +19,16 @@ public class optionGauss extends Option
 public	JTextField sigma=new JFormattedTextField();
 public	JTextField rayon=new JFormattedTextField();
 public JLabel TxtSigma = new JLabel("Sigma");
-public JLabel TxtRayon = new JLabel("Rayon");
+public JLabel TxtRayon = new JLabel("Radius");
 	
-//TODO mettre sous forme comme les autres
 
 	public optionGauss()
 	{
 		super();
 
-		this.setSize(300,200);
+		this.setSize(200,150);
 
-		Dimension dim = new Dimension(50,30);
+		Dimension dim = new Dimension(20,10);
 
 		sigma.setPreferredSize(dim);
 		rayon.setPreferredSize(dim);

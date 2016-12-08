@@ -20,15 +20,11 @@ public class optionCanny extends Option
 	private	JTextField thr_max_conv=new JFormattedTextField();
 	private	JTextField thr_min_hyst=new JFormattedTextField();
 	private	JTextField thr_max_hyst=new JFormattedTextField();
-	public	JTextField sigma=new JFormattedTextField();
-	public	JTextField rayon=new JFormattedTextField();
 
-	private JLabel Txt_thr_min_conv = new JLabel("thr min convolution");
-	private JLabel Txt_thr_max_conv = new JLabel("thr max convolution");
-	private JLabel Txt_thr_min_hyst = new JLabel("thr min seuillage");
-	private JLabel Txt_thr_max_hyst = new JLabel("thr max seuillage");
-	public JLabel TxtSigma = new JLabel("Sigma");
-	public JLabel TxtRayon = new JLabel("Rayon");
+	private JLabel Txt_thr_min_conv = new JLabel("thresh min ");
+	private JLabel Txt_thr_max_conv = new JLabel("thresh max ");
+	private JLabel Txt_thr_min_hyst = new JLabel("double thresh min");
+	private JLabel Txt_thr_max_hyst = new JLabel("double thresh max");
 	
 
 
@@ -38,7 +34,7 @@ public class optionCanny extends Option
 
 		this.setSize(300,200);
 
-		Dimension dim = new Dimension(50,30);
+		Dimension dim = new Dimension(80,30);
 
 		thr_min_conv.setPreferredSize(dim);
 		thr_max_conv.setPreferredSize(dim);
@@ -53,10 +49,6 @@ public class optionCanny extends Option
 		this.panel.add(thr_min_hyst);
 		this.panel.add(Txt_thr_max_hyst);
 		this.panel.add(thr_max_hyst);
-		this.panel.add(TxtRayon);
-		this.panel.add(rayon);
-		this.panel.add(TxtSigma);
-		this.panel.add(sigma);
 
 
 		this.panel.add(submit);
@@ -87,7 +79,6 @@ public class optionCanny extends Option
 		int tmih= Integer.parseInt(ttmih);
 		int tmah= Integer.parseInt(ttmah);
 
-        // XXX
-		image=new Canny(src,tmic,tmac,tmih,tmah,10,3.).getImg();
+		image=new Canny(src,tmic,tmac,tmih,tmah,1,0.8).getImg();
 	}
 }

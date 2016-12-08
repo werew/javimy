@@ -22,7 +22,6 @@ public class Kirsch extends Filter {
     BufferedImage src;
 
 
-    // XXX if threshold < 0 ?? exception ??
     public Kirsch(BufferedImage img, int threshold_min, int threshold_max ){
         src = img;
 	thr_min = threshold_min;

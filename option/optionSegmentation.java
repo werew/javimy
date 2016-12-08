@@ -25,9 +25,9 @@ public class optionSegmentation extends Option
 	{
 		super();
 
-		this.setSize(300,100);
+		this.setSize(200,100);
 
-		Dimension dim = new Dimension(50,30);
+		Dimension dim = new Dimension(20,10);
 		n_colors.setPreferredSize(dim);
 
 		this.panel.add(Txt_n_colors);

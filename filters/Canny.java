@@ -24,9 +24,8 @@ private int thr=0;
     BufferedImage src;
 
 
-    // XXX if threshold < 0 ?? exception ??
     public Canny(BufferedImage img, int thr_min_conv,int thr_max_conv, int thr_min_hyst,int thr_max_hyst,int rayon,double sigma ){
-	src=new Gauss(img,rayon,sigma).getImg();	//TODO parametre libre
+	src=new Gauss(img,rayon,sigma).getImg();	
 	this.thr_min_conv = thr_min_conv;
 	this.thr_max_conv = thr_max_conv;
 	this.thr_min_hyst = thr_min_hyst;
@@ -55,7 +54,6 @@ private int thr=0;
             for (int j=1; j<w-1; j++){
                 gradient val = convolution(j,i);
 
-		//TODO
                 // Truncate values
                 val.Norme = (int) Math.floor((255*val.Norme)/max);
                 // Normalize
@@ -92,12 +90,10 @@ private int thr=0;
 			{
 				if(carte[j][i].Norme<thr_min_hyst)
 				{
-					//XXX rejeté?
 					carte[j][i].etat=false;
 				}
 				else if(carte[j][i].Norme>thr_max_hyst)
 				{
-					//XXX accepter
 					carte[j][i].etat=true;
 				}
 				else
@@ -108,7 +104,7 @@ private int thr=0;
 
 		}
 	}
-	//TODO prend les point au bord: attention
+
 	for(Point p : incertain)
 	{
 		int x=p.x;
