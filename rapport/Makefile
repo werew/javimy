@@ -8,7 +8,7 @@ $(TARGET).ps: $(TARGET).dvi
 
 $(TARGET).dvi: $(TARGET).tex
 	latex $(TARGET).tex
-	#bibtex $(TARGET).aux
+	bibtex $(TARGET).aux
 	latex $(TARGET).tex
 	latex $(TARGET).tex
 
