@@ -28,7 +28,7 @@ public class window extends JFrame implements ActionListener
 		JMenuItem btnQuitter=new JMenuItem("Quitter");
 		ItemAction btnSobel=new ItemAction(new optionSobel(),"Sobel");
 		ItemAction btnPrewitt=new ItemAction(new optionPrewitt(),"Prewitt");
-		JMenuItem btnKirsche=new JMenuItem("Kirsche");
+		ItemAction btnKirsch=new ItemAction(new optionKirsch(),"Kirsch");
 		JMenuItem btnRoberts=new JMenuItem("Roberts");
 		ItemAction btnGauss=new ItemAction(new optionGauss(),"Gauss");
 		ItemAction btnCanny=new ItemAction(new optionCanny(),"Canny");
@@ -84,8 +84,8 @@ public class window extends JFrame implements ActionListener
 		filtre.add(btnPrewitt);
 		btnPrewitt.addActionListener(this);
 
-		filtre.add(btnKirsche);
-		btnKirsche.addActionListener(this);
+		filtre.add(btnKirsch);
+		btnKirsch.addActionListener(this);
 
 		filtre.add(btnRoberts);
 		btnRoberts.addActionListener(this);
