@@ -8,19 +8,19 @@ import java.awt.*;
 public class Sobel extends Filter {
 
     private int max = 1;
-    private int thr = 0;
+    private int thr_min = 0;
+    private int thr_max = 0;
 
     private int[][] mx = {{-1,0,1},{-2,0,2},{-1,0,1}};
     private int[][] my = {{-1,-2,-1},{0,0,0},{1,2,1}};
     BufferedImage src;
 
-    public Sobel(BufferedImage img){
-        this(img,0);
-    }
 
     // XXX if threshold < 0 ?? exception ??
-    public Sobel(BufferedImage img, int threshold ){
-        src = img; thr = threshold;
+    public Sobel(BufferedImage img, int threshold_min, int threshold_max ){
+        src = img;
+	thr_min = threshold_min;
+	thr_max = threshold_max;
         int w = img.getWidth();
         int h = img.getHeight();
         image = new BufferedImage(w-2,h-2,img.getType());
@@ -41,8 +41,8 @@ public class Sobel extends Filter {
                 // Truncate values
                 val = (int) Math.floor((255*val)/max);
                 // Normalize
-                if (val > 255 - thr) val = 255;
-                else if (val < thr) val = 0;
+                if (val > 255 - thr_max) val = 255;
+                else if (val < thr_min) val = 0;
     
                 // Set pixel
                 Color nc = new Color(val,val,val);

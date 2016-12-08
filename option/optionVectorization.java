@@ -19,8 +19,8 @@ import window.popup;
 
 public class optionVectorization extends JDialog implements ActionListener
 {
-	public	JTextField champNbCouleur=new JFormattedTextField();	//TODO filtrer si il y a de caractere
-	public	JTextField champPrecision=new JFormattedTextField();	//DOUBLE
+	private	JTextField champNbCouleur=new JFormattedTextField();	//TODO filtrer si il y a de caractere
+	private	JTextField champPrecision=new JFormattedTextField();	//DOUBLE
 	
 	private ImageIcon icone=new ImageIcon("icone.jpg");
 	private	 JButton browse = new JButton ("Browse");
@@ -28,6 +28,7 @@ public class optionVectorization extends JDialog implements ActionListener
 	public Filter image;
 	public BufferedImage src;
 	private JFileChooser choix = null; 
+	private JPanel panel = new JPanel();
 
 
 	public optionVectorization(BufferedImage src)
@@ -44,7 +45,6 @@ public class optionVectorization extends JDialog implements ActionListener
 		champNbCouleur.setPreferredSize(new Dimension(100,50));
 		champPrecision.setPreferredSize(new Dimension(100,50));
 
-		JPanel panel=new JPanel();
 		panel.add(champNbCouleur);
 		panel.add(champPrecision);
 
