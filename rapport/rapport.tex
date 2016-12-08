@@ -25,7 +25,6 @@
 \usepackage{listings}
 \usepackage{color}
 
-\definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.8,0.8,0.8}
 
 \begin{document}
@@ -241,9 +240,36 @@ bon ordre (sachant que un bord est partage toujours entre deux
 {\it figures}).
 
 L'algoritme pour la construction des {\it figures} consinste a parcourir
-l'image a la recherche des zones de couleurs. Apres avoir detecte une
-zone qui n'a pas encore ete traite, on procede a examiner les voisins
-\underline{externes} des pixels qui delimitent la {\it figure}.
+l'image a la recherche des zones de couleurs. 
+
+\begin{lstlisting}[frame=single]  % Start your code-block
+Construction figures ( image )
+
+Pixel p
+Couleur c
+Figure figures[]
+Pour i=0...image.hauteur faire
+    initialise c tel que c != image.pixel(i,0).couleur 
+    Pour j=0...image.largeur faire
+        si image.pixel(i,j).couleur != c et 
+           image.pixel(i,j).traite = faux
+
+            f <- image.pixel(i,j).extrait_figure()
+            figures.ajouter(f)
+
+            Pour tout pixel b dans f faire
+                image.pixel(b.y,b.x).traite <- vrai
+            fin 
+        fin 
+    fin
+fin
+renvoyer figures
+\end{lstlisting}
+
+
+Apres avoir detecte une zone qui n'a pas encore ete traite, on procede
+a examiner les voisins \underline{externes} des pixels qui delimitent
+la {\it figure}.
 
 \begin{figure}[h]
 \centering
@@ -253,9 +279,7 @@ zone qui n'a pas encore ete traite, on procede a examiner les voisins
 \end{figure}
 
 Les contours d'une {\it figure} sont examine dans le sens horaire en
-utilisant l'algoritme du voisinage de Moore. 
-
-
+utilisant l'algoritme du voisinage de Moore.
 
 
 
