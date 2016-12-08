@@ -76,7 +76,7 @@ trouverez les fichiers et répertoires suivants:
 
 \subsection{Usage}
 Compiler le programme par le biais de la commande : 
-\colorbox{gray}{\lstinline[basicstyle=\ttfamily\color{black}]| javac javimy.java |}
+\colorbox{gray}{\lstinline[basicstyle=\ttfamily\color{black}]| make |}
 Une fois la création des fichiers{\it .class} terminé vous êtes prêt
 à utiliser ce magnifigue logiciel: 
 \colorbox{gray}{\lstinline[basicstyle=\ttfamily\color{black}]| java javimy |},
@@ -146,6 +146,11 @@ comme un bord.
 \subsection{Gauss}
 \label{sec:gauss}
 %TODO Description du principe de fonctionnement avec quelque image/example
+L'algorithme utilisé pour le lissage d'image est l'algorithme de Gauss. Celui-ci va générer une
+matrice de convolution à l'aide d'une formule mathématique. Il va ensuite, comme les autres filtre,
+appliqué une convolution avec le matrices généré. La subtilité par rapport aux autres fitre, et qu'ici
+il faut déterminer la valeur maximal des trois composantes RVB pour appliquer un coefficient
+permettant rester dans la plage 0-255 sur les 3 composantes.
 
 \subsection{Segmentation}
 La segmentation a pour objectif de partitionner une image en sections
