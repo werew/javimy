@@ -41,11 +41,11 @@ optionClusterEdges(),"Cluster-Edges");
 		ImageIcon imageAfficher;
 		JLabel labelImageAfficher;
 
-		File fichierImage;	//TODO en attribut si jamais on veux ecraser le fichier courant
+		File fichierImage;
 		BufferedImage newImage=null;
 		BufferedImage imageOriginal=null;
 
-		JFileChooser choix=new JFileChooser(new File("."));	//TODO filtre	Variable local au méthode
+		JFileChooser choix=new JFileChooser(new File("."));
 
 		ImageIcon icone=new ImageIcon("icone.jpg");
 
@@ -76,9 +76,6 @@ optionClusterEdges(),"Cluster-Edges");
 		file.add(btnVectorisation);
 		btnVectorisation.addActionListener(this);
 
-		/*file.add(btnFermer);
-		btnFermer.addActionListener(this);
-*/
 		file.add(btnQuitter);
 		btnQuitter.addActionListener(this);
 
@@ -122,7 +119,6 @@ optionClusterEdges(),"Cluster-Edges");
 		int boite=choix.showOpenDialog(null);
 		if(boite==JFileChooser.APPROVE_OPTION)
 		{
-			System.out.println("Bravo, tu as ouvert: "+choix.getSelectedFile());	//XXX
 			fichierImage=new File(""+choix.getSelectedFile());
 			try{
 			imageOriginal=ImageIO.read(fichierImage);
@@ -130,8 +126,6 @@ optionClusterEdges(),"Cluster-Edges");
 				e.printStackTrace();
 			}
 
-			//this.printImage(image);	//TODO marche presque, si on ouvre une image alors qu'il y en a deja une ouverte = bug
-			//TODO factoriser code dans méthode
 			this.pathOriginal=choix.getSelectedFile().toString();
 			this.getContentPane().removeAll();
 			imageAfficher=new ImageIcon(imageOriginal);
@@ -143,7 +137,7 @@ optionClusterEdges(),"Cluster-Edges");
 		}
 		else
 		{
-			System.out.println("Perdu");	//XXX
+			System.out.println("Erreur lors de l'ouverture du fichier");
 		}
 	}
 
@@ -162,8 +156,7 @@ optionClusterEdges(),"Cluster-Edges");
 		int boite=choix.showSaveDialog(null);
 		if(boite==JFileChooser.APPROVE_OPTION)
 		{
-			System.out.println("Bravo, tu as enregistrer: "+choix.getSelectedFile());	//XXX
-			File output=new File(""+choix.getSelectedFile());
+			File output=new File(choix.getSelectedFile().toString());
 			try {
 			ImageIO.write(newImage,"jpg",output);
 			} catch (IOException e) {
@@ -225,12 +218,6 @@ optionClusterEdges(),"Cluster-Edges");
 			}
 		}
 
-	/*	if(e.getSource()==btnFermer)
-		{
-			this.getContentPane().removeAll();
-			this.revalidate();
-		}
-*/
 		else if(e.getSource() instanceof ItemAction)
 		{
 			if(imageOriginal==null)

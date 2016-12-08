@@ -66,14 +66,6 @@ trouverez les fichiers et répertoires suivants:
 \end{itemize}
 
 \bigbreak
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=12cm]{./pics/classes.eps}
-\caption{Diagrammes d’heritages et de classes}
-\label{fig:routcidr}
-\end{figure}
-
 \subsection{Usage}
 Compiler le programme par le biais de la commande : 
 \colorbox{gray}{\lstinline[basicstyle=\ttfamily\color{black}]| make |}
@@ -83,7 +75,7 @@ Une fois la création des fichiers{\it .class} terminé vous êtes prêt
 
 \vspace{1cm}
 A l'exécution, il vous sera présenté une interface graphique qui vous
-permettra de facon assez intuitive d'accéder aux differentes fonctions
+permettra de façon assez intuitive d'accéder aux differentes fonctions
 du programme:
 
 \begin{center}
@@ -91,13 +83,64 @@ du programme:
 \end{center}
 
 \newpage 
+\section{Implémentation}
+Voyons maintenant l'implémentation et la structure du programme.
+Cette structure peut être divisée en trois sections que sont:
+\begin{itemize}
+\item l'interface graphique
+\item les filtres
+\item la vectorisation
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=12cm]{./pics/classes.eps}
+\caption{Diagramme d’heritages et de classes}
+\end{figure}
+
+
+Comme nous pouvons le voir sur le diagramme ci-dessus, l'interface graphique à une hiérarchie
+particulière. En effet, cela à été fait pour permettre d'appeler le bon filtre de manière la
+plus générique possible: à savoir, lancé l'execution de l'objet correspondant au filtre que l'on
+souhaite appliqué sans avoir à distinguer de cas pour chaque filtre.
+De cette manière si on souhaite ajouter un filtre, il suffit d'ajouter le bouton d'execution de
+se filtre et de créer un fichier option (que nous allons détailler) sans avoir à ajouter de traitement
+particulier pour ce filtre. Voyons plus précisement cette implémentation.
+Lorsque l'on ajoute un filtre, on va lui attribuer un ItemAction qui est une classe étendue de MenuItem.
+ItemAction permet de profiter des fonctionnalités de MenuItem, mais il permet de rajouter comme attribut,
+un objet Option qui permettra de paraméttrer et d'executer le bon filtre. Donc lors de la création d'un
+ItemAction, on passe un objet (Option) qui correspond aux paramétrage et au stockage du filtre qu'il faudra
+executer lorsque l'on cliquera sur ce button.
+La classe Option est une classe abstraite qui permet de regrouper sous un parent toute les différentes classes
+spécifique au filtre. Elle dérive de la classe JDialog qui permet de profiter d'un affichage des options à
+l'écran, affichage qui a la particularité d'avoir un affichage bloquant. L'avantage est que cela empêche la
+fenêtre principale de continuer son execution et de tenter d'afficher une image filtrer alors qu'elle n'a pas
+encore été calculée. Avec ce système, lorsqu'une fenêtre d'option de filtre s'ouvre, elle bloque l'execution
+de la fenêtre principale, cela permet à la fenêtre option de filtre de receuillir les options demandé à
+l'utilisateur et de filtrer l'image. Une fois l'execution du filtre terminée, la fenêtre est retiré de l'affichage
+ce qui libère la fenêtre principale qui pourra alors récupérer l'image filtrer et l'afficher à l'écran.
+Cette classe va aussi regrouper les attributs et méthode générique aux différents filtres, en particulier une
+variable contenant l'image filtrer, l'image source, un panel qui va contenir les différents
+éléments affiché à l'écran et un boutton submit qui permet de valider
+les options que l'on a rentrer et de lançer l'execution du filtre.
+Enfin, les différentes classes option de filtre (optionSobel, optionPrewitt, ...) sont les derniers maillons qui
+vont contenir les différentes options qui vont être demandées à l'utilisateur (typiquement des seuils) ainsi que
+l'appel à la fonction de filtre.
+Lorsque l'utilisateur pas presser un bouton de filtre, action va être lu par la fenêtre principale, qui va recupérer l'objet 
+à l'origine de l'action (ici un ItemAction) et elle va appeller la méthode affiche de cette objet, qui va lançer l'affichage
+des options. Une fois que l'utilisateur valide ses options le filtre s'execute.
+
+La deuxième section est celle des filtres. Elle est constitué d'une classe abstraite Filter qui permet de regrouper les
+attributs communs aux différents filtres.
+Les différentes classe de filtre étende cette classe Filter de sorte que les filtre apparaissent sous un objet unique; un Filter.
+
+
 
 \section{Filtres}
 \label{sec:filtres}
 
-\subsection{Sobel, Prewitt, Roberts, etc...}
-%TODO Description du principe de fonctionnement avec quelque image/example
-Les algotihmes utilisés dans ce projet (à savoir Sobel, Prewitt, Roberts et Kirsch)
+\subsection{Sobel, Prewitt, Roberts et Kirsch}
+Les algorithmes utilisés dans ce projet (à savoir Sobel, Prewitt, Roberts et Kirsch)
 fonctionnent tous sur le principe de convolution de pixel avec une matrice.
 Le principe est que l'on va appliquer une (ou plusieurs) matrices de convolution propre
 à chaque filtre, sur les pixels de l'image. Nous allons donc superposer la matrice sur
