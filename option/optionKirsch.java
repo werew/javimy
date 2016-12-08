@@ -18,8 +18,8 @@ public class optionKirsch extends Option
 {
 	private	JTextField thr_min=new JFormattedTextField();
 	private	JTextField thr_max=new JFormattedTextField();
-	private JLabel Txt_thr_min = new JLabel("thr min");
-	private JLabel Txt_thr_max = new JLabel("thr max");
+	private JLabel Txt_thr_min = new JLabel("black thresh (0 <= bt <= 255)");
+	private JLabel Txt_thr_max = new JLabel("white thresh (0 <= wt <= 255)");
 	
 
 
@@ -27,7 +27,7 @@ public class optionKirsch extends Option
 	{
 		super();
 
-		this.setSize(300,100);
+		this.setSize(500,100);
 
 		Dimension dim = new Dimension(50,30);
 

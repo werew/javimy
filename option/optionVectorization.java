@@ -15,7 +15,7 @@ import vectorization.*;
 import javax.swing.JFormattedTextField;
 import vectorization.*;
 import javax.swing.ImageIcon;
-import window.popup;
+import window.*;
 
 public class optionVectorization extends JDialog implements ActionListener
 {
