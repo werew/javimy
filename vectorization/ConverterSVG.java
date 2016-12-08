@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.io.IOException;
 
 
+
 public class ConverterSVG {
 
     int h,w;
@@ -21,6 +22,12 @@ public class ConverterSVG {
         
     }
 
+    /**
+     * Write the given image at the format svg 
+     * to the givel file
+     * @param filename A string containing the file to 
+     * which write the image.
+     */
     public void export(String filename) throws IOException {
 
         PrintWriter writer = new PrintWriter(filename);
@@ -37,12 +44,14 @@ public class ConverterSVG {
         
     }
 
+    /* Header SVG */
     String getHeader(int h, int w){
         return "<svg version=\"1.1\" "             +
                "width=\""+w+"\" height=\""+h+"\" " +
                "xmlns=\"http://www.w3.org/2000/svg\">";
     }
 
+    /* Footer SVG */
     String getFooter(){
         return "</svg>";
     }

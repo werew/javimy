@@ -9,9 +9,9 @@ public class FiguresCollector {
     
     private ArrayList<Figure> figures; 
 
-    PathsCollector pc;
+    PathsCollector pc;   // PathsCollector serving this object
     BufferedImage src;   // Image source
-    int w,h;
+    int w,h;             // Dimensions source image
     int[][] labels;      // Segment label of each pixel
 
     /**
@@ -23,6 +23,13 @@ public class FiguresCollector {
     static final int DOWN  = 2;
     static final int LEFT  = 3;
 
+    /**
+     * Create a new FiguresCollector. This methods triggers the 
+     * creation and collection of all the figures inside the image
+     * @param img Image source
+     * @param precision To which precision should be approsimated the
+     * figures
+     */
     public FiguresCollector(BufferedImage img, float precision){
         // Init object
         w = img.getWidth();
@@ -58,6 +65,12 @@ public class FiguresCollector {
         }
     }
 
+
+    /**
+     * Fill a figure to avoid recount of his pixels
+     * @param start A point of the figure
+     * @param label Value used to fill the figure
+     */
     void fill_figure(Point start, int label){
 
         // Color of the figure
@@ -182,6 +195,11 @@ public class FiguresCollector {
         return f;
     }
 
+    
+    /**
+     * Gets all the neighbours of the point p
+     * in clockwise order
+     */
     Point[] getNeighbours(Point p){
         Point[] n = new Point[8];
 
@@ -199,7 +217,10 @@ public class FiguresCollector {
     }
 
 
-    // Assure they are auto-contained from left to right
+    /**
+     * Get all the figures of the current image assuring that they are
+     * auto-contained from left to right (precedence to containors)
+     */
     ArrayList<Figure> getFigures(){
         ArrayList<Figure> figs = new ArrayList<Figure>();
 
@@ -215,6 +236,9 @@ public class FiguresCollector {
     }
 
 
+    /**
+     * Get neighbours at the given direction
+     */
     Point getNeighbour(Point p, int direction){
         switch (direction){
             case UP:    return new Point(p.x,p.y-1);
