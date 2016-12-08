@@ -65,16 +65,6 @@ trouverez les fichiers et répertoires suivants:
       la vectorisation d'une image
 \end{itemize}
 
-\section{Répartition des tâches}
-La majorité des algorithmes implémentés dans ce projet ont été pensés par l'ensemble du groupe.
-Cependant, la production du code à été répartit comme suit:
-\begin{itemize}
-\item {\bf Luigi CONIGLIO}: Filtre de Sobel, segmentation, filtre Cluster-Edges, vectorisation
-\item {\bf Victor CONSTANS}: Interface graphique, filtre de Prewitt, Gauss, Roberts, Kirsch, Canny
-\end{itemize}
-
-
-\bigbreak
 \subsection{Usage}
 Compiler le programme par le biais de la commande : 
 \colorbox{gray}{\lstinline[basicstyle=\ttfamily\color{black}]| make |}
@@ -85,7 +75,19 @@ Une fois la création des fichiers{\it .class} terminé vous êtes prêt
 \vspace{1cm}
 A l'exécution, il vous sera présenté une interface graphique qui vous
 permettra de façon assez intuitive d'accéder aux differentes fonctions
-du programme:
+du programme.
+
+
+\section{Répartition des tâches}
+La majorité des algorithmes implémentés dans ce projet ont été pensés par l'ensemble du groupe.
+Cependant, la production du code à été répartit comme suit:
+\begin{itemize}
+\item {\bf Luigi CONIGLIO}: Filtre de Sobel, segmentation, filtre Cluster-Edges, vectorisation
+\item {\bf Victor CONSTANS}: Interface graphique, filtre de Prewitt, Gauss, Roberts, Kirsch, Canny
+\end{itemize}
+
+
+\bigbreak
 
 \section{Implémentation}
 Voyons maintenant l'implémentation et la structure du programme.
@@ -103,10 +105,10 @@ Cette structure peut être divisée en trois sections que sont:
 \end{figure}
 
 
-Comme nous pouvons le voir sur le diagramme ci-dessus, l'interface graphique à une hiérarchie
+Comme nous pouvons le voir sur le diagramme ci-dessous, l'interface graphique à une hiérarchie
 particulière. En effet, cela à été fait pour permettre d'appeler le bon filtre de manière la
-plus générique possible: à savoir, lancé l'execution de l'objet correspondant au filtre que l'on
-souhaite appliqué sans avoir à distinguer de cas pour chaque filtre.
+plus générique possible: à savoir lancer l'exécution de l'objet correspondant au filtre que l'on
+souhaite appliquer sans avoir à distinguer de cas pour chaque filtre.
 De cette manière si on souhaite ajouter un filtre, il suffit d'ajouter le bouton d'execution de
 se filtre et de créer un fichier option (que nous allons détailler) sans avoir à ajouter de traitement
 particulier pour ce filtre. Voyons plus précisement cette implémentation.
@@ -428,8 +430,7 @@ les valeurs des options qui présentent des résultats intéressant.
 \item Canny: thresh min = 60 , thresh max = 220 , double thresh min = 60 , double thresh max = 220
 \item Segmentation: nombre de couleur = 3
 \item Cluster-edges: nombre de couleur = 3
-\end
-
+\end{itemize}
 
 \addcontentsline{toc}{section}{Références}
 \bibliographystyle{plain}
