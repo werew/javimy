@@ -380,29 +380,29 @@ la {\it figure}.
 \label{fig:moore}
 \end{figure}
 
-Les contours d'une {\it figure} sont examine dans le sens horaire en
-utilisant l'algoritme du voisinage de Moore \cite{url-moore}. Cet
-approche permet d'obtenir une liste trie des contours de chaque {\it
+Les contours d'une {\it figure} sont examinés dans le sens horaire en
+utilisant l'algorithme du voisinage de Moore \cite{url-moore}. Cette
+approche permet d'obtenir une liste triée des contours de chaque {\it
 figure}.
 
 
 \subsection{Conversion au format SVG}
 Le format SVG permet de representer le contenu d'une image par le
-biais de plusieurs entites geometriques par le biais de simples tags
-{\it xml} \cite{url-svg}. Le type de figure le plus generique est
-caracterize par l'element {\it path}. Une {\it path} est un "chemin"
-permettant  de representer n'importe quel type de figure comme etant
+comme étant plusieurs entités géométriques, par le biais de simples tags
+{\it xml} \cite{url-svg}. Le type de figure le plus générique est
+caractérisé par l'élément {\it path}. Un {\it path} est un "chemin"
+permettant  de représenter n'importe quel type de figure comme étant
 une suite de segments ou de courbes.
 
 La traduction au format SVG n'est rien d'autre que la conversion en
-{\it paths} des contours de chaque {\it figure}. L'unique inconvenient
-de cet etape est constitue par la possibilite d'avoir des {\it
-figures} superposes.  Pour eviter que une {\it figure} puisse cacher
-un autre il est indispensable de trier les {\it figures} selon leur
-grandeur et contenu. Les {\it figures} sont tries selon leur distance 
-depuis les limites de l'image en utilisent le principe que, si une
-{\it figure } est plus proche d'un limite de l'image que un'autre
-alors la derniere ne pourra jamais couvrir la premiere.
+{\it paths} des contours de chaque {\it figure}. L'unique inconvénient
+de cette étape est la possibilité d'avoir des {\it
+figures} superposés.  Pour éviter qu'une {\it figure} puisse cacher
+une autre il est indispensable de trier les {\it figures} selon leur
+taille et contenu. Les {\it figures} sont triées selon leur distance 
+depuis les bords de l'image en utilisent le principe que, si une
+{\it figure } est plus proche d'un bord de l'image qu'une autre,
+alors la dernière ne pourra jamais couvrir la première.
 
 
 \section{Valeurs optimales}
