@@ -16,7 +16,7 @@ public class ConverterSVG {
         this.w = img.getWidth()*2-2; 
         this.h = img.getHeight()*2-2; 
 
-        FigureBuilder fb = new FigureBuilder(img, precision);
+        FiguresCollector fb = new FiguresCollector(img, precision);
         figures = fb.getFigures();
         
     }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 
-public class FigureBuilder {
+public class FiguresCollector {
     
     private ArrayList<Figure> figures; 
 
@@ -23,7 +23,7 @@ public class FigureBuilder {
     static final int DOWN  = 2;
     static final int LEFT  = 3;
 
-    public FigureBuilder (BufferedImage img, float precision){
+    public FiguresCollector(BufferedImage img, float precision){
         // Init object
         w = img.getWidth();
         h = img.getHeight();
