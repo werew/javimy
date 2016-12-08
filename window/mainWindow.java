@@ -34,6 +34,8 @@ public class mainWindow extends JFrame implements ActionListener
 		ItemAction btnCanny=new ItemAction(new optionCanny(),"Canny");
 		ItemAction btnSegmentation=new ItemAction(new
 optionSegmentation(),"Segmentation");
+		ItemAction btnClusterEdges=new ItemAction(new
+optionClusterEdges(),"Cluster-Edges");
 		JMenuItem btnEffacer=new JMenuItem("Effacer");
 
 		ImageIcon imageAfficher;
@@ -101,6 +103,9 @@ optionSegmentation(),"Segmentation");
 
 		filtre.add(btnSegmentation);
 		btnSegmentation.addActionListener(this);
+
+		filtre.add(btnClusterEdges);
+		btnClusterEdges.addActionListener(this);
 
 		filtre.add(btnEffacer);
 		btnEffacer.addActionListener(this);

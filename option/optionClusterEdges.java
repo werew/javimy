@@ -55,5 +55,6 @@ public class optionClusterEdges extends Option
 		int n = Integer.parseInt(input);
 
 		image = new Clusterizator(src,n).getImg();
+        image = new PathsCollector(image, 100).getImg();
 	}
 }
