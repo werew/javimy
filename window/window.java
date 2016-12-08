@@ -232,7 +232,10 @@ public class window extends JFrame implements ActionListener
 				ItemAction item=(ItemAction)e.getSource();
 				item.affiche(imageOriginal);
 				newImage=item.getImg();
-				this.printImage(newImage.getImg());
+				if(newImage!=null)
+				{
+					this.printImage(newImage.getImg());
+				}
 			}
 		}
 
@@ -245,12 +248,15 @@ public class window extends JFrame implements ActionListener
 
 	private void printImage(BufferedImage i)
 	{
+		if(i!=null)
+		{
 			this.getContentPane().remove(labelImageAfficher);
 			imageAfficher=new ImageIcon(i);
 			labelImageAfficher=new JLabel("",SwingConstants.CENTER);	//TODO Inutile?
 			labelImageAfficher.setIcon(imageAfficher);
 			this.getContentPane().add(labelImageAfficher,BorderLayout.CENTER);
 			this.revalidate();	
+		}
 	}
 	
 }

@@ -10,7 +10,7 @@ public abstract class Option extends JDialog implements ActionListener
 {
 	private ImageIcon icone=new ImageIcon("icone.jpg");
 	public	JButton submit=new JButton("valider");
-	public Filter image;
+	public Filter image=null;
 	public BufferedImage src;
 	public JPanel panel=new JPanel();
 
