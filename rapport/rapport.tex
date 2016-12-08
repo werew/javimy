@@ -46,37 +46,37 @@
 
 \section{Fichiers rendus et usage}
 \subsection{Contenu du rapport}
-L'objectif de ce rapport est d'abord celui d'illustrer la structure du
-programme. Pour accelerer/simplifier l'utilisation du travail rendu, la partie
+L'objectif de ce rapport est d'abord d'illustrer la structure du
+programme. Pour accelérer/simplifier l'utilisation du travail rendu, la partie
 initiale de ce rapport décrit le contenu des fichiers et leur usage.
 
 \subsection{Contenu de l'archive}
 Après avoir ouvert l'archive {\it constans\_coniglio\_luigi.tar.gz} vous
-trouverez les fichiers et repertoires suivants:
+trouverez les fichiers et répertoires suivants:
 \smallbreak
 \begin{itemize}
 \item Ce rapport
-\item Les fichier {\bf javimy.java} est le point d'entre du programme
-\item Le repertoire {\bf gui} contiens tous les fichiers to du programme relatifs
-      a l'interface graphique
-\item Le repertoire {\bf filters} contient un package incluant tous les filtres 
-      implemente dans la candre de ce projet
-\item Le repertoire {\bf vectorization} contients la partie du programme dedie a
+\item Le fichier {\bf javimy.java} qui est le point d'entrée du programme
+\item Le répertoire {\bf gui} qui contient tous les fichiers du programme relatifs
+      à l'interface graphique
+\item Le répertoire {\bf filters} qui contient un package incluant tous les filtres 
+      implementés dans la cadre de ce projet
+\item Le répertoire {\bf vectorization} qui contient la partie du programme dédiée à
       la vectorisation d'une image
 \end{itemize}
 
 \bigbreak
 
 \subsection{Usage}
-Compilez le programme par le biais de la commande 
+Compiler le programme par le biais de la commande : 
 \colorbox{gray}{\lstinline[basicstyle=\ttfamily\color{black}]| javac javimy.java |}
-Une fois termine la création des fichiers {\it .class} vous etes pret
-a utiliser ce magnifigue logiciel: 
+Une fois la création des fichiers{\it .class} terminé vous êtes prêt
+à utiliser ce magnifigue logiciel: 
 \colorbox{gray}{\lstinline[basicstyle=\ttfamily\color{black}]| java javimy |},
 
 \vspace{1cm}
-A l'execution il vous serait presente une interface graphique que vous
-permettra de facon assez intuitive d'acceder aux different functions
+A l'exécution, il vous sera présenté une interface graphique qui vous
+permettra de facon assez intuitive d'accéder aux differentes fonctions
 du programme:
 
 \begin{center}
@@ -89,24 +89,25 @@ du programme:
 \label{sec:filtres}
 
 \subsection{Sobel, Prewitt, Roberts, etc...}
-Description du principe de fonctionnement avec quelque image/example
+%TODO Description du principe de fonctionnement avec quelque image/example
 
 \subsection{Canny}
+%TODO
 
 \subsection{Gauss}
-Description du principe de fonctionnement avec quelque image/example
+%TODO Description du principe de fonctionnement avec quelque image/example
 
 \subsection{Segmentation}
-La segmentation a l'objectif de partitionner un image en sections
-(ensembles de pixels) sur la base de leurs propriete (couleurs,
-intensite, ...). Dans le menu des filtres vous trouverez un bouton qui
-va vous permet de realiser cette type de operation sur les couleurs
-d'une image. 
+La segmentation a pour objectif de partitionner une image en sections
+(ensembles de pixels) sur la base de leurs propriétés (couleurs,
+intensité, ...). Dans le menu des filtres vous trouverez un bouton qui
+vous permettra de réaliser ce type d'opération sur les couleurs
+d'une image.
 
-L'algoritme utilise pour segmenter l'image est inspire du
+L'algoritme utilisé pour segmenter l'image est inspiré du
 partitionnement en {\it K-moyennes} (ou {\it k-means clustering} en
-anglais). Ce type de partitionnement consiste a selectioner K couleurs
-et assigner chaque pixel de l'image a le plus proche de ces couleurs.
+anglais). Ce type de partitionnement consiste à sélectioner K couleurs
+et à assigner à chaque pixel de l'image à la plus proche de ces couleurs.
 
 \begin{figure}[h]
 \centering
@@ -116,40 +117,41 @@ K-moyennes (ici K = 5)}
 \label{fig:routcidr}
 \end{figure}
 
-Les K couleurs sont apres modifie pour minimiser les distances avec
-les pixel de l'image, les groupement par couleurs refait et ainsi de
-suite jusq'a quand les K couleurs et le partitionnement des pixels
+Les K couleurs vont ensuite êtres modifiées pour prendre comme valeur la
+moyenne de la couleur des pixels qui lui sont associés, dans le but de
+minimiser l'écart de couleur avec les pixels de l'image. Cette opération va
+être répétée jusqu'à ce que les K couleurs et le partitionnement des pixels
 convergent. 
 
 \subsection{Cluster-edges}
-Cet filtre s'inscrit dans l'ensemble des filtres de detections des
-bords. La particularite de ce filtre par rapport aux autres filtre de
-detection des contours est que il n'effectue pas une simple detection
-des bords mais, plus precisement, il determine les limites entre
-differents zones de couleurs. 
-Les limites entre deux zones de couleurs sont represente par des
-chemin colore. A chaque bord correspond un chemin d'un couleur
-different \cite{url-novelvect}.
+Ce filtre s'inscrit dans l'ensemble des filtres de détections des
+bords. La particularité de ce filtre vis-à-vis des autres filtres de
+détection des contours est qu'il n'effectue pas qu'une simple détection
+des bords mais. En effet, il détermine plus précisement les limites entre les
+différentes zones de couleurs. 
+La limite entre deux zones de couleurs est représentée par des
+chemin coloré. A chaque bord correspond un chemin d'une couleur
+différente \cite{url-novelvect}.
 
-Le premiere etape de l'algoritme consiste a segmenter l'image en
-different zones de couleurs.
+Le première étape de l'algoritme consiste à segmenter l'image en
+différentes zones de couleurs.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=3.5cm]{./pics/cluster-edges1.eps}
-\caption{Segmentation, chaque nombre represente un couleur different}
+\caption{Segmentation, chaque nombre représente une couleur differente}
 \label{fig:routcidr}
 \end{figure}
 
-Une fois termine la segmentation on procede a la generation de
-sub-pixels entre chaque pixel de l'image originaire. Chaque sub pixel
-est rempli en raison du couleur des pixel autour de lui.
+Une fois la segmentation terminée on procède à la génération de
+sub-pixels entre chaque pixel de l'image originale. Chaque sub-pixel
+est rempli selon la couleur des pixels autour de lui.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=3.5cm]{./pics/cluster-edges2.eps}
-\caption{Les bords sont les subpixel ayant comme voisins des pixel de
-couleur different}
+\caption{Les bords sont les sub-pixel ayant comme voisins des pixels de
+couleur différente}
 \label{fig:routcidr}
 \end{figure}
 
@@ -158,90 +160,90 @@ couleur different}
 \section{Vectorisation} 
 Le programme permet d'exporter une image sous la forme d'un fichier
 {\it .svg}. La conversion d'une image dans le format SVG ({\it
-Scalable Vector Graphics}) suive un processus assenz complex que vaut
-la peine d'etre presente.
+Scalable Vector Graphics}) suit un processus assez complexe qui ne vaut
+pas la peine d'être présenté.
 
-Si la plupart des formats representant une image en utilisant un 
-mappage plus ou moin complex des pixels, un format d'image vectorielle
-permet de representer une image comme etant un ensemble de formes
-egendre par des vecteurs. Vectoriser une image constiste a traduire
-l'ensembles des pixels d'une image en vecteurs (formes geometriques,
+Si la plupart des formats représentant une image en utilisant un 
+mappage plus ou moins complexe de pixel, un format d'image vectorielle
+permet de représenter une image comme etant un ensemble de formes
+egendre par des vecteurs. Vectoriser une image consiste à traduire
+l'ensemble des pixels d'une image en vecteurs (formes géométriques,
 chemins, courbes, etc ...).
 
-L'algorithme utilise dans le candre de ce projet pour vectoriser une
-image peut etre resume dans les etapes suivantes:   
+L'algorithme utilisé pour vectoriser une image dans le cadre de ce projet peut
+être résumé par les étapes suivantes:   
 
 \smallbreak
 \begin{itemize}
 \item Segmentation de l'image
-\item Detection des contours et extraction des bords
+\item Détection des contours et extraction des bords
 \item Compression des bords
 \item Construction des figures
 \item Conversion au format SVG
 \end{itemize}   
 \bigbreak
 
-La segmentation et la detection des contours d'une image sont effectue
-en utilisant les techiques presentes dans la section
+La segmentation et la détection des contours d'une image sont effectuées
+en utilisant les techiques présentes dans la section
 \ref{sec:filtres} de ce rapport.
 
 
 \subsection{Compression des bords}
 %TODO Algorithme de Douglas-Peucker %
-Au moment de sa detection chaque bord est extrait comme etant une
-suite continue de pixels. Bien que un telle representation soit tout a
+Au moment de la détection, chaque bord est extrait comme étant une
+suite continue de pixels. Bien qu'une telle représentation soit tout à
 fait utilisable dans la construction d'une image vectorielle le
-resultat ne serait pas tres different de celui d'un format standard
-d'image. Pour cette raison pendant le processus de vectorisation d'une
-image les suites continues de pixels constituees pas les contours de
-l'image doivent etre traduite par des elements geometriques plus
+resultat ne serait pas très différent de celui d'un format standard
+d'image. C'est pour cette raison que pendant le processus de vectorisation d'une
+image, les suites continues de pixels constituant les contours de
+l'image doivent être traduits comme des éléments géométriques plus
 simples: segments, courbes, etc.. .  
 
-Le premiere etape dans la traduction des contours consiste a en reduir
-le nombre de pixels. Dans la cadre de ce projet on a decide d'utiliser
-l'algoritme de Douglas-Peucker pour atteindre cet objectif
+La première étape dans la traduction des contours consiste à réduire
+le nombre de pixels. Dans la cadre de ce projet nous avons décidés d'utiliser
+l'algorithme de Douglas-Peucker pour atteindre cet objectif
 \cite{url-dougpeuck}.
 
-L'algoritme de Douglas-Peucker est beaucoup utilise en geographie dans
+L'algorithme de Douglas-Peucker est beaucoup utilisé en géographie
 et permet d'approximer les points d'un chemin en tenant compte d'un
-certaine degre de liberte (parametrable).
+certain degré de liberté (paramétrable).
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=7cm]{./pics/dp1.eps}
-\caption{Le bords sont approxime avec un degree de liberte croissante}
+\caption{Les bords sont approximés avec un degré de liberté croissant}
 \label{fig:routcidr}
 \end{figure}
 
-Le fait que cet algoritme soit facilement parametrable a ete un
-element cle dans la choix et il permet a l'utilisateur de choisir la
-precision souhaite dans la vectorisation.
+Le fait que cet algorithme soit facilement paramétrable a été un élément clé
+dans le choix de celui-ci, et il permet a l'utilisateur de choisir la précision
+souhaité dans la vectorisation.
 
-Un autre element essentiel dans la choix de cet algorithme a ete le
-fait que il ne change pas la position du premier et le dernier point
-d'un chemin dans la compression de celui-ci. Grace a ca un chemin
-(partie d'un contour) d'une image commencera et terminera toujour sur
-le meme points meme apres sa compression, en assurant ainsi la
-contiguite de celui ci avec les bords voisins.
+Un autre élément essentiel dans le choix de cet algorithme a été le
+fait que il ne change pas la position du premier et du dernier point
+d'un chemin dans la compression de celui-ci. Grâce à cela, un chemin
+(partie d'un contour) d'une image commencera et terminera toujours sur
+le en un même point, même après la compression, et assurant ainsi la
+contiguité de celui-ci avec les bords voisins.
 
 
 
 \subsection{Construction des figures}
 %TODO voisinage de moore %
-Une fois simplifie les contours il est arrive le moment de traiters
-les zones de couleurs egendre par les bords.
+Une fois les contours simplifiés, arrive le moment de traiter
+les zones de couleurs engendré par les bords.
 
-On peut definire une {\it figure} comme etant une section de l'image
-ayant (apres segmentation) un unique couleur et egendre par un ou
-la combinaison de plusieurs bords.
+On peut définire une {\it figure} comme étant une section de l'image ayant
+(après segmentation) une unique couleur, et qui engendre la combinaison de
+plusieurs bords.
 
-Le but de ce stade est de detecter toutes les {\it figures} dans l'image et
-de affecter a chaque {\it figure} les bords entourant celle-ci dans le
-bon ordre (sachant que un bord est partage toujours entre deux
+Le but à ce stade est de détecter toutes les {\it figures} de l'image et
+d'afféeter à chaque {\it figure} les bords entourant celle-ci dans le
+bon ordre (sachant qu'un bord est toujours partagé entre deux
 {\it figures}).
 
-L'algoritme pour la construction des {\it figures} consinste a parcourir
-l'image a la recherche des zones de couleurs. 
+L'algorithme de construction des {\it figures} consiste à parcourir
+l'image à la recherche des zones de couleur.
 
 \begin{lstlisting}[frame=single]  % Start your code-block
 Construction figures ( image )
@@ -268,8 +270,8 @@ renvoyer figures
 \end{lstlisting}
 
 
-Apres avoir detecte une zone qui n'a pas encore ete traite, on procede
-a examiner les voisins \underline{externes} des pixels qui delimitent
+Après avoir détecté une zone qui n'a pas encore été traitée, on procède
+à l'examen des voisins \underline{externes} des pixels qui délimitent
 la {\it figure}.
 
 \begin{figure}[h]
