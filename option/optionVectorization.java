@@ -21,6 +21,11 @@ public class optionVectorization extends JDialog implements ActionListener
 {
 	private	JTextField champNbCouleur=new JFormattedTextField();	
 	private	JTextField champPrecision=new JFormattedTextField();
+
+    private JLabel Txt_nbcouleurs = new JLabel("Nb colors");
+    private JLabel Txt_precision  = new JLabel("Percent precision");
+
+
 	
 	private ImageIcon icone=new ImageIcon("icone.jpg");
 	private	 JButton browse = new JButton ("Browse");
@@ -37,16 +42,20 @@ public class optionVectorization extends JDialog implements ActionListener
 
 		this.setTitle("Javimy");
 		this.setIconImage(icone.getImage());
-		this.setSize(500,500);
+		this.setSize(500,100);
 		this.setLocationRelativeTo(null);
-		this.setModal(true);
+		this.setModal(false);
+        this.setResizable(false);
 
 
-		champNbCouleur.setPreferredSize(new Dimension(100,50));
-		champPrecision.setPreferredSize(new Dimension(100,50));
 
-		panel.add(champNbCouleur);
-		panel.add(champPrecision);
+		champNbCouleur.setPreferredSize(new Dimension(50,30));
+		champPrecision.setPreferredSize(new Dimension(50,30));
+
+        panel.add(Txt_nbcouleurs);
+        panel.add(champNbCouleur);
+        panel.add(Txt_precision);
+        panel.add(champPrecision);
 
 		panel.add(submit);
 		panel.add(browse);
@@ -92,9 +101,7 @@ public class optionVectorization extends JDialog implements ActionListener
 			}
 			else
 			{
-				new popup("Veuillez patienter");	
 				execute(src);
-				new popup("Fichier enregistrer");
 				this.dispose();
 			}
 		}

@@ -28,6 +28,7 @@ public abstract class Option extends JDialog implements ActionListener
 		this.setIconImage(icone.getImage());
 		this.setLocationRelativeTo(null);
 		this.setModal(true);
+        this.setResizable(false);
 
 
 		this.setVisible(true);
