@@ -28,7 +28,7 @@ public class window extends JFrame implements ActionListener
 		JMenuItem btnQuitter=new JMenuItem("Quitter");
 		ItemAction btnSobel=new ItemAction(new optionSobel(),"Sobel");
 		ItemAction btnPrewitt=new ItemAction(new optionPrewitt(),"Prewitt");
-		JMenuItem btnKirsche=new JMenuItem("Kirsche");
+		ItemAction btnKirsche=new ItemAction(new optionKirsch(),"Kirsche");
 		JMenuItem btnRoberts=new JMenuItem("Roberts");
 		ItemAction btnGauss=new ItemAction(new optionGauss(),"Gauss");
 		ItemAction btnCanny=new ItemAction(new optionCanny(),"Canny");
