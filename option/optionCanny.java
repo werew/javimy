@@ -34,6 +34,9 @@ public class optionCanny extends Option
 
 		this.setSize(300,200);
 
+
+		//Ajout des différents composants
+
 		Dimension dim = new Dimension(80,30);
 
 		thr_min_conv.setPreferredSize(dim);
@@ -61,6 +64,7 @@ public class optionCanny extends Option
 		this.setContentPane(this.panel);
 	}
 
+	//Execution de Canny
 	public void execute(BufferedImage src)
 	{
 		String ttmic= thr_min_conv.getText();

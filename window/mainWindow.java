@@ -15,16 +15,18 @@ import option.*;
 
 public class mainWindow extends JFrame implements ActionListener
 {
+		//Barre de menu
 		JMenuBar menu=new JMenuBar();
 
+		//Menu de la barre
 		JMenu file=new JMenu("Fichier");
 		JMenu filtre=new JMenu("Filtre");
 
+		//Item
 		JMenuItem btnOuvrir=new JMenuItem("Ouvrir");
 		JMenuItem btnEnregistrer=new JMenuItem("Enregistrer");
 		JMenuItem btnEnregistrerSous=new JMenuItem("Enregistrer sous");
 		JMenuItem btnVectorisation=new JMenuItem("Exporter comme SVG");
-		//JMenuItem btnFermer=new JMenuItem("Fermer");
 		JMenuItem btnQuitter=new JMenuItem("Quitter");
 		ItemAction btnSobel=new ItemAction(new optionSobel(),"Sobel");
 		ItemAction btnPrewitt=new ItemAction(new optionPrewitt(),"Prewitt");
@@ -38,18 +40,25 @@ optionSegmentation(),"Segmentation");
 optionClusterEdges(),"Cluster-Edges");
 		JMenuItem btnEffacer=new JMenuItem("Effacer");
 
+		//Image que l'on souhaite afficher
 		ImageIcon imageAfficher;
 		JLabel labelImageAfficher;
 
+		//Fichier image source
 		File fichierImage;
+
+		//Image filtrer
 		BufferedImage newImage=null;
+
+		//Image original
 		BufferedImage imageOriginal=null;
 
 		JFileChooser choix=new JFileChooser(new File("."));
 
+		//Icone du programme
 		ImageIcon icone=new ImageIcon("icone.jpg");
 
-
+		//Chemin du fichier original
 		String pathOriginal;
 
 	public mainWindow()
@@ -60,6 +69,8 @@ optionClusterEdges(),"Cluster-Edges");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.setJMenuBar(menu);
+
+		//Initialisation de l'interface
 
 		menu.add(file);
 		menu.add(filtre);
@@ -119,21 +130,17 @@ optionClusterEdges(),"Cluster-Edges");
 		int boite=choix.showOpenDialog(null);
 		if(boite==JFileChooser.APPROVE_OPTION)
 		{
-			fichierImage=new File(""+choix.getSelectedFile());
+			fichierImage=new File(choix.getSelectedFile().toString());
 			try{
-			imageOriginal=ImageIO.read(fichierImage);
+				imageOriginal=ImageIO.read(fichierImage);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
+			//Initialisation du chemin du fichier source
 			this.pathOriginal=choix.getSelectedFile().toString();
-			this.getContentPane().removeAll();
-			imageAfficher=new ImageIcon(imageOriginal);
-			labelImageAfficher=new JLabel("",SwingConstants.CENTER);
-			labelImageAfficher.setIcon(imageAfficher);
-			this.getContentPane().add(labelImageAfficher,BorderLayout.CENTER);
-			this.revalidate();
 
+			printImg(imageOriginal);
 		}
 		else
 		{
@@ -143,11 +150,14 @@ optionClusterEdges(),"Cluster-Edges");
 
 	private void enregistrerSous()
 	{
+		//Si on a pas ouvert d'image
 		if(imageOriginal==null)
 		{
 			new popup("Pas d'image ouverte");
 			return;
 		}
+
+		//Si on a pas modifier l'image, on empeche l'enregistrement
 		if(newImage==null)
 		{
 			new popup("Image non modifier");
@@ -158,7 +168,7 @@ optionClusterEdges(),"Cluster-Edges");
 		{
 			File output=new File(choix.getSelectedFile().toString());
 			try {
-			ImageIO.write(newImage,"jpg",output);
+				ImageIO.write(newImage,"jpg",output);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -167,23 +177,26 @@ optionClusterEdges(),"Cluster-Edges");
 
 	private void enregistrer()
 	{
+		//Si on a pas ouvert d'image
 		if(imageOriginal==null)
 		{
 			new popup("Pas d'image ouverte");
 			return;
 		}
+
+		//Si on a pas modifier l'image, on empeche l'enregistrement
 		if(newImage==null)
 		{
 			new popup("Image non modifier");
 			return;
 		}
 
-			File output=new File(pathOriginal);
-			try {
+		File output=new File(pathOriginal);
+		try {
 			ImageIO.write(newImage,"jpg",output);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -208,6 +221,7 @@ optionClusterEdges(),"Cluster-Edges");
 		}
 		else if(e.getSource()==btnVectorisation)
 		{
+			//Si on a pas ouvert d'image
 			if(imageOriginal==null)
 			{
 				new popup("Pas d'image ouverte");
@@ -220,6 +234,7 @@ optionClusterEdges(),"Cluster-Edges");
 
 		else if(e.getSource() instanceof ItemAction)
 		{
+			//Si on a pas ouvert d'image
 			if(imageOriginal==null)
 			{
 				new popup("Pas d'image ouverte");

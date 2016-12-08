@@ -7,6 +7,7 @@ import java.awt.*;
 
 public class ItemAction extends JMenuItem
 {
+	//Fenetre d'option
 	public Option opt;
 
 	public ItemAction(Option opt,String nom)
@@ -15,11 +16,13 @@ public class ItemAction extends JMenuItem
 		this.opt=opt;
 	}
 
+	//Provoque l'affichage de la fenetre d'option
 	public void affiche(BufferedImage src)
 	{
 		opt.affiche(src);
 	}
 
+	//Return l'image
 	public BufferedImage getImg()
 	{
 		return opt.getImg();

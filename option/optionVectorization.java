@@ -22,16 +22,16 @@ public class optionVectorization extends JDialog implements ActionListener
 	private	JTextField champNbCouleur=new JFormattedTextField();	
 	private	JTextField champPrecision=new JFormattedTextField();
 
-    private JLabel Txt_nbcouleurs = new JLabel("Nb colors");
-    private JLabel Txt_precision  = new JLabel("Percent precision");
+	private JLabel Txt_nbcouleurs = new JLabel("Nb colors");
+	private JLabel Txt_precision  = new JLabel("Percent precision");
 
 
 	
 	private ImageIcon icone=new ImageIcon("icone.jpg");
 	private	 JButton browse = new JButton ("Browse");
-	public	JButton submit=new JButton("valider");
-	public Filter image;
-	public BufferedImage src;
+	private	JButton submit=new JButton("valider");
+	private Filter image;
+	private BufferedImage src;
 	private JFileChooser choix = null; 
 	private JPanel panel = new JPanel();
 
@@ -45,17 +45,17 @@ public class optionVectorization extends JDialog implements ActionListener
 		this.setSize(500,100);
 		this.setLocationRelativeTo(null);
 		this.setModal(false);
-        this.setResizable(false);
+	        this.setResizable(false);
 
-
+		//Ajout des différents composants
 
 		champNbCouleur.setPreferredSize(new Dimension(50,30));
 		champPrecision.setPreferredSize(new Dimension(50,30));
 
-        panel.add(Txt_nbcouleurs);
-        panel.add(champNbCouleur);
-        panel.add(Txt_precision);
-        panel.add(champPrecision);
+      	 	panel.add(Txt_nbcouleurs);
+	        panel.add(champNbCouleur);
+  	      	panel.add(Txt_precision);
+       		panel.add(champPrecision);
 
 		panel.add(submit);
 		panel.add(browse);
@@ -68,12 +68,12 @@ public class optionVectorization extends JDialog implements ActionListener
 		this.setVisible(true);
 	}
 
-
+	//Vectorisation de l'image source
 	public void execute(BufferedImage src)
 	{
 		int nbCouleur=Integer.parseInt(champNbCouleur.getText());
 		float precision=Float.parseFloat((champPrecision.getText()));
-	//Segmentation
+
 		Clusterizator f = new Clusterizator(src, nbCouleur); 
 
 		ConverterSVG svg=new ConverterSVG(f.getImg() ,precision); 
@@ -95,6 +95,7 @@ public class optionVectorization extends JDialog implements ActionListener
 		}
 		else if (e.getSource()==submit)
 		{
+			//Si on a pas choisi de chemin destination
 			if(choix==null)
 			{
 				new popup("Pas de chemin de sauvegarde");

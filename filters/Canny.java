@@ -36,9 +36,6 @@ public class Canny extends Filter {
 	carte = new gradient[image.getWidth()][image.getHeight()];
 
 
-
-	//Convolution
-
         // Set max
         for (int i=1; i<h-1; i++){
             for (int j=1; j<w-1; j++){
@@ -58,6 +55,7 @@ public class Canny extends Filter {
                 if (val.Norme > 255 - thr_max_conv) val.Norme = 255;
                 else if (val.Norme < thr_min_conv) val.Norme = 0;
 
+		//Arondissement des angles
 		val.Angle=roundedAngle(val.Angle); 
 
 		carte[j-1][i-1]=val;
@@ -103,6 +101,8 @@ public class Canny extends Filter {
 		}
 	}
 
+	/*un point incertain peux devenir valide si
+	au moins un de ces voisins est valide*/
 	for(Point p : incertain)
 	{
 		int x=p.x;
@@ -174,43 +174,48 @@ public class Canny extends Filter {
 
 	private double roundedAngle(double angle)
 	{
-			if(angle>=0 && angle<45)
-			{
-				return 0;
-			}
-			else if(angle>=45 && angle<90)
-			{
-				return 45;
-			}
-			else if(angle>=90 && angle<135)
-			{
-				return 90;
-			}
-			else if(angle>=135 && angle<180)
-			{
-				return 135;
-			}
-			else if(angle<=0 && angle>-45)
-			{
-				return 135;
-			}
-			else if(angle<=-45 && angle>-90)
-			{
-				return 90;
-			}
-			else if(angle<=-90 && angle>-135)
-			{
-				return 45;
-			}
-			else if(angle<=-135 && angle>-180)
-			{
-				return 0;
-			}
-			else
-				return 0;
+		if(angle>=0 && angle<45)
+		{
+			return 0;
+		}
+		else if(angle>=45 && angle<90)
+		{
+			return 45;
+		}
+		else if(angle>=90 && angle<135)
+		{
+			return 90;
+		}
+		else if(angle>=135 && angle<180)
+		{
+			return 135;
+		}
+		else if(angle<=0 && angle>-45)
+		{
+			return 135;
+		}
+		else if(angle<=-45 && angle>-90)
+		{
+			return 90;
+		}
+		else if(angle<=-90 && angle>-135)
+		{
+			return 45;
+		}
+		else if(angle<=-135 && angle>-180)
+		{
+			return 0;
+		}
+		else
+			return 0;
 	}
 
 
+	/* Si un pixel se trouvant dans le masque
+	de convolution a une norme supérieur au pixel
+	que l'on traite alors cela veut dire que le
+	pixel courant n'est pas le maximum local et
+	n'est donc pas le bord*/
 	private void nonMaxima(int x,int y)
 	{
 		boolean tmp=true;

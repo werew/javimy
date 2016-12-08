@@ -8,10 +8,15 @@ import java.awt.event.ActionListener;
 
 public abstract class Option extends JDialog implements ActionListener
 {
-	private ImageIcon icone=new ImageIcon("icone.jpg");
-	public	JButton submit=new JButton("valider");
+	public ImageIcon icone=new ImageIcon("icone.jpg");
+	public JButton submit=new JButton("valider");
+
+	//Image traité
 	public BufferedImage image=null;
+
+	//Image source
 	public BufferedImage src;
+
 	public JPanel panel=new JPanel();
 
 	public Option()
@@ -28,12 +33,13 @@ public abstract class Option extends JDialog implements ActionListener
 		this.setIconImage(icone.getImage());
 		this.setLocationRelativeTo(null);
 		this.setModal(true);
-        this.setResizable(false);
+	        this.setResizable(false);
 
 
 		this.setVisible(true);
 	}
 
+	//Execute le traitement à effectuer sur l'image source
 	abstract public void execute(BufferedImage src);
 
 	public BufferedImage getImg()
@@ -43,6 +49,7 @@ public abstract class Option extends JDialog implements ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
+		//Si on valide les options, on traite l'image
 		if(e.getSource()==submit)
 		{
 			this.execute(src);

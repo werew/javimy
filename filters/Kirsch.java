@@ -61,6 +61,7 @@ public class Kirsch extends Filter {
         int px_x = 0;
 	int max_g =0;
 
+	//Convolution avec les 8 matrices
 	for(int k=0;k<8;k++)
 	{
 		for (int i=0; i<3; i++){
@@ -75,6 +76,7 @@ public class Kirsch extends Filter {
 				
 			}
 		}
+		//La valeur retenu pour le pixel est la plus haute
 		px_x=Math.abs(px_x);
 		if(px_x > max_g)
 		{

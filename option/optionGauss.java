@@ -16,10 +16,10 @@ import window.*;
 
 public class optionGauss extends Option
 {
-public	JTextField sigma=new JFormattedTextField();
-public	JTextField rayon=new JFormattedTextField();
-public JLabel TxtSigma = new JLabel("Sigma");
-public JLabel TxtRayon = new JLabel("Radius");
+	public	JTextField sigma=new JFormattedTextField();
+	public	JTextField rayon=new JFormattedTextField();
+	public JLabel TxtSigma = new JLabel("Sigma");
+	public JLabel TxtRayon = new JLabel("Radius");
 	
 
 	public optionGauss()
@@ -27,6 +27,8 @@ public JLabel TxtRayon = new JLabel("Radius");
 		super();
 
 		this.setSize(200,150);
+
+		//Ajout des differents composants
 
 		Dimension dim = new Dimension(20,10);
 
@@ -49,6 +51,8 @@ public JLabel TxtRayon = new JLabel("Radius");
 		this.setContentPane(panel);
 	}
 
+
+	//Execution de Gauss
 	public void execute(BufferedImage src)
 	{
 		int r= Integer.parseInt(rayon.getText());

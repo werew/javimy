@@ -8,9 +8,10 @@ public class Sobel extends Filter {
     private int thr_min = 0;
     private int thr_max = 0;
 
+	/*Matrice de convolution*/
     private int[][] mx = {{-1,0,1},{-2,0,2},{-1,0,1}};
     private int[][] my = {{-1,-2,-1},{0,0,0},{1,2,1}};
-    BufferedImage src;
+    BuferedImage src;
 
 
     public Sobel(BufferedImage img, int threshold_min, int threshold_max ){
@@ -21,7 +22,7 @@ public class Sobel extends Filter {
         int h = img.getHeight();
         image = new BufferedImage(w-2,h-2,img.getType());
 
-        // Set max
+        // Recherche de la valeur max
         for (int i=1; i<w-1; i++){
             for (int j=1; j<h-1; j++){
                 int val = convolution(i,j);
