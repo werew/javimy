@@ -64,6 +64,6 @@ public class optionKirsch extends Option
 		int tmic= Integer.parseInt(ttmi);
 		int tmac= Integer.parseInt(ttma);
 
-		image=new Kirsch(src,tmic,tmac);
+		image=new Kirsch(src,tmic,tmac).getImg();
 	}
 }

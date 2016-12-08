@@ -20,7 +20,7 @@ public class ItemAction extends JMenuItem
 		opt.affiche(src);
 	}
 
-	public Filter getImg()
+	public BufferedImage getImg()
 	{
 		return opt.getImg();
 	}

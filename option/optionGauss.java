@@ -54,6 +54,6 @@ public JLabel TxtRayon = new JLabel("Rayon");
 	{
 		int r= Integer.parseInt(rayon.getText());
 		double s= Double.parseDouble(sigma.getText());
-		image=new Gauss(src,r,s);
+		image=new Gauss(src,r,s).getImg();
 	}
 }

@@ -64,6 +64,6 @@ public class optionPrewitt extends Option
 		int tmic= Integer.parseInt(ttmi);
 		int tmac= Integer.parseInt(ttma);
 
-		image=new Prewitt(src,tmic,tmac);
+		image=new Prewitt(src,tmic,tmac).getImg();
 	}
 }

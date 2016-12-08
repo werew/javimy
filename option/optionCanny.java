@@ -87,6 +87,7 @@ public class optionCanny extends Option
 		int tmih= Integer.parseInt(ttmih);
 		int tmah= Integer.parseInt(ttmah);
 
-		image=new Canny(src,tmic,tmac,tmih,tmah);
+        // XXX
+		image=new Canny(src,tmic,tmac,tmih,tmah,10,3.).getImg();
 	}
 }

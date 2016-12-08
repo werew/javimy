@@ -14,32 +14,24 @@ import vectorization.*;
 import javax.swing.JFormattedTextField;
 import window.*;
 
-public class optionSobel extends Option
+public class optionSegmentation extends Option
 {
-	private	JTextField thr_min=new JFormattedTextField();
-	private	JTextField thr_max=new JFormattedTextField();
-	private JLabel Txt_thr_min = new JLabel("thr min");
-	private JLabel Txt_thr_max = new JLabel("thr max");
+	private	JTextField n_colors=new JFormattedTextField();
+	private JLabel Txt_n_colors = new JLabel("How many colors:");
 	
 
 
-	public optionSobel()
+	public optionSegmentation()
 	{
 		super();
 
 		this.setSize(300,100);
 
 		Dimension dim = new Dimension(50,30);
+		n_colors.setPreferredSize(dim);
 
-		thr_min.setPreferredSize(dim);
-		thr_max.setPreferredSize(dim);
-
-		this.panel.add(Txt_thr_min);
-		this.panel.add(thr_min);
-		this.panel.add(Txt_thr_max);
-		this.panel.add(thr_max);
-
-
+		this.panel.add(Txt_n_colors);
+		this.panel.add(n_colors);
 		this.panel.add(submit);
 
 		GridLayout gl = new GridLayout(3,2);
@@ -52,18 +44,16 @@ public class optionSobel extends Option
 
 	public void execute(BufferedImage src)
 	{
-		String ttmi= thr_min.getText();
-		String ttma= thr_max.getText();
+		String input = n_colors.getText();
 
-		if(ttmi.length()==0 || ttma.length()==0)
+		if(input.length()==0)
 		{
 			new popup("Option invalide");
 			return;
 		}
 
-		int tmic= Integer.parseInt(ttmi);
-		int tmac= Integer.parseInt(ttma);
+		int n = Integer.parseInt(input);
 
-		image=new Sobel(src,tmic,tmac).getImg();
+		image = new Clusterizator(src,n).getImg();
 	}
 }

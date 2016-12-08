@@ -64,6 +64,6 @@ public class optionRoberts extends Option
 		int tmic= Integer.parseInt(ttmi);
 		int tmac= Integer.parseInt(ttma);
 
-		image=new Roberts(src,tmic,tmac);
+		image=new Roberts(src,tmic,tmac).getImg();
 	}
 }

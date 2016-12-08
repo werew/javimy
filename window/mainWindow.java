@@ -32,13 +32,15 @@ public class mainWindow extends JFrame implements ActionListener
 		ItemAction btnRoberts=new ItemAction(new optionRoberts(),"Roberts");
 		ItemAction btnGauss=new ItemAction(new optionGauss(),"Gauss");
 		ItemAction btnCanny=new ItemAction(new optionCanny(),"Canny");
+		ItemAction btnSegmentation=new ItemAction(new
+optionSegmentation(),"Segmentation");
 		JMenuItem btnEffacer=new JMenuItem("Effacer");
 
 		ImageIcon imageAfficher;
 		JLabel labelImageAfficher;
 
 		File fichierImage;	//TODO en attribut si jamais on veux ecraser le fichier courant
-		Filter newImage=null;
+		BufferedImage newImage=null;
 		BufferedImage imageOriginal=null;
 
 		JFileChooser choix=new JFileChooser(new File("."));	//TODO filtre	Variable local au méthode
@@ -96,6 +98,9 @@ public class mainWindow extends JFrame implements ActionListener
 
 		filtre.add(btnCanny);
 		btnCanny.addActionListener(this);
+
+		filtre.add(btnSegmentation);
+		btnSegmentation.addActionListener(this);
 
 		filtre.add(btnEffacer);
 		btnEffacer.addActionListener(this);
@@ -155,7 +160,7 @@ public class mainWindow extends JFrame implements ActionListener
 			System.out.println("Bravo, tu as enregistrer: "+choix.getSelectedFile());	//XXX
 			File output=new File(""+choix.getSelectedFile());
 			try {
-			ImageIO.write(newImage.getImg(),"jpg",output);
+			ImageIO.write(newImage,"jpg",output);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -177,7 +182,7 @@ public class mainWindow extends JFrame implements ActionListener
 
 			File output=new File(pathOriginal);
 			try {
-			ImageIO.write(newImage.getImg(),"jpg",output);
+			ImageIO.write(newImage,"jpg",output);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -234,7 +239,7 @@ public class mainWindow extends JFrame implements ActionListener
 				newImage=item.getImg();
 				if(newImage!=null)
 				{
-					this.printImage(newImage.getImg());
+					this.printImage(newImage);
 				}
 			}
 		}
