@@ -188,7 +188,7 @@ en utilisant les techiques présentes dans la section
 \ref{sec:filtres} de ce rapport.
 
 
-\subsection{Compression des bords}
+\subsection{Compression des contours}
 %TODO Algorithme de Douglas-Peucker %
 Au moment de la détection, chaque bord est extrait comme étant une
 suite continue de pixels. Bien qu'une telle représentation soit tout à
@@ -204,9 +204,9 @@ le nombre de pixels. Dans la cadre de ce projet nous avons décidés d'utiliser
 l'algorithme de Douglas-Peucker pour atteindre cet objectif
 \cite{url-dougpeuck}.
 
-L'algorithme de Douglas-Peucker est beaucoup utilisé en géographie
-et permet d'approximer les points d'un chemin en tenant compte d'un
-certain degré de liberté (paramétrable).
+L'algorithme de Douglas-Peucker est beaucoup utilisé en géographie pour
+l'approximation des trajet et permet de réduire les points d'un chemin en
+tenant compte d'un certain degré de liberté (paramétrable).
 
 \begin{figure}[h]
 \centering
@@ -246,27 +246,28 @@ L'algorithme de construction des {\it figures} consiste à parcourir
 l'image à la recherche des zones de couleur.
 
 \begin{lstlisting}[frame=single]  % Start your code-block
+
 Construction figures ( image )
 
-Pixel p
-Couleur c
-Figure figures[]
-Pour i=0...image.hauteur faire
-    initialise c tel que c != image.pixel(i,0).couleur 
-    Pour j=0...image.largeur faire
-        si image.pixel(i,j).couleur != c et 
-           image.pixel(i,j).traite = faux
+    Pixel p, Couleur c, Figure figures[]
 
-            f <- image.pixel(i,j).extrait_figure()
-            figures.ajouter(f)
+    Pour i=0...image.hauteur faire
+        initialise c tel que c != image.pixel(i,0).couleur 
+        Pour j=0...image.largeur faire
+            si image.pixel(i,j).couleur != c et 
+               image.pixel(i,j).traite = faux
 
-            Pour tout pixel b dans f faire
-                image.pixel(b.y,b.x).traite <- vrai
+                f <- image.pixel(i,j).extrait_figure()
+                figures.ajouter(f)
+
+                Pour tout pixel b dans f faire
+                    image.pixel(b.y,b.x).traite <- vrai
+                fin 
             fin 
-        fin 
+        c <- image.pixel(i,j).couleur
+        fin
     fin
-fin
-renvoyer figures
+    renvoyer figures
 \end{lstlisting}
 
 
@@ -282,9 +283,28 @@ la {\it figure}.
 \end{figure}
 
 Les contours d'une {\it figure} sont examine dans le sens horaire en
-utilisant l'algoritme du voisinage de Moore \cite{url-moore}.
+utilisant l'algoritme du voisinage de Moore \cite{url-moore}. Cet
+approche permet d'obtenir une liste trie des contours de chaque {\it
+figure}.
 
 
+\subsection{Conversion au format SVG}
+Le format SVG permet de representer le contenu d'une image par le
+biais de plusieurs entites geometriques par le biais de simples tags
+{\it xml} \cite{url-svg}. Le type de figure le plus generique est
+caracterize par l'element {\it path}. Une {\it path} est un "chemin"
+permettant  de representer n'importe quel type de figure comme etant
+une suite de segments ou de courbes.
+
+La traduction au format SVG n'est rien d'autre que la conversion en
+{\it paths} des contours de chaque {\it figure}. L'unique inconvenient
+de cet etape est constitue par la possibilite d'avoir des {\it
+figures} superposes.  Pour eviter que une {\it figure} puisse cacher
+un autre il est indispensable de trier les {\it figures} selon leur
+grandeur et contenu. Les {\it figures} sont tries selon leur distance 
+depuis les limites de l'image en utilisent le principe que, si une
+{\it figure } est plus proche d'un limite de l'image que un'autre
+alors la derniere ne pourra jamais couvrir la premiere.
 
 
 \section{Valeurs optimales}
