@@ -40,7 +40,7 @@ public class PathsCollector {
 
         if (precision > 100) precision = 100;
 
-        if (precision > 0) {
+        if (precision < 100) {
             for (Path p : paths) p.reduce(100-precision);
         }
     
