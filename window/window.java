@@ -29,7 +29,7 @@ public class window extends JFrame implements ActionListener
 		ItemAction btnSobel=new ItemAction(new optionSobel(),"Sobel");
 		ItemAction btnPrewitt=new ItemAction(new optionPrewitt(),"Prewitt");
 		ItemAction btnKirsch=new ItemAction(new optionKirsch(),"Kirsch");
-		JMenuItem btnRoberts=new JMenuItem("Roberts");
+		ItemAction btnRoberts=new ItemAction(new optionRoberts(),"Roberts");
 		ItemAction btnGauss=new ItemAction(new optionGauss(),"Gauss");
 		ItemAction btnCanny=new ItemAction(new optionCanny(),"Canny");
 		JMenuItem btnEffacer=new JMenuItem("Effacer");
