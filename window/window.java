@@ -31,8 +31,7 @@ public class window extends JFrame implements ActionListener
 		JMenuItem btnKirsche=new JMenuItem("Kirsche");
 		JMenuItem btnRoberts=new JMenuItem("Roberts");
 		ItemAction btnGauss=new ItemAction(new optionGauss(),"Gauss");
-		//JMenuItem btnCanny=new JMenuItem("Canny");
-		JMenuItem btnCanny=new JMenuItem("Canny");
+		ItemAction btnCanny=new ItemAction(new optionCanny(),"Canny");
 		JMenuItem btnEffacer=new JMenuItem("Effacer");
 
 		ImageIcon imageAfficher;
@@ -256,14 +255,6 @@ public class window extends JFrame implements ActionListener
 				this.printImage(newImage.getImg());
 			}
 		}
-
-		if(e.getSource()==btnCanny)
-		{
-			System.out.println("Canny");
-			newImage=new Canny(imageOriginal);
-			this.printImage(newImage.getImg());
-		}
-
 
 		if(e.getSource()==btnEffacer)
 		{
