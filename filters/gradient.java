@@ -5,7 +5,7 @@ public class gradient
 	public int Gx;
 	public int Gy;
 	public int Norme;
-	public int Angle;
+	public double Angle;
 	public boolean etat;
 
 	public gradient(int x,int y)
@@ -14,6 +14,8 @@ public class gradient
 		this.Gy=y;
         	Norme=(int) Math.ceil(Math.sqrt((Gx*Gx) + (Gy*Gy)));	//XXX Int?
 		Angle= (int) Math.atan2(Gy,Gx);
+
+		this.etat=true;
 	}
 
 	public void setNorme()
@@ -23,6 +25,6 @@ public class gradient
 
 	public void setAngle()
 	{
-		Angle= (int) Math.atan2(Gy,Gx);
+		Angle= Math.toDegrees(Math.atan2(Gy,Gx));
 	}
 }
