@@ -5,13 +5,10 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.awt.Point;
 
-// Here is a cool post about this filter:
-// https://blog.saush.com/2011/04/20/edge-detection-
-// with-the-sobel-operator-in-ruby/
 public class Canny extends Filter {
 
     private int max = 1;
-private int thr=0;
+    private int thr=0;
 
     private int[][] mx = {{-1,0,1},{-2,0,2},{-1,0,1}};
     private int[][] my = {{-1,-2,-1},{0,0,0},{1,2,1}};
@@ -24,7 +21,8 @@ private int thr=0;
     BufferedImage src;
 
 
-    public Canny(BufferedImage img, int thr_min_conv,int thr_max_conv, int thr_min_hyst,int thr_max_hyst,int rayon,double sigma ){
+    public Canny(BufferedImage img, int thr_min_conv,int thr_max_conv,
+                 int thr_min_hyst,int thr_max_hyst,int rayon,double sigma ){
 	src=new Gauss(img,rayon,sigma).getImg();	
 	this.thr_min_conv = thr_min_conv;
 	this.thr_max_conv = thr_max_conv;

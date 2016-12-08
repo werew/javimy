@@ -2,9 +2,6 @@ package filters;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 
-// Here is a cool post about this filter:
-// https://blog.saush.com/2011/04/20/edge-detection-
-// with-the-sobel-operator-in-ruby/
 public class Sobel extends Filter {
 
     private int max = 1;

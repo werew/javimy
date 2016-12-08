@@ -249,7 +249,7 @@ optionClusterEdges(),"Cluster-Edges");
 		{
 			this.getContentPane().remove(labelImageAfficher);
 			imageAfficher=new ImageIcon(i);
-			labelImageAfficher=new JLabel("",SwingConstants.CENTER);	//TODO Inutile?
+			labelImageAfficher=new JLabel("",SwingConstants.CENTER);
 			labelImageAfficher.setIcon(imageAfficher);
 			this.getContentPane().add(labelImageAfficher,BorderLayout.CENTER);
 			this.revalidate();	
