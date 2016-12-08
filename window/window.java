@@ -26,7 +26,7 @@ public class window extends JFrame implements ActionListener
 		JMenuItem btnVectorisation=new JMenuItem("Exporter comme SVG");
 		//JMenuItem btnFermer=new JMenuItem("Fermer");
 		JMenuItem btnQuitter=new JMenuItem("Quitter");
-		JMenuItem btnSobel=new JMenuItem("Sobel");
+		ItemAction btnSobel=new ItemAction(new optionSobel(),"Sobel");
 		JMenuItem btnPrewitt=new JMenuItem("Prewitt");
 		JMenuItem btnKirsche=new JMenuItem("Kirsche");
 		JMenuItem btnRoberts=new JMenuItem("Roberts");
@@ -220,28 +220,8 @@ public class window extends JFrame implements ActionListener
 			this.getContentPane().removeAll();
 			this.revalidate();
 		}
-		if(e.getSource()==btnSobel)
-		{
-			newImage = new Sobel(imageOriginal);
-			this.printImage(newImage.getImg());
-
-		}
-		if(e.getSource()==btnPrewitt)
-		{
-			newImage = new Prewitt(imageOriginal);
-			this.printImage(newImage.getImg());
-		}
-		if(e.getSource()==btnKirsche)
-		{
-			newImage = new Kirsche(imageOriginal);
-			this.printImage(newImage.getImg());
-		}
-		if(e.getSource()==btnRoberts)
-		{
-			newImage = new Roberts(imageOriginal);
-			this.printImage(newImage.getImg());
-		}
-*/		else if(e.getSource() instanceof ItemAction)
+*/
+		else if(e.getSource() instanceof ItemAction)
 		{
 			if(imageOriginal==null)
 			{
