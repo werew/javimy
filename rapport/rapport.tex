@@ -235,9 +235,26 @@ On peut definire une {\it figure} comme etant une section de l'image
 ayant (apres segmentation) un unique couleur et egendre par un ou
 la combinaison de plusieurs bords.
 
-Le but de ce stade est de detecter toutes les figures dans l'image et
-de affecter a chaque figure les bords entourant celle-ci dans le bon
-ordre (sachant que un bord est partage toujours entre deux figures).
+Le but de ce stade est de detecter toutes les {\it figures} dans l'image et
+de affecter a chaque {\it figure} les bords entourant celle-ci dans le
+bon ordre (sachant que un bord est partage toujours entre deux
+{\it figures}).
+
+L'algoritme pour la construction des {\it figures} consinste a parcourir
+l'image a la recherche des zones de couleurs. Apres avoir detecte une
+zone qui n'a pas encore ete traite, on procede a examiner les voisins
+\underline{externes} des pixels qui delimitent la {\it figure}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=7cm]{./pics/moore.eps}
+\caption{Detection du voisinage externe d'une {\it figure}}
+\label{fig:moore}
+\end{figure}
+
+Les contours d'une {\it figure} sont examine dans le sens horaire en
+utilisant l'algoritme du voisinage de Moore. 
+
 
 
 
