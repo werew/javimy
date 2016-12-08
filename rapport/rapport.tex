@@ -90,11 +90,54 @@ du programme:
 
 \subsection{Sobel, Prewitt, Roberts, etc...}
 %TODO Description du principe de fonctionnement avec quelque image/example
+Les algotihmes utilisés dans ce projet (à savoir Sobel, Prewitt, Roberts et Kirsch)
+fonctionnent tous sur le principe de convolution de pixel avec une matrice.
+Le principe est que l'on va appliquer une (ou plusieurs) matrices de convolution propre
+à chaque filtre, sur les pixels de l'image. Nous allons donc superposer la matrice sur
+l'image avec en son centre le pixel que l'on traite, et on multiplie la valeur du pixel
+par le coefficient se trouvant "au dessus du pixel" dans la matrice. On somme tous les
+produits issus de la convolution avec la matrice et l'on obtient la nouvelle valeur du pixel.
+
+Dans les filtres que nous utilisons, nous faisons deux convolutions, avec deux
+matrices différentes qui vont analyser les alentours du pixel de manière
+horizontale pour l'une et verticale pour l'autre. Nous obtenons donc deux
+gradients (X et Y) dont nous pouvons estimer la norme une fois combiné avec la
+formule:
+$\sqrt[2]{X^2+Y^2}$
+
+Nous appliquons un coefficient, issus de la valeur du plus grand pixel après la convolution,
+pour avoir une valeur comprise entre 0 et 255, et cela nous donne la nouvelle valeur du pixel.
+
+Sobel, Prewitt et Roberts fonctionnent de cette manière; seul les valeurs et
+les dimensions des matrices de convolution change.
+Kirsch fonctionne aussi de cette façon, seulement il va appliquer 8 matrices de convolution
+représentant les 8 directions entourant le pixel, et il va retenir la valeur de convolution
+la plus haute.
 
 \subsection{Canny}
-%TODO
+L'algorithme de Canny utilise aussi le principe de convolution mais de manière plus évolué.
+En effet, l'image est d'abord traitée avec un filtre de \ref{Gauss} afin de réduire le bruit et
+la rendre plus lisse.
+Dans un second temps nous utilisons une convolution habituelle pour obtenir des gradient, mais cette fois-ci
+nous obtenons aussi la direction du gradient. Nous arrondissons les angles que formes des gradient par rapport
+à l'axe horizontale avec un pas de 45°.
+Il faut à présent supprimer les points non-maxima local par rapport au masque de convolution, qui pourrait
+élargir les bords si on les laissaient. On va donc pour cela, chercher les valeurs des pixels se trouvant "sous"
+la matrice de convolution qui sont plus grande que la valeur du pixel qui l'on traite, et dont la direction est
+la même que le pixel que l'on est entrain de traiter. Si on trouve un tel pixel, alors le pixel courant ne 
+sera pas retenu et mis à un état invalide.
+A partit de là nous n'avons plus que les maxima-locaux, donnant un bord bien net, il ne reste plus
+qu'à sueiller les pixels qui sont encore valides. Pour qu'un pixel soit valide il faut que son intensité soit
+élevé, ce qui signifie qu'il y a un bord à cet endroit. On utilise deux seuils qui vont définir si un pixel
+peut être compter comme étant un bord. En dessus du seuil minimum, le pixel n'est mis dans un état invalide,
+car son intensité n'est pas assez élevée pour être considéré comme un bord. Si elle est au dessus du seuil
+maximum alors on estime que le pixel peut être considéré comme un bord. Entre ces deux seuils, on ne peux pas
+vraiement savoir si un pixel est effectivement un bord ou non. On va donc simplement regarder les voisins directe
+de ce pixel, et si un ceux-ci est valide et considéré comme un bord, alors le pixel courant est aussi considéré
+comme un bord.
 
 \subsection{Gauss}
+\label{sec:gauss}
 %TODO Description du principe de fonctionnement avec quelque image/example
 
 \subsection{Segmentation}
