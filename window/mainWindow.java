@@ -13,7 +13,7 @@ import filters.*;
 import vectorization.*;
 import option.*;
 
-public class window extends JFrame implements ActionListener
+public class mainWindow extends JFrame implements ActionListener
 {
 		JMenuBar menu=new JMenuBar();
 
@@ -48,7 +48,7 @@ public class window extends JFrame implements ActionListener
 
 		String pathOriginal;
 
-	public window()
+	public mainWindow()
 	{
 		this.setTitle("Javimy");
 		this.setIconImage(icone.getImage());
