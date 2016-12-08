@@ -33,7 +33,6 @@ public JLabel TxtRayon = new JLabel("Rayon");
 		sigma.setPreferredSize(new Dimension(70,20));
 		rayon.setPreferredSize(new Dimension(70,20));
 
-		JPanel panel=new JPanel();
 		panel.add(TxtSeuil);
 		panel.add(seuil);
 		panel.add(TxtSigma);
