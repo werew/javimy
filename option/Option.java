@@ -12,6 +12,7 @@ public abstract class Option extends JDialog implements ActionListener
 	public	JButton submit=new JButton("valider");
 	public Filter image;
 	public BufferedImage src;
+	public JPanel panel=new JPanel();
 
 	public Option()
 	{
@@ -23,9 +24,8 @@ public abstract class Option extends JDialog implements ActionListener
 	{
 		this.src=src;
 
-		this.setTitle("Javimy");
+		this.setTitle("Options");
 		this.setIconImage(icone.getImage());
-		this.setSize(400,100);
 		this.setLocationRelativeTo(null);
 		this.setModal(true);
 
