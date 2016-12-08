@@ -57,13 +57,22 @@ trouverez les fichiers et répertoires suivants:
 \begin{itemize}
 \item Ce rapport
 \item Le fichier {\bf javimy.java} qui est le point d'entrée du programme
-\item Le répertoire {\bf gui} qui contient tous les fichiers du programme relatifs
+\item Les répertoires {\bf window} et {\bf option} qui contiennent tous les fichiers du programme relatifs
       à l'interface graphique
 \item Le répertoire {\bf filters} qui contient un package incluant tous les filtres 
       implementés dans la cadre de ce projet
 \item Le répertoire {\bf vectorization} qui contient la partie du programme dédiée à
       la vectorisation d'une image
 \end{itemize}
+
+\section{Répartition des tâches}
+La majorité des algorithmes implémentés dans ce projet ont été pensés par l'ensemble du groupe.
+Cependant, la production du code à été répartit comme suit:
+\begin{itemize}
+\item {\bf Luigi CONIGLIO}: Filtre de Sobel, segmentation, filtre Cluster-Edges, vectorisation
+\item {\bf Victor CONSTANS}: Interface graphique, filtre de Prewitt, Gauss, Roberts, Kirsch, Canny
+\end{itemize}
+
 
 \bigbreak
 \subsection{Usage}
@@ -131,6 +140,8 @@ aux différents filtres.
 Les différentes classe de filtre étende cette classe Filter de sorte
 que les filtres apparaissent sous un objet uniques un Filter.
 
+Les classes de la partie vectorisation n'ont pas de lien hiérarchique entre
+eux. Cependant les objets de cette section sont complémentaires étant qu'il y a un lien de producteur/consommateur.
 
 
 \section{Filtres}
@@ -376,34 +387,48 @@ la {\it figure}.
 \label{fig:moore}
 \end{figure}
 
-Les contours d'une {\it figure} sont examine dans le sens horaire en
-utilisant l'algoritme du voisinage de Moore \cite{url-moore}. Cet
-approche permet d'obtenir une liste trie des contours de chaque {\it
+Les contours d'une {\it figure} sont examinés dans le sens horaire en
+utilisant l'algorithme du voisinage de Moore \cite{url-moore}. Cette
+approche permet d'obtenir une liste triée des contours de chaque {\it
 figure}.
 
 
 \subsection{Conversion au format SVG}
 Le format SVG permet de representer le contenu d'une image par le
-biais de plusieurs entites geometriques par le biais de simples tags
-{\it xml} \cite{url-svg}. Le type de figure le plus generique est
-caracterize par l'element {\it path}. Une {\it path} est un "chemin"
-permettant  de representer n'importe quel type de figure comme etant
+comme étant plusieurs entités géométriques, par le biais de simples tags
+{\it xml} \cite{url-svg}. Le type de figure le plus générique est
+caractérisé par l'élément {\it path}. Un {\it path} est un "chemin"
+permettant  de représenter n'importe quel type de figure comme étant
 une suite de segments ou de courbes.
 
 La traduction au format SVG n'est rien d'autre que la conversion en
-{\it paths} des contours de chaque {\it figure}. L'unique inconvenient
-de cet etape est constitue par la possibilite d'avoir des {\it
-figures} superposes.  Pour eviter que une {\it figure} puisse cacher
-un autre il est indispensable de trier les {\it figures} selon leur
-grandeur et contenu. Les {\it figures} sont tries selon leur distance 
-depuis les limites de l'image en utilisent le principe que, si une
-{\it figure } est plus proche d'un limite de l'image que un'autre
-alors la derniere ne pourra jamais couvrir la premiere.
+{\it paths} des contours de chaque {\it figure}. L'unique inconvénient
+de cette étape est la possibilité d'avoir des {\it
+figures} superposés.  Pour éviter qu'une {\it figure} puisse cacher
+une autre il est indispensable de trier les {\it figures} selon leur
+taille et contenu. Les {\it figures} sont triées selon leur distance 
+depuis les bords de l'image en utilisent le principe que, si une
+{\it figure } est plus proche d'un bord de l'image qu'une autre,
+alors la dernière ne pourra jamais couvrir la première.
 
 
 \section{Valeurs optimales}
-%TODO valeurs optimales dans l'utilisation de chaque filtre%
+Tout au long du développement nous avons pu tester les algorithmes à
+plusieurs reprises et surtout avec des valeurs d'option différentes,
+influençant directement le qualité de l'image filtrer.
+Fort des tests que nous avons réalisés, nous vous mettons à disposition
+les valeurs des options qui présentent des résultats intéressant.
 
+\begin{itemize}
+\item Sobel: black thresh = 20 , white thresh = 150
+\item Prewitt: black thresh = 20 , white thresh = 150
+\item Kirsch: black thresh = 25 , white tresh = 155
+\item Roberts: black thresh = 20 , white tresh = 220
+\item Gauss: sigma = 1.2 , radius = 2
+\item Canny: thresh min = 60 , thresh max = 220 , double thresh min = 60 , double thresh max = 220
+\item Segmentation: nombre de couleur = 3
+\item Cluster-edges: nombre de couleur = 3
+\end
 
 
 \addcontentsline{toc}{section}{Références}
