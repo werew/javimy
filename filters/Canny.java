@@ -24,7 +24,7 @@ private int thr=0;
     BufferedImage src;
 
     public Canny(BufferedImage img){
-        this(img,25,25,5,5);
+        this(img,100,100,100,100);
     }
 
     // XXX if threshold < 0 ?? exception ??
@@ -66,10 +66,9 @@ private int thr=0;
                 // Normalize
                 if (val.Norme > 255 - thr_max_conv) val.Norme = 255;
                 else if (val.Norme < thr_min_conv) val.Norme = 0;
-    
-                // Set pixel
-                //Color nc = new Color(val.Norme,val.Norme,val.Norme);
-                //image.setRGB(i-1,j-1,nc.getRGB());
+
+		val.Angle=roundedAngle(val.Angle); 
+
 		carte[j-1][i-1]=val;
             }
         }
@@ -81,34 +80,7 @@ private int thr=0;
 	{
 		for(int j=1;j<w-3;j++)
 		{
-			//TODO arrondir angle
-			int dx=0,dy=0;
-			if(carte[j][i].Angle>=0 && carte[j][i].Angle<45)
-			{
-				dx=1;
-				dy=0;
-			}
-			if(carte[j][i].Angle>=45 && carte[j][i].Angle<90)
-			{
-				dx=1;
-				dy=1;
-			}
-			if(carte[j][i].Angle>=90 && carte[j][i].Angle<135)
-			{
-				dx=0;
-				dy=1;
-			}
-			if(carte[j][i].Angle>=135 && carte[j][i].Angle<180)
-			{
-				dx=-1;
-				dy=1;
-			}
-
-			if(carte[j+dx][i+dy].Norme>carte[j][i].Norme || carte[j-dx][i-dy].Norme>carte[j][i].Norme)
-			{
-				//XXX Mise a 0?
-				carte[j][i].etat=false;
-			}
+			nonMaxima(j,i);
 		}
 	}
 
@@ -123,20 +95,20 @@ private int thr=0;
 		{
 			if(carte[j][i].etat)
 			{
-			if(carte[j][i].Norme<thr_min_hyst)
-			{
-				//XXX rejeté?
-				carte[j][i].etat=false;
-			}
-			else if(carte[j][i].Norme>thr_max_hyst)
-			{
-				//XXX accepter
-				carte[j][i].etat=true;
-			}
-			else
-			{
-				incertain.add(new Point(j,i));
-			}
+				if(carte[j][i].Norme<thr_min_hyst)
+				{
+					//XXX rejeté?
+					carte[j][i].etat=false;
+				}
+				else if(carte[j][i].Norme>thr_max_hyst)
+				{
+					//XXX accepter
+					carte[j][i].etat=true;
+				}
+				else
+				{
+					incertain.add(new Point(j,i));
+				}
 			}
 
 		}
@@ -213,5 +185,63 @@ private int thr=0;
     	gradient g=new gradient(px_x,px_y);
         return g;
     }
+
+
+	private double roundedAngle(double angle)
+	{
+			if(angle>=0 && angle<45)
+			{
+				return 0;
+			}
+			else if(angle>=45 && angle<90)
+			{
+				return 45;
+			}
+			else if(angle>=90 && angle<135)
+			{
+				return 90;
+			}
+			else if(angle>=135 && angle<180)
+			{
+				return 135;
+			}
+			else if(angle<=0 && angle>-45)
+			{
+				return 135;
+			}
+			else if(angle<=-45 && angle>-90)
+			{
+				return 90;
+			}
+			else if(angle<=-90 && angle>-135)
+			{
+				return 45;
+			}
+			else if(angle<=-135 && angle>-180)
+			{
+				return 0;
+			}
+			else
+				return 0;
+	}
+
+
+	private void nonMaxima(int x,int y)
+	{
+		boolean tmp=true;
+
+		for(int i=-1;i<=1;i++)
+		{
+			for(int j=-1;j<=1;j++)
+			{
+				if(carte[j+x][i+y].Norme>carte[x][y].Norme)
+				{
+					tmp=false;
+				}
+			}
+		}
+
+		carte[x][y].etat=tmp;
+	}
 
 }
