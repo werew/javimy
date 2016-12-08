@@ -20,10 +20,15 @@ public class optionCanny extends Option
 	private	JTextField thr_max_conv=new JFormattedTextField();
 	private	JTextField thr_min_hyst=new JFormattedTextField();
 	private	JTextField thr_max_hyst=new JFormattedTextField();
+	public	JTextField sigma=new JFormattedTextField();
+	public	JTextField rayon=new JFormattedTextField();
+
 	private JLabel Txt_thr_min_conv = new JLabel("thr min convolution");
 	private JLabel Txt_thr_max_conv = new JLabel("thr max convolution");
 	private JLabel Txt_thr_min_hyst = new JLabel("thr min seuillage");
 	private JLabel Txt_thr_max_hyst = new JLabel("thr max seuillage");
+	public JLabel TxtSigma = new JLabel("Sigma");
+	public JLabel TxtRayon = new JLabel("Rayon");
 	
 
 
@@ -48,11 +53,15 @@ public class optionCanny extends Option
 		this.panel.add(thr_min_hyst);
 		this.panel.add(Txt_thr_max_hyst);
 		this.panel.add(thr_max_hyst);
+		this.panel.add(TxtRayon);
+		this.panel.add(rayon);
+		this.panel.add(TxtSigma);
+		this.panel.add(sigma);
 
 
 		this.panel.add(submit);
 
-		GridLayout gl = new GridLayout(5,2);
+		GridLayout gl = new GridLayout(7,2);
 		gl.setHgap(5);
 		gl.setVgap(5);
 		this.panel.setLayout(gl);

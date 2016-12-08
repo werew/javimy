@@ -25,8 +25,8 @@ private int thr=0;
 
 
     // XXX if threshold < 0 ?? exception ??
-    public Canny(BufferedImage img, int thr_min_conv,int thr_max_conv, int thr_min_hyst,int thr_max_hyst ){
-	src=new Gauss(img,1,0.8).getImg();	//TODO parametre libre
+    public Canny(BufferedImage img, int thr_min_conv,int thr_max_conv, int thr_min_hyst,int thr_max_hyst,int rayon,double sigma ){
+	src=new Gauss(img,rayon,sigma).getImg();	//TODO parametre libre
 	this.thr_min_conv = thr_min_conv;
 	this.thr_max_conv = thr_max_conv;
 	this.thr_min_hyst = thr_min_hyst;

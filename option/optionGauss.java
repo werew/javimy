@@ -16,31 +16,36 @@ import window.*;
 
 public class optionGauss extends Option
 {
-public	JTextField seuil=new JFormattedTextField();
 public	JTextField sigma=new JFormattedTextField();
 public	JTextField rayon=new JFormattedTextField();
-public JLabel TxtSeuil = new JLabel("Seuil");
 public JLabel TxtSigma = new JLabel("Sigma");
 public JLabel TxtRayon = new JLabel("Rayon");
 	
-
+//TODO mettre sous forme comme les autres
 
 	public optionGauss()
 	{
 		super();
 
-		seuil.setPreferredSize(new Dimension(70,20));
-		sigma.setPreferredSize(new Dimension(70,20));
-		rayon.setPreferredSize(new Dimension(70,20));
+		this.setSize(300,200);
 
-		panel.add(TxtSeuil);
-		panel.add(seuil);
+		Dimension dim = new Dimension(50,30);
+
+		sigma.setPreferredSize(dim);
+		rayon.setPreferredSize(dim);
+
 		panel.add(TxtSigma);
 		panel.add(sigma);
 		panel.add(TxtRayon);
 		panel.add(rayon);
 
 		panel.add(submit);
+
+		GridLayout gl = new GridLayout(3,2);
+		gl.setHgap(5);
+		gl.setVgap(5);
+		this.panel.setLayout(gl);
+
 
 		this.setContentPane(panel);
 	}
