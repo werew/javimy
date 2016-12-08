@@ -29,7 +29,7 @@ public class window extends JFrame implements ActionListener
 		ItemAction btnSobel=new ItemAction(new optionSobel(),"Sobel");
 		ItemAction btnPrewitt=new ItemAction(new optionPrewitt(),"Prewitt");
 		ItemAction btnKirsch=new ItemAction(new optionKirsch(),"Kirsch");
-		JMenuItem btnRoberts=new JMenuItem("Roberts");
+		ItemAction btnRoberts=new ItemAction(new optionRoberts(),"Roberts");
 		ItemAction btnGauss=new ItemAction(new optionGauss(),"Gauss");
 		ItemAction btnCanny=new ItemAction(new optionCanny(),"Canny");
 		JMenuItem btnEffacer=new JMenuItem("Effacer");
@@ -232,7 +232,10 @@ public class window extends JFrame implements ActionListener
 				ItemAction item=(ItemAction)e.getSource();
 				item.affiche(imageOriginal);
 				newImage=item.getImg();
-				this.printImage(newImage.getImg());
+				if(newImage!=null)
+				{
+					this.printImage(newImage.getImg());
+				}
 			}
 		}
 
@@ -245,12 +248,15 @@ public class window extends JFrame implements ActionListener
 
 	private void printImage(BufferedImage i)
 	{
+		if(i!=null)
+		{
 			this.getContentPane().remove(labelImageAfficher);
 			imageAfficher=new ImageIcon(i);
 			labelImageAfficher=new JLabel("",SwingConstants.CENTER);	//TODO Inutile?
 			labelImageAfficher.setIcon(imageAfficher);
 			this.getContentPane().add(labelImageAfficher,BorderLayout.CENTER);
 			this.revalidate();	
+		}
 	}
 	
 }
