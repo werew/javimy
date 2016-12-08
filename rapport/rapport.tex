@@ -220,14 +220,31 @@ precision souhaite dans la vectorisation.
 Un autre element essentiel dans la choix de cet algorithme a ete le
 fait que il ne change pas la position du premier et le dernier point
 d'un chemin dans la compression de celui-ci. Grace a ca un chemin
-(partie d'un bord) d'une image commencera et terminera toujour sur le
-meme points meme apres sa compression.
+(partie d'un contour) d'une image commencera et terminera toujour sur
+le meme points meme apres sa compression, en assurant ainsi la
+contiguite de celui ci avec les bords voisins.
+
+
 
 \subsection{Construction des figures}
 %TODO voisinage de moore %
+Une fois simplifie les contours il est arrive le moment de traiters
+les zones de couleurs egendre par les bords.
+
+On peut definire une {\it figure} comme etant une section de l'image
+ayant (apres segmentation) un unique couleur et egendre par un ou
+la combinaison de plusieurs bords.
+
+Le but de ce stade est de detecter toutes les figures dans l'image et
+de affecter a chaque figure les bords entourant celle-ci dans le bon
+ordre (sachant que un bord est partage toujours entre deux figures).
 
 
 
+
+
+\section{Valeurs optimales}
+%TODO valeurs optimales dans l'utilisation de chaque filtre%
 
 
 
