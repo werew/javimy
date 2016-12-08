@@ -23,9 +23,6 @@ private int thr=0;
 
     BufferedImage src;
 
-    public Canny(BufferedImage img){
-        this(img,100,100,100,100);
-    }
 
     // XXX if threshold < 0 ?? exception ??
     public Canny(BufferedImage img, int thr_min_conv,int thr_max_conv, int thr_min_hyst,int thr_max_hyst ){
@@ -41,7 +38,6 @@ private int thr=0;
         image = new BufferedImage(w-2,h-2,src.getType());
 	carte = new gradient[image.getWidth()][image.getHeight()];
 
-	System.out.println("w "+w+" h "+h);
 
 
 	//Convolution
@@ -50,7 +46,6 @@ private int thr=0;
         for (int i=1; i<h-1; i++){
             for (int j=1; j<w-1; j++){
                 gradient val = convolution(j,i);
-//		System.out.println("===========> i "+i+" j "+j);
                 if (val.Norme>max) max = val.Norme;
             }
         }
@@ -167,12 +162,8 @@ private int thr=0;
             for (int j=-1; j<=1; j++){
 
 		Color c=null;
-		try{
                 c = new Color(src.getRGB(j+x,i+y));
-		} catch(Exception e){
 			
-		System.out.println("i "+i+" j "+j+" w "+src.getWidth()+" h "+src.getHeight());
-		};
                 int red = (int)(c.getRed() * 0.3);
                 int green = (int)(c.getGreen() * 0.3);
                 int blue = (int)(c.getBlue() * 0.3);
