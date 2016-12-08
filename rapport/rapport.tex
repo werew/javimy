@@ -78,11 +78,6 @@ A l'exécution, il vous sera présenté une interface graphique qui vous
 permettra de façon assez intuitive d'accéder aux differentes fonctions
 du programme:
 
-\begin{center}
-% TODO image GUI %
-\end{center}
-
-\newpage 
 \section{Implémentation}
 Voyons maintenant l'implémentation et la structure du programme.
 Cette structure peut être divisée en trois sections que sont:
@@ -130,9 +125,11 @@ Lorsque l'utilisateur pas presser un bouton de filtre, action va être lu par la
 à l'origine de l'action (ici un ItemAction) et elle va appeller la méthode affiche de cette objet, qui va lançer l'affichage
 des options. Une fois que l'utilisateur valide ses options le filtre s'execute.
 
-La deuxième section est celle des filtres. Elle est constitué d'une classe abstraite Filter qui permet de regrouper les
-attributs communs aux différents filtres.
-Les différentes classe de filtre étende cette classe Filter de sorte que les filtre apparaissent sous un objet unique; un Filter.
+La deuxième section est celle des filtres. Elle est constitué d'une
+classe abstraite Filter qui permet de regrouper les attributs communs
+aux différents filtres.
+Les différentes classe de filtre étende cette classe Filter de sorte
+que les filtres apparaissent sous un objet uniques un Filter.
 
 
 
@@ -170,7 +167,7 @@ En effet, l'image est d'abord traitée avec un filtre de \ref{Gauss} afin de ré
 la rendre plus lisse.
 Dans un second temps nous utilisons une convolution habituelle pour obtenir des gradient, mais cette fois-ci
 nous obtenons aussi la direction du gradient. Nous arrondissons les angles que formes des gradient par rapport
-à l'axe horizontale avec un pas de 45°.
+à l'axe horizontale avec un pas de 45 degrées.
 Il faut à présent supprimer les points non-maxima local par rapport au masque de convolution, qui pourrait
 élargir les bords si on les laissaient. On va donc pour cela, chercher les valeurs des pixels se trouvant "sous"
 la matrice de convolution qui sont plus grande que la valeur du pixel qui l'on traite, et dont la direction est
@@ -253,7 +250,6 @@ couleur différente}
 \label{fig:routcidr}
 \end{figure}
 
-\newpage
 
 \section{Vectorisation} 
 Le programme permet d'exporter une image sous la forme d'un fichier
@@ -410,7 +406,6 @@ alors la derniere ne pourra jamais couvrir la premiere.
 
 
 
-\newpage
 \addcontentsline{toc}{section}{Références}
 \bibliographystyle{plain}
 \bibliography{rapport}
