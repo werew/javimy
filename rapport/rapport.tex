@@ -175,8 +175,8 @@ image peut etre resume dans les etapes suivantes:
 \smallbreak
 \begin{itemize}
 \item Segmentation de l'image
-\item Detection des contours et collecte des chemins 
-\item Compression des chemins
+\item Detection des contours et extraction des bords
+\item Compression des bords
 \item Construction des figures
 \item Conversion au format SVG
 \end{itemize}   
@@ -187,8 +187,42 @@ en utilisant les techiques presentes dans la section
 \ref{sec:filtres} de ce rapport.
 
 
-\subsection{Compression des chemins}
+\subsection{Compression des bords}
 %TODO Algorithme de Douglas-Peucker %
+Au moment de sa detection chaque bord est extrait comme etant une
+suite continue de pixels. Bien que un telle representation soit tout a
+fait utilisable dans la construction d'une image vectorielle le
+resultat ne serait pas tres different de celui d'un format standard
+d'image. Pour cette raison pendant le processus de vectorisation d'une
+image les suites continues de pixels constituees pas les contours de
+l'image doivent etre traduite par des elements geometriques plus
+simples: segments, courbes, etc.. .  
+
+Le premiere etape dans la traduction des contours consiste a en reduir
+le nombre de pixels. Dans la cadre de ce projet on a decide d'utiliser
+l'algoritme de Douglas-Peucker pour atteindre cet objectif.
+
+L'algoritme de Douglas-Peucker est beaucoup utilise en geographie dans
+et permet d'approximer les points d'un chemin en tenant compte d'un
+certaine degre de liberte (parametrable).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=7cm]{./pics/dp1.eps}
+\caption{Le bords sont approxime avec un degree de liberte croissante}
+\label{fig:routcidr}
+\end{figure}
+
+Le fait que cet algoritme soit facilement parametrable a ete un
+element cle dans la choix et il permet a l'utilisateur de choisir la
+precision souhaite dans la vectorisation.
+
+Un autre element essentiel dans la choix de cet algorithme a ete le
+fait que il ne change pas la position du premier et le dernier point
+d'un chemin dans la compression de celui-ci. Grace a ca un chemin
+(partie d'un bord) d'une image commencera et terminera toujour sur le
+meme points meme apres sa compression.
+
 \subsection{Construction des figures}
 %TODO voisinage de moore %
 
