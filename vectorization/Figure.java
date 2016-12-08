@@ -5,17 +5,28 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-
+/**
+ * A figure represents a "color-zone" of an image
+ * and it's delimited by several paths. The path
+ * togheter must always form a closed path.
+ */
 class Figure {
-    public final Color color;
+    public final Color color; // Color of this zone
 
-    public LinkedList<Path> borders;
+    public LinkedList<Path> borders;    // Delimiters
 
+    /**
+     * Create a figure assinging a color 
+     */
     public Figure(int rgb){
         color = new Color(rgb);
         borders = new LinkedList<Path>();
     }
 
+    /**
+     * Add a path to this figure. Path should be
+     * added in order
+     */
     public void addBorder(Path p){
         for (Path b : borders){
             if (p.id == b.id) return;
@@ -23,6 +34,10 @@ class Figure {
         borders.add(p);
     }
 
+    /**
+     * Returns true wheter this figure doesnt close
+     * itself by touching the image's borders
+     */
     boolean isClosed(){
         Point start = borders.getFirst().getFirst();
         Point end   = borders.getLast().getLast();
@@ -30,6 +45,10 @@ class Figure {
     }
 
 
+    /**
+     * Recursively binary-sort the bords of this
+     * figure
+     */
     void sortBorders(){
         if (borders.size() <= 1) return;
 
@@ -38,9 +57,11 @@ class Figure {
         _sortBorders(1); 
     }
 
-    // Sort borders starting from i > 0
-    // NB: this is an function auxiliary to sortBorders
-    // shouldn't be used on it's own
+    /**
+     * Sort borders starting from i > 0
+     * NB: this is an function auxiliary to sortBorders
+     * shouldn't be used on it's own
+     */
     boolean _sortBorders(int i){
 
         // Check the last border against the first one
@@ -66,6 +87,10 @@ class Figure {
         return (matchb(i-1,i) && _sortBorders(i+1));
     }
 
+    /**
+     * Test wheter two borders of this figure could
+     * be considered as being consecutives
+     */
     boolean matchb(int i, int j){
         Point a = borders.get(i).getLast();
         Point b = borders.get(j).getFirst();
@@ -87,6 +112,9 @@ class Figure {
     }
         
 
+    /**
+     * Return an SVG tag representing this figure
+     */
     public String toSVG(){
         sortBorders();
         String svg_path = "";

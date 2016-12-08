@@ -10,24 +10,38 @@ class Path {
     public ArrayList<Point> points;
     boolean circular = false;
 
+    /**
+     * Create Path from the content of another path
+     * @param p Path to copy
+     */
     public Path(Path p){
         this.id = p.id;
         points = new ArrayList<Point>(p.points);
     }
 
+    /**
+     * Create a path having the given id
+     * @param id Id to assign to the path
+     */
     public Path(int id){
         this.id = id;
         points = new ArrayList<Point>();
     }
 
+    /* Get first point of the path */
     public Point getFirst(){
         return points.get(0);
     }
 
+    /* Get last point of the path */
     public Point getLast(){
         return points.get(points.size()-1);
     }
-    
+   
+    /**
+     * Convert this path to a svg path
+     * @return content of an svg path
+     */ 
     public String toSVG(){
         String result = "";
         for (Point p : points){
@@ -37,16 +51,22 @@ class Path {
         return result;
     }
 
+     /* Theverse the path (the first point will be
+      * the last one, etc..) */
     public void reverse(){
         Collections.reverse(this.points);
     }
 
-   
+  
+    /**
+     * Compress this part using Douglas-Peck 
+     */
     public void reduce(double epsilon){
         if (this.points.size() <= 2 ) return;
         this.points = this.rec_red(this.points, epsilon);
     }
 
+    /* Perpendicular distant to a point from a segment */
     private double perpDist(Point p1, Point p2, Point e){
         return Math.abs((p2.y-p1.y)*e.x - (p2.x-p1.x)*e.y 
                          + p2.x*p1.y - p2.y*p1.x ) /
@@ -54,6 +74,8 @@ class Path {
                          (p2.x-p1.x)*(p2.x-p1.x) ) ;
     }
 
+    
+    /* Implementation of the Douglas-Peck algorithm */
     private ArrayList<Point> rec_red
         (ArrayList<Point> rpath, double epsilon){
 

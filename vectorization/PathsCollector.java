@@ -23,6 +23,7 @@ public class PathsCollector {
     static final int LAB_NOT_FOLLOW = -3;
     
 
+    
     public PathsCollector (BufferedImage img, float precision){
         // Init object
         w = img.getWidth();
@@ -46,6 +47,11 @@ public class PathsCollector {
     
     }
 
+    /**
+     * Check if a point can move to a given direction 
+     * @param origin Point to test for
+     * @param delts Direction
+     */
     public boolean checkDirection(Point origin, Point delta){
 
         Point p = new Point(origin.x*2+delta.x,origin.y*2+delta.y);
@@ -54,9 +60,19 @@ public class PathsCollector {
 
             if (labels[p.x][p.y] != 0) return false;
 
+            // Direction is valid if there is no path
+            // and it's not out of bounds
+
             return true;
     }
 
+    /**
+     * Get the border passing from a given edge
+     * of a pixel.
+     * @param pixel Start pixel
+     * @param delta Direction of the edge
+     * @return null or the border found
+     */
     public Path getBorder(Point origin, Point delta){
 
         Point p = new Point(origin.x*2+delta.x,origin.y*2+delta.y);
@@ -68,6 +84,10 @@ public class PathsCollector {
     }
 
 
+    /**
+     * Get an image where all the paths are represented
+     * using random colors
+     */
     public BufferedImage getImg(){
         int imgtype = src.getType();
         if (imgtype == 0 ) imgtype = 5;
@@ -240,6 +260,7 @@ public class PathsCollector {
 
 
 
+    /* Caller for take_path2 */
     private Path take_path(Point start, int label){
         Path pa = new Path(label);
         return take_path2(start, label, pa);
